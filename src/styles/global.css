@@ -17,6 +17,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-height);
+  overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -30,6 +31,7 @@ body {
   color: var(--color-text-light);
   background-color: var(--color-stone);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 img,
@@ -159,6 +161,8 @@ p {
 .section {
   padding-top: var(--section-padding-y);
   padding-bottom: var(--section-padding-y);
+  position: relative;
+  overflow: hidden;
 }
 
 .section-label {
@@ -329,7 +333,8 @@ p {
 
 /* ── Floating Animation ──────────────────────────────────────────────────── */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -343,7 +348,8 @@ p {
 
 /* ── CTA Pulse Glow ──────────────────────────────────────────────────────── */
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: var(--shadow-gold-glow);
   }
   50% {
@@ -356,11 +362,21 @@ p {
 }
 
 /* ── Stagger Animation Delays ────────────────────────────────────────────── */
-.stagger-1 { transition-delay: 100ms; }
-.stagger-2 { transition-delay: 200ms; }
-.stagger-3 { transition-delay: 300ms; }
-.stagger-4 { transition-delay: 400ms; }
-.stagger-5 { transition-delay: 500ms; }
+.stagger-1 {
+  transition-delay: 100ms;
+}
+.stagger-2 {
+  transition-delay: 200ms;
+}
+.stagger-3 {
+  transition-delay: 300ms;
+}
+.stagger-4 {
+  transition-delay: 400ms;
+}
+.stagger-5 {
+  transition-delay: 500ms;
+}
 
 /* ── Accessibility ────────────────────────────────────────────────────────── */
 .sr-only {
