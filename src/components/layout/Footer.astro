@@ -47,9 +47,16 @@ const companyLinks = [
       <div class="footer__contact-zone">
         <div class="footer__cta">
           <span class="footer__cta-text">Need Immediate Service?</span>
-          <a href={`tel:${businessInfo.phoneRaw}`} class="footer__phone">
-            {businessInfo.phone}
-          </a>
+          <div class="footer__cta-actions">
+            <a href={`tel:${businessInfo.phoneRaw}`} class="footer__phone">
+              <span class="material-symbols-outlined">call</span>
+              {businessInfo.phone}
+            </a>
+            <a href="#contact" class="btn btn-primary">
+              <span class="material-symbols-outlined">calendar_month</span>
+              Book Inspection
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -74,20 +81,19 @@ const companyLinks = [
 
 <style>
   .footer {
-    background-color: var(--color-stone);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #f8f9fa;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     padding: var(--space-3xl) 0 var(--space-xl);
     position: relative;
     overflow: hidden;
   }
 
-  /* Main Floor: 2-Column Desktop, 1-Column Mobile */
   .footer__main {
     display: flex;
     flex-direction: column;
     gap: var(--space-3xl);
     padding-bottom: var(--space-3xl);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   @media (min-width: 992px) {
@@ -137,11 +143,11 @@ const companyLinks = [
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-widest);
-    color: var(--color-text-white);
-    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-charcoal);
+    background: rgba(0, 0, 0, 0.03);
     padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-sm);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .footer__badge .material-symbols-outlined {
@@ -173,20 +179,36 @@ const companyLinks = [
     font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-widest);
-    color: var(--color-text-muted);
+    color: var(--color-charcoal-light);
+  }
+
+  .footer__cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xs);
   }
 
   .footer__phone {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-black);
-    color: var(--color-text-white);
+    color: var(--color-charcoal);
     text-decoration: none;
     transition: color var(--transition-base);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .footer__phone .material-symbols-outlined {
+    color: var(--color-primary);
+    font-size: 28px;
   }
 
   @media (min-width: 768px) {
     .footer__phone {
-      font-size: 3.5rem;
+      font-size: var(--font-size-3xl);
     }
   }
 
@@ -237,7 +259,7 @@ const companyLinks = [
 
   .footer__copyright {
     font-size: var(--font-size-xs);
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--color-text-muted);
   }
 
   .footer__nav-list {
@@ -253,7 +275,7 @@ const companyLinks = [
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-widest);
-    color: var(--color-text-muted);
+    color: var(--color-charcoal-light);
     text-decoration: none;
     transition: color var(--transition-base);
   }

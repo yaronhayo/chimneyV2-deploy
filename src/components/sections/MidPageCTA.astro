@@ -18,7 +18,10 @@ import businessInfo from '../../data/business-info.json';
         </p>
       </div>
       <div class="mid-cta__actions">
-        <a href="#contact" class="btn btn-primary mid-cta__btn"> Book Your $99 Inspection </a>
+        <a href="#contact" class="btn btn-primary mid-cta__btn">
+          <span class="material-symbols-outlined">calendar_month</span>
+          Book Your $99 Inspection
+        </a>
         <a href={`tel:${businessInfo.phoneRaw}`} class="mid-cta__phone">
           <span class="material-symbols-outlined">call</span>
           Or call {businessInfo.phone}

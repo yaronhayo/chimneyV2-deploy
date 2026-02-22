@@ -152,27 +152,35 @@
 
 <script>
   (function () {
-    var entries = [
-      { name: 'Sarah', area: 'Lakewood', service: 'chimney assessment', time: '2 hours ago' },
-      { name: 'Mike', area: 'Toms River', service: 'air duct cleaning', time: '4 hours ago' },
-      { name: 'Jennifer', area: 'Brick', service: 'dryer vent cleaning', time: '5 hours ago' },
-      { name: 'David', area: 'Jackson', service: 'chimney inspection', time: 'yesterday' },
-      { name: 'Lisa', area: 'Howell', service: 'full home assessment', time: 'yesterday' },
+    type Entry = { name: string; area: string; service: string; time: string };
+    const entries: Entry[] = [
+      { name: 'Sarah', area: 'Austin, TX', service: 'chimney assessment', time: '2 hours ago' },
+      { name: 'Mike', area: 'Denver, CO', service: 'air duct cleaning', time: '4 hours ago' },
+      {
+        name: 'Jennifer',
+        area: 'Seattle, WA',
+        service: 'dryer vent cleaning',
+        time: '5 hours ago',
+      },
+      { name: 'David', area: 'Atlanta, GA', service: 'chimney inspection', time: 'yesterday' },
+      { name: 'Lisa', area: 'Chicago, IL', service: 'full home assessment', time: 'yesterday' },
+      { name: 'Robert', area: 'Charlotte, NC', service: 'chimney sweep', time: 'yesterday' },
+      { name: 'Emily', area: 'Phoenix, AZ', service: 'dryer vent cleaning', time: '2 days ago' },
     ];
 
-    var feed = document.getElementById('activity-feed');
-    var toast = document.getElementById('activity-toast');
-    var messageEl = document.getElementById('activity-message');
-    var timeEl = document.getElementById('activity-time');
-    var closeBtn = document.getElementById('activity-close');
+    const feed = document.getElementById('activity-feed') as HTMLElement;
+    const toast = document.getElementById('activity-toast') as HTMLElement;
+    const messageEl = document.getElementById('activity-message') as HTMLElement;
+    const timeEl = document.getElementById('activity-time') as HTMLElement;
+    const closeBtn = document.getElementById('activity-close') as HTMLElement;
 
     if (!feed || !toast || !messageEl || !timeEl || !closeBtn) return;
 
-    var currentIndex = 0;
-    var cycleTimer;
-    var dismissed = false;
+    let currentIndex = 0;
+    let cycleTimer: ReturnType<typeof setTimeout> | undefined;
+    let dismissed = false;
 
-    function showToast(entry) {
+    function showToast(entry: Entry) {
       if (dismissed) return;
       messageEl.textContent = entry.name + ' from ' + entry.area + ' booked a ' + entry.service;
       timeEl.textContent = entry.time;

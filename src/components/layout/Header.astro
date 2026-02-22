@@ -43,7 +43,10 @@ const navLinks = [
       </a>
 
       <!-- CTA Button -->
-      <a href="#contact" class="btn btn-primary header__cta"> Get Inspection </a>
+      <a href="#contact" class="btn btn-primary header__cta">
+        <span class="material-symbols-outlined">calendar_month</span>
+        Get Inspection
+      </a>
 
       <!-- Mobile Menu Toggle -->
       <button
@@ -77,7 +80,10 @@ const navLinks = [
           </a>
         </li>
         <li>
-          <a href="#contact" class="btn btn-primary header__mobile-cta"> Book $99 Inspection </a>
+          <a href="#contact" class="btn btn-primary header__mobile-cta">
+            <span class="material-symbols-outlined">calendar_month</span>
+            Book $99 Inspection
+          </a>
         </li>
       </ul>
     </nav>
@@ -90,11 +96,11 @@ const navLinks = [
     top: 0;
     z-index: var(--z-sticky);
     width: 100%;
-    background-color: rgba(26, 26, 26, 0.95);
+    background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
   }
 
   .header__inner {
@@ -138,7 +144,7 @@ const navLinks = [
     font-weight: var(--font-weight-medium);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
-    color: var(--color-text-muted);
+    color: var(--color-charcoal);
     transition: color var(--transition-base);
     position: relative;
   }
@@ -180,7 +186,7 @@ const navLinks = [
   }
 
   .header__phone:hover {
-    color: var(--color-text-white);
+    color: var(--color-charcoal);
   }
 
   .header__phone .material-symbols-outlined {
@@ -199,7 +205,7 @@ const navLinks = [
     justify-content: center;
     width: 44px;
     height: 44px;
-    color: var(--color-text-light);
+    color: var(--color-charcoal);
     transition: color var(--transition-base);
   }
 
@@ -210,8 +216,8 @@ const navLinks = [
   /* Mobile Menu */
   .header__mobile-menu {
     display: none;
-    background-color: var(--color-charcoal);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: var(--color-text-white);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     padding: var(--space-lg);
   }
 
@@ -232,13 +238,13 @@ const navLinks = [
     padding: var(--space-md);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-medium);
-    color: var(--color-text-light);
+    color: var(--color-charcoal);
     border-radius: var(--radius-md);
     transition: all var(--transition-base);
   }
 
   .header__mobile-link:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.05);
     color: var(--color-primary);
   }
 
