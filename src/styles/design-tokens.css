@@ -6,9 +6,9 @@
 
 :root {
   /* ── Colors ─────────────────────────────────────────────────────────────── */
-  --color-primary: #d4af37;
-  --color-primary-hover: #b5952f;
-  --color-primary-rgb: 212, 175, 55;
+  --color-primary: #ff8f00;
+  --color-primary-hover: #e65100;
+  --color-primary-rgb: 255, 143, 0;
 
   --color-navy: #0b132b;
   --color-charcoal: #1a1a1a;
@@ -25,12 +25,12 @@
   --color-warning: #f59e0b;
 
   /* ── Gradients ──────────────────────────────────────────────────────────── */
-  --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4d35e 50%, #d4af37 100%);
-  --gradient-gold-hover: linear-gradient(135deg, #b5952f 0%, #d4af37 50%, #b5952f 100%);
+  --gradient-gold: linear-gradient(135deg, #ff8f00 0%, #ffb300 50%, #ff8f00 100%);
+  --gradient-gold-hover: linear-gradient(135deg, #e65100 0%, #ff8f00 50%, #e65100 100%);
 
   /* ── Shadows ────────────────────────────────────────────────────────────── */
-  --shadow-gold-glow: 0 4px 20px -5px rgba(212, 175, 55, 0.3);
-  --shadow-gold-glow-strong: 0 4px 30px -5px rgba(212, 175, 55, 0.5);
+  --shadow-gold-glow: 0 4px 20px -5px rgba(255, 143, 0, 0.3);
+  --shadow-gold-glow-strong: 0 4px 30px -5px rgba(255, 143, 0, 0.5);
   --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.3);
 

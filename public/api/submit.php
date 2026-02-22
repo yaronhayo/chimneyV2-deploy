@@ -200,43 +200,43 @@ $notificationHtml = <<<HTML
 <head><meta charset="UTF-8"></head>
 <body style="margin:0;padding:0;background:#121212;font-family:'Helvetica Neue',Arial,sans-serif;">
   <div style="max-width:600px;margin:0 auto;background:#1A1A1A;border:1px solid #333;">
-    <div style="background:linear-gradient(135deg,#D4AF37,#F4D35E,#D4AF37);padding:20px;text-align:center;">
+    <div style="background:linear-gradient(135deg,#FF8F00,#FFB300,#FF8F00);padding:20px;text-align:center;">
       <h1 style="margin:0;color:#121212;font-size:20px;font-weight:900;text-transform:uppercase;">New Lead — {$businessName}</h1>
     </div>
     <div style="padding:30px;">
       <table style="width:100%;border-collapse:collapse;">
         <tr style="border-bottom:1px solid #333;">
-          <td style="padding:12px;color:#D4AF37;font-weight:bold;width:120px;font-size:12px;text-transform:uppercase;">Name</td>
+          <td style="padding:12px;color:#FF8F00;font-weight:bold;width:120px;font-size:12px;text-transform:uppercase;">Name</td>
           <td style="padding:12px;color:#E5E5E5;font-size:16px;">{$firstName} {$lastName}</td>
         </tr>
         <tr style="border-bottom:1px solid #333;">
-          <td style="padding:12px;color:#D4AF37;font-weight:bold;font-size:12px;text-transform:uppercase;">Phone</td>
-          <td style="padding:12px;color:#E5E5E5;font-size:18px;font-weight:bold;"><a href="tel:{$phone}" style="color:#D4AF37;text-decoration:none;">{$phone}</a></td>
+          <td style="padding:12px;color:#FF8F00;font-weight:bold;font-size:12px;text-transform:uppercase;">Phone</td>
+          <td style="padding:12px;color:#E5E5E5;font-size:18px;font-weight:bold;"><a href="tel:{$phone}" style="color:#FF8F00;text-decoration:none;">{$phone}</a></td>
         </tr>
         <tr style="border-bottom:1px solid #333;">
-          <td style="padding:12px;color:#D4AF37;font-weight:bold;font-size:12px;text-transform:uppercase;">Email</td>
+          <td style="padding:12px;color:#FF8F00;font-weight:bold;font-size:12px;text-transform:uppercase;">Email</td>
           <td style="padding:12px;color:#E5E5E5;font-size:16px;"><a href="mailto:{$email}" style="color:#E5E5E5;">{$email}</a></td>
         </tr>
         <tr style="border-bottom:1px solid #333;">
-          <td style="padding:12px;color:#D4AF37;font-weight:bold;font-size:12px;text-transform:uppercase;">Service</td>
+          <td style="padding:12px;color:#FF8F00;font-weight:bold;font-size:12px;text-transform:uppercase;">Service</td>
           <td style="padding:12px;color:#E5E5E5;font-size:16px;">{$serviceLabel}</td>
         </tr>
         <tr style="border-bottom:1px solid #333;">
-          <td style="padding:12px;color:#D4AF37;font-weight:bold;font-size:12px;text-transform:uppercase;">Submitted</td>
+          <td style="padding:12px;color:#FF8F00;font-weight:bold;font-size:12px;text-transform:uppercase;">Submitted</td>
           <td style="padding:12px;color:#E5E5E5;font-size:14px;">{$timestamp}</td>
         </tr>
         <tr style="border-bottom:1px solid #333;">
-          <td style="padding:12px;color:#D4AF37;font-weight:bold;font-size:12px;text-transform:uppercase;">Page URL</td>
+          <td style="padding:12px;color:#FF8F00;font-weight:bold;font-size:12px;text-transform:uppercase;">Page URL</td>
           <td style="padding:12px;color:#A3A3A3;font-size:12px;">{$pageUrl}</td>
         </tr>
         <tr>
-          <td style="padding:12px;color:#D4AF37;font-weight:bold;font-size:12px;text-transform:uppercase;">UTM Data</td>
+          <td style="padding:12px;color:#FF8F00;font-weight:bold;font-size:12px;text-transform:uppercase;">UTM Data</td>
           <td style="padding:12px;color:#A3A3A3;font-size:12px;">{$utmString}</td>
         </tr>
       </table>
     </div>
     <div style="padding:24px;text-align:center;background:#0B132B;border-top:1px solid #333;">
-      <p style="color:#D4AF37;font-size:14px;margin:0;font-weight:bold;">Reply directly to the customer or click the phone number to call.</p>
+      <p style="color:#FF8F00;font-size:14px;margin:0;font-weight:bold;">Reply directly to the customer or click the phone number to call.</p>
     </div>
   </div>
 </body>
@@ -257,27 +257,27 @@ $autoresponderHtml = <<<HTML
       <img src="{$logoUrl}" alt="{$businessName}" style="max-width:200px;height:auto;display:inline-block;">
     </div>
 
-    <div style="background:linear-gradient(135deg,#D4AF37,#F4D35E,#D4AF37);padding:2px;"></div>
+    <div style="background:linear-gradient(135deg,#FF8F00,#FFB300,#FF8F00);padding:2px;"></div>
 
     <div style="padding:40px 30px;">
       <h2 style="color:#FFFFFF;font-size:24px;margin:0 0 16px;font-weight:900;text-transform:uppercase;letter-spacing:1px;">Thank You, {$firstName}!</h2>
       <p style="color:#E5E5E5;font-size:16px;line-height:1.6;margin:0 0 24px;">
-        We've received your request for <strong style="color:#D4AF37;">{$serviceLabel}</strong>. At {$businessName}, we take your home's safety seriously.
+        We've received your request for <strong style="color:#FF8F00;">{$serviceLabel}</strong>. At {$businessName}, we take your home's safety seriously.
       </p>
 
-      <div style="background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.2);border-radius:12px;padding:24px;margin:24px 0;">
-        <h3 style="color:#D4AF37;font-size:14px;text-transform:uppercase;letter-spacing:2px;margin:0 0 16px;font-weight:bold;">What Happens Next</h3>
+      <div style="background:rgba(255,143,0,0.05);border:1px solid rgba(255,143,0,0.2);border-radius:12px;padding:24px;margin:24px 0;">
+        <h3 style="color:#FF8F00;font-size:14px;text-transform:uppercase;letter-spacing:2px;margin:0 0 16px;font-weight:bold;">What Happens Next</h3>
         <table style="width:100%;border-collapse:separate;border-spacing:0 12px;">
           <tr>
-            <td style="width:24px;vertical-align:top;color:#D4AF37;font-size:16px;">✓</td>
+            <td style="width:24px;vertical-align:top;color:#FF8F00;font-size:16px;">✓</td>
             <td style="color:#E5E5E5;font-size:14px;padding-left:12px;"><strong>Instant Confirmation:</strong> Your request is in our system.</td>
           </tr>
           <tr>
-            <td style="width:24px;vertical-align:top;color:#D4AF37;font-size:16px;">📞</td>
-            <td style="color:#E5E5E5;font-size:14px;padding-left:12px;"><strong>Expert Callback:</strong> A team member will call you within <strong style="color:#D4AF37;">2 hours</strong> to confirm scheduling.</td>
+            <td style="width:24px;vertical-align:top;color:#FF8F00;font-size:16px;">📞</td>
+            <td style="color:#E5E5E5;font-size:14px;padding-left:12px;"><strong>Expert Callback:</strong> A team member will call you within <strong style="color:#FF8F00;">2 hours</strong> to confirm scheduling.</td>
           </tr>
           <tr>
-            <td style="width:24px;vertical-align:top;color:#D4AF37;font-size:16px;">🏠</td>
+            <td style="width:24px;vertical-align:top;color:#FF8F00;font-size:16px;">🏠</td>
             <td style="color:#E5E5E5;font-size:14px;padding-left:12px;"><strong>On-Site Assessment:</strong> A CSIA certified technician arrives in uniform to protect your home.</td>
           </tr>
         </table>
@@ -285,7 +285,7 @@ $autoresponderHtml = <<<HTML
 
       <div style="text-align:center;margin:32px 0;">
         <p style="color:#A3A3A3;font-size:14px;margin-bottom:16px;">Average response time is currently under 30 minutes.</p>
-        <a href="tel:{$businessPhone}" style="display:inline-block;background:linear-gradient(135deg,#D4AF37,#F4D35E,#D4AF37);color:#121212;font-weight:900;text-transform:uppercase;letter-spacing:1px;padding:18px 36px;text-decoration:none;border-radius:8px;font-size:15px;box-shadow:0 4px 15px rgba(212,175,55,0.3);">
+        <a href="tel:{$businessPhone}" style="display:inline-block;background:linear-gradient(135deg,#FF8F00,#FFB300,#FF8F00);color:#121212;font-weight:900;text-transform:uppercase;letter-spacing:1px;padding:18px 36px;text-decoration:none;border-radius:8px;font-size:15px;box-shadow:0 4px 15px rgba(255,143,0,0.3);">
           Call Us Directly: {$businessPhone}
         </a>
       </div>
