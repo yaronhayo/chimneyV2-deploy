@@ -137,7 +137,7 @@
             <span>We Arrive</span>
           </div>
         </div>
-        <a href="tel:5551234567" class="btn btn-primary contact__confirmation-call">
+        <a href="tel:8886969296" class="btn btn-primary contact__confirmation-call">
           <span class="material-symbols-outlined">call</span>
           Can't Wait? Call Now
         </a>
@@ -168,9 +168,9 @@
     content.appendChild(strong);
 
     var phoneLink = document.createElement('a');
-    phoneLink.href = 'tel:5551234567';
+    phoneLink.href = 'tel:8886969296';
     phoneLink.className = 'contact__form-error-phone';
-    phoneLink.textContent = 'Call us directly: (555) 123-4567';
+    phoneLink.textContent = 'Call us directly: (888) 696-9296';
     content.appendChild(phoneLink);
 
     errorEl.appendChild(content);
