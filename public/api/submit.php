@@ -140,11 +140,21 @@ if (empty($lastName)) {
     $errors[] = 'Last name is required';
 }
 
-if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = 'Valid email address is required';
+// Email is optional in UI (FR14-18), validate only if provided
+if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'Please provide a valid email address';
 }
 
-$validServices = ['chimney-sweep', 'air-duct', 'dryer-vent', 'other'];
+$validServices = [
+    'chimney-sweep',
+    'chimney-inspection',
+    'chimney-repair',
+    'caps-liners',
+    'fireplace-services',
+    'dryer-vent',
+    'air-duct',
+    'other'
+];
 if (empty($service) || !in_array($service, $validServices)) {
     $errors[] = 'Please select a valid service';
 }
@@ -157,10 +167,14 @@ if (!empty($errors)) {
 
 // ── Service Label Map ────────────────────────────────────────────────────
 $serviceLabels = [
-    'chimney-sweep' => 'Chimney Inspection & Sweep',
-    'air-duct'      => 'Air Duct Cleaning',
-    'dryer-vent'    => 'Dryer Vent Repair',
-    'other'         => 'Other Inquiry',
+    'chimney-sweep'      => 'Chimney Sweep & Cleaning',
+    'chimney-inspection' => 'Chimney Inspection',
+    'chimney-repair'     => 'Chimney Repair',
+    'caps-liners'        => 'Caps, Liners & Flues',
+    'fireplace-services' => 'Fireplace Services',
+    'dryer-vent'         => 'Dryer Vent Cleaning',
+    'air-duct'           => 'Air Duct Cleaning',
+    'other'              => 'Other Inquiry',
 ];
 $serviceLabel = $serviceLabels[$service] ?? $service;
 

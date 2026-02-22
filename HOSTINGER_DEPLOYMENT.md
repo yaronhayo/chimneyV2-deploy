@@ -28,8 +28,8 @@ define('NOTIFICATION_EMAIL_3', 'backup@example.com');
 
 1.  Go to the **Hostinger Dashboard** -> **Website** -> **Git**.
 2.  Connect your repository: `https://github.com/yaronhayo/chimneyV2-deploy.git`.
-3.  Set the Branch to `master`.
-4.  Set the Install Directory to `public_html` (or your desired subdirectory).
+3.  Set the Branch to `main`.
+4.  Set the Install Directory to `public_html`.
 5.  Click **Deploy**.
 
 ## 3. Verify Deployment

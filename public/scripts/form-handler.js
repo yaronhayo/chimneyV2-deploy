@@ -77,10 +77,8 @@
       isValid = false;
     }
 
-    if (!email.value.trim()) {
-      showError(email, 'Email address is required');
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+    const emailVal = email.value.trim();
+    if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
       showError(email, 'Please enter a valid email address');
       isValid = false;
     }
