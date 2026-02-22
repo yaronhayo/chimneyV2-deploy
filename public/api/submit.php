@@ -323,8 +323,12 @@ $sender = $config['smtp2go']['sender'];
 $recipients = array_filter($config['recipients']); // Remove empties
 
 if (empty($apiKey) || empty($recipients)) {
-    // Dev mode: no API key configured, return success anyway
-    echo json_encode(['success' => true, 'message' => 'Request received (dev mode — no emails sent)']);
+    // Dev mode: no API key configured
+    // On production, this means env.php is missing or empty.
+    echo json_encode([
+        'success' => true,
+        'message' => 'Dev Mode: env.php not found or credentials empty. No email sent.'
+    ]);
     exit;
 }
 
