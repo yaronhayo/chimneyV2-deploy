@@ -64,6 +64,7 @@
 
     const firstName = form.querySelector('#first-name');
     const lastName = form.querySelector('#last-name');
+    const phone = form.querySelector('#phone');
     const email = form.querySelector('#email');
     const service = form.querySelector('#service-select');
 
@@ -74,6 +75,14 @@
 
     if (!lastName.value.trim()) {
       showError(lastName, 'Last name is required');
+      isValid = false;
+    }
+
+    if (!phone.value.trim()) {
+      showError(phone, 'Phone number is required');
+      isValid = false;
+    } else if (!validatePhone(phone.value)) {
+      showError(phone, 'Please enter a valid 10-digit phone number');
       isValid = false;
     }
 
@@ -187,6 +196,7 @@
     const payload = {
       firstName: form.querySelector('#first-name').value.trim(),
       lastName: form.querySelector('#last-name').value.trim(),
+      phone: form.querySelector('#phone').value.trim(),
       email: form.querySelector('#email').value.trim(),
       service: form.querySelector('#service-select').value,
       honeypot: honeypot ? honeypot.value : '',
