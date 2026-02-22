@@ -14,6 +14,20 @@ if (!file_exists($configPath)) {
     die("Error: config.php not found.");
 }
 
+// Track which env file is actually used
+$envPaths = [
+    dirname($_SERVER['DOCUMENT_ROOT']) . '/env.php',
+    dirname(__DIR__) . '/env.php',
+    __DIR__ . '/env.php',
+];
+$foundEnv = "None";
+foreach ($envPaths as $p) {
+    if (file_exists($p)) {
+        $foundEnv = $p;
+        break;
+    }
+}
+
 $config = require $configPath;
 
 $apiKey = $config['smtp2go']['api_key'] ?? '';
@@ -22,6 +36,7 @@ $recipients = array_filter($config['recipients'] ?? []);
 
 echo "--- SMTP2GO Diagnostic ---\n";
 echo "Config Loaded: Yes\n";
+echo "Env File Used: $foundEnv\n";
 echo "API Key Found: " . ($apiKey ? "Yes (" . substr($apiKey, 0, 8) . "...)" : "No") . "\n";
 echo "Sender: $sender\n";
 echo "Recipients: " . implode(', ', $recipients) . "\n\n";

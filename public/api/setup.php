@@ -8,10 +8,16 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// 1. Security Check: Don't allow re-running if env.php exists
+// 1. Security Check: Don't allow re-running if env.php exists in THIS directory
 $envFile = __DIR__ . '/env.php';
 if (file_exists($envFile)) {
-    die("<h1>Security Notice</h1><p>Credentials are already configured. For security, please delete this file (setup.php) via FTP or File Manager.</p>");
+    die("<h1>Security Notice</h1><p>Credentials are already configured in this folder. For security, please delete this file (setup.php).</p>");
+}
+
+// 2. Conflict Check: Check if env.php exists higher up
+$higherEnv = dirname($_SERVER['DOCUMENT_ROOT']) . '/env.php';
+if (file_exists($higherEnv)) {
+    die("<h1>Configuration Conflict</h1><p>A global configuration file was found at <code>$higherEnv</code>. This will override anything you set here.</p><p>Please delete that file via Hostinger File Manager before using this tool.</p>");
 }
 
 $message = '';
