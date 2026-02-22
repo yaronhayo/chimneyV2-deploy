@@ -76,10 +76,11 @@ if ($curlError) {
     echo "API Response: $response\n\n";
 
     $decoded = json_decode($response, true);
-    if ($httpCode === 200 && isset($decoded['data']['succeeded'])) {
+    if ($httpCode === 200 && isset($decoded['data']['succeeded']) && $decoded['data']['succeeded'] > 0) {
         echo "✅ SUCCESS! Test email sent successfully to " . count($recipients) . " addresses.\n";
     } else {
-        echo "❌ FAILED: SMTP2GO returned an error.\n";
+        echo "❌ FAILED: SMTP2GO accepted the request but did not send the email.\n";
+        echo "Reason: " . ($decoded['data']['failures'][0] ?? 'Unknown API error') . "\n";
     }
 }
 ?>

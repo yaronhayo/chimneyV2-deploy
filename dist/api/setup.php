@@ -147,6 +147,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" name="api_key" placeholder="api-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" required>
             </div>
             <div class="form-group">
+                <label>Verified Sender Email</label>
+                <input type="email" name="sender" value="noreply@1stclasschimneyandairduct.com" required>
+                <small style="display:block;margin-top:5px;color:#888;font-size:11px;">This MUST be a verified sender domain in your SMTP2GO account.</small>
+            </div>
+            <div class="form-group">
                 <label>Notification Email 1</label>
                 <input type="email" name="email1" placeholder="yaron@..." required>
             </div>
