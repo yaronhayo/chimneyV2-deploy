@@ -25,7 +25,7 @@ foreach ($envPaths as $path) {
 return [
     'smtp2go' => [
         'api_key'    => defined('SMTP2GO_API_KEY') ? SMTP2GO_API_KEY : '',
-        'sender'     => defined('SMTP2GO_SENDER') ? SMTP2GO_SENDER : 'noreply@1stclasschimney.com',
+        'sender'     => defined('SMTP2GO_SENDER') ? SMTP2GO_SENDER : 'noreply@1stclasschimneyandairduct.com',
     ],
     'recipients' => [
         defined('NOTIFICATION_EMAIL_1') ? NOTIFICATION_EMAIL_1 : '',
@@ -35,7 +35,7 @@ return [
     'business' => [
         'name'  => '1st Class Chimney & Air Duct',
         'phone' => '(888) 696-9296',
-        'email' => 'info@1stclasschimney.com',
+        'email' => 'info@1stclasschimneyandairduct.com',
     ],
     'rate_limit' => [
         'max_per_hour' => 60,

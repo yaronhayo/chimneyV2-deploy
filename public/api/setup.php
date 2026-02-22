@@ -25,7 +25,7 @@ $messageClass = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $apiKey    = trim($_POST['api_key'] ?? '');
-    $sender    = trim($_POST['sender'] ?? 'info@1stclasschimney.com');
+    $sender    = trim($_POST['sender'] ?? 'info@1stclasschimneyandairduct.com');
     $email1    = trim($_POST['email1'] ?? '');
     $email2    = trim($_POST['email2'] ?? '');
 
