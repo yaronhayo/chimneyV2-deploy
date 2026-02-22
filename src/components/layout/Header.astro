@@ -101,7 +101,9 @@ const navLinks = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: var(--header-height);
+    min-height: var(--header-height);
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
   }
 
   /* Logo */
@@ -112,9 +114,9 @@ const navLinks = [
   }
 
   .header__logo-img {
-    height: 70px;
+    height: 140px;
     width: auto;
-    max-width: 220px;
+    max-width: 440px;
     object-fit: contain;
     transition: transform var(--transition-base);
     filter: drop-shadow(0 0 10px rgba(216, 67, 21, 0.2));
