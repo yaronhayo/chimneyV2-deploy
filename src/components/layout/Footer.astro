@@ -1,0 +1,264 @@
+---
+import businessInfo from '../../data/business-info.json';
+
+const currentYear = new Date().getFullYear();
+
+const serviceLinks = [
+  { label: 'Chimney Sweep', href: '#services' },
+  { label: 'Air Duct Cleaning', href: '#services' },
+  { label: 'Dryer Vent Repair', href: '#services' },
+  { label: 'Chimney Inspection', href: '#services' },
+];
+
+const companyLinks = [
+  { label: 'Why Choose Us', href: '#services' },
+  { label: 'Reviews', href: '#reviews' },
+  { label: 'Contact', href: '#contact' },
+  { label: 'FAQ', href: '#faq' },
+];
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__main">
+      <!-- Zone 1: Brand & Trust -->
+      <div class="footer__brand-zone">
+        <div class="footer__logo">
+          <img
+            src="/images/brand/logo.png"
+            alt={businessInfo.businessName}
+            class="footer__logo-img"
+          />
+        </div>
+        <p class="footer__tagline">Elite Level Chimney & Air Duct Protection</p>
+        <div class="footer__trust-badges">
+          <div class="footer__badge">
+            <span class="material-symbols-outlined">verified</span>
+            <span>CSIA Certified</span>
+          </div>
+          <div class="footer__badge">
+            <span class="material-symbols-outlined">gavel</span>
+            <span>Licensed & Insured</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zone 2: High-Impact Contact -->
+      <div class="footer__contact-zone">
+        <div class="footer__cta">
+          <span class="footer__cta-text">Need Immediate Service?</span>
+          <a href={`tel:${businessInfo.phoneRaw}`} class="footer__phone">
+            {businessInfo.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Floor: Legal & Nav -->
+    <div class="footer__secondary">
+      <p class="footer__copyright">
+        &copy; {currentYear}
+        {businessInfo.businessName}. All rights reserved.
+      </p>
+      <nav class="footer__nav">
+        <ul class="footer__nav-list">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-stone);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: var(--space-3xl) 0 var(--space-xl);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Main Floor: 2-Column Desktop, 1-Column Mobile */
+  .footer__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+    padding-bottom: var(--space-3xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  @media (min-width: 992px) {
+    .footer__main {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+  }
+
+  /* Zone 1: Brand & Trust */
+  .footer__brand-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 500px;
+  }
+
+  .footer__logo-img {
+    height: 70px;
+    width: auto;
+    margin-bottom: var(--space-md);
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.1));
+  }
+
+  .footer__tagline {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .footer__trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+
+  .footer__badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-widest);
+    color: var(--color-text-white);
+    background: rgba(255, 255, 255, 0.03);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .footer__badge .material-symbols-outlined {
+    font-size: 16px;
+    color: var(--color-primary);
+  }
+
+  /* Zone 2: Contact */
+  .footer__contact-zone {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 992px) {
+    .footer__contact-zone {
+      align-items: flex-end;
+      text-align: right;
+    }
+  }
+
+  .footer__cta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .footer__cta-text {
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-widest);
+    color: var(--color-text-muted);
+  }
+
+  .footer__phone {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-black);
+    color: var(--color-text-white);
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+
+  @media (min-width: 768px) {
+    .footer__phone {
+      font-size: 3.5rem;
+    }
+  }
+
+  .footer__phone:hover {
+    color: var(--color-primary);
+  }
+
+  .footer__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .footer__info-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 992px) {
+    .footer__info-item {
+      justify-content: flex-end;
+    }
+  }
+
+  .footer__info-item .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--color-primary);
+  }
+
+  /* Secondary Floor */
+  .footer__secondary {
+    padding-top: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .footer__secondary {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .footer__copyright {
+    font-size: var(--font-size-xs);
+    color: rgba(255, 255, 255, 0.2);
+  }
+
+  .footer__nav-list {
+    display: flex;
+    gap: var(--space-xl);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer__nav-list a {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-widest);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+
+  .footer__nav-list a:hover {
+    color: var(--color-primary);
+  }
+</style>

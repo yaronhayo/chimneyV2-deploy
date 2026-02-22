@@ -1,0 +1,238 @@
+---
+const faqs = [
+  {
+    question: 'How long does a chimney sweep take?',
+    answer:
+      "Most chimney sweeps take <strong>60–90 minutes</strong>, including a visual inspection. Deep cleaning (PCR) or smoke chamber work may take longer. We'll give you a clear time estimate upfront.",
+  },
+  {
+    question: 'How do I know if I need a chimney liner replacement?',
+    answer:
+      'Signs include <strong>flaking mortar, water in the firebox, or a failed Level II inspection</strong>. We offer stainless steel and flexible liner installations — both backed by a manufacturer warranty.',
+  },
+  {
+    question: 'Do you repair chimneys or just clean them?',
+    answer:
+      'We handle the full range: <strong>tuckpointing, crown repair, cap installation, masonry restoration, flashing, and full rebuilds</strong>. If we find damage during an inspection, we show you HD photos and walk through your options.',
+  },
+  {
+    question: 'Can you service gas fireplaces and pilot lights?',
+    answer:
+      'Yes — we handle <strong>gas fireplace repair, pilot light service, gas valve replacement, gas log installation</strong>, and remote control setup. We also service electric fireplaces and pellet stoves.',
+  },
+  {
+    question: 'How much does it cost?',
+    answer:
+      'Every home is different, so we provide a <strong>free, no-obligation assessment</strong> with clear pricing before any work begins. No surprises, no hidden fees — ever.',
+  },
+  {
+    question: 'What happens if you find something wrong during the inspection?',
+    answer:
+      'We show you <strong>HD photos and video</strong> of exactly what we found, explain your options in plain English, and give you a clear quote. No work starts without your approval.',
+  },
+  {
+    question: 'Are your technicians certified and insured?',
+    answer:
+      'Yes — every technician is <strong>CSIA certified</strong>, fully insured, background-checked, and drug-tested. They complete 200+ hours of training before entering your home.',
+  },
+  {
+    question: 'Do you remove animals from chimneys?',
+    answer:
+      'Yes — we safely remove <strong>birds, squirrels, raccoons, and nests</strong> from your chimney. We also install chimney caps and spark arrestors to prevent them from coming back.',
+  },
+];
+---
+
+<section class="faq section" id="faq" aria-label="Frequently Asked Questions">
+  <div class="faq__bg">
+    <img src="/images/backgrounds/faq-consultation.png" alt="" class="faq__bg-img" loading="lazy" />
+    <div class="faq__bg-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="faq__layout">
+      <div class="faq__header" data-reveal>
+        <span class="section-label">Common Questions</span>
+        <h2 class="faq__heading">
+          Everything You Need to Know <br /><span class="faq__heading-sub">Before You Book</span>
+        </h2>
+        <p class="faq__lead">
+          Still have questions? <a href="#contact" class="faq__link">Reach out</a> — we're happy to help.
+        </p>
+      </div>
+      <div class="faq__list" data-reveal-group="60">
+        {
+          faqs.map((faq, i) => (
+            <details class="faq__item" data-reveal open={i === 0}>
+              <summary class="faq__question">
+                <span class="faq__question-text">{faq.question}</span>
+                <span class="material-symbols-outlined faq__chevron">expand_more</span>
+              </summary>
+              <div class="faq__answer">
+                <p set:html={faq.answer} />
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    position: relative;
+    background-color: var(--color-stone);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+  }
+
+  .faq__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .faq__bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.08;
+  }
+
+  .faq__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      var(--color-stone) 0%,
+      rgba(18, 18, 18, 0.7) 50%,
+      var(--color-stone) 100%
+    );
+  }
+
+  .faq > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .faq__layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .faq__heading {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-md);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .faq__heading-sub {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-2xl);
+  }
+
+  .faq__lead {
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    max-width: 400px;
+  }
+
+  .faq__link {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .faq__item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+  }
+
+  .faq__item:hover {
+    border-color: rgba(212, 175, 55, 0.2);
+  }
+
+  .faq__item[open] {
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+
+  .faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg) var(--space-xl);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__question-text {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-white);
+    line-height: var(--line-height-snug);
+  }
+
+  .faq__chevron {
+    color: var(--color-primary);
+    font-size: 24px;
+    flex-shrink: 0;
+    transition: transform var(--transition-base);
+  }
+
+  .faq__item[open] .faq__chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq__answer {
+    padding: var(--space-sm) var(--space-xl) var(--space-lg);
+  }
+
+  .faq__answer p {
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    max-width: 640px;
+  }
+
+  .faq__answer :global(strong) {
+    color: var(--color-text-light);
+    font-weight: var(--font-weight-bold);
+  }
+
+  @media (min-width: 1024px) {
+    .faq__layout {
+      flex-direction: row;
+      gap: var(--space-3xl);
+    }
+
+    .faq__header {
+      flex: 0 0 32%;
+      position: sticky;
+      top: 100px;
+      align-self: flex-start;
+    }
+
+    .faq__list {
+      flex: 1;
+    }
+  }
+</style>

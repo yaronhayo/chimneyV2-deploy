@@ -1,0 +1,130 @@
+---
+import businessInfo from '../data/business-info.json';
+
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage = '/og-image.png' } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// LocalBusiness JSON-LD (FR24)
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: businessInfo.businessName,
+  description: description,
+  url: Astro.site?.toString(),
+  telephone: businessInfo.phone,
+  email: businessInfo.email,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: String(businessInfo.rating.score),
+    reviewCount: String(businessInfo.rating.count),
+    bestRating: '5',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Services',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Chimney Inspection & Sweep' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Air Duct Cleaning' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Dryer Vent Repair' } },
+    ],
+  },
+  image: new URL(ogImage, Astro.site).toString(),
+  priceRange: '$$',
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- SEO Meta (FR23) -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph (FR26) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Twitter Card (FR27) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- LocalBusiness JSON-LD (FR24) -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- GTM Container (FR19) — Replace GTM-XXXXXX with real ID -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-XXXXXX');
+    </script>
+
+    <!-- Fonts: Preconnect + Load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Global Styles (imports design-tokens.css) -->
+    <style is:global>
+      @import '../styles/global.css';
+    </style>
+  </head>
+  <body>
+    <!-- GTM noscript fallback -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+        title="GTM"></iframe></noscript
+    >
+
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    <slot />
+    <!-- Click Fraud Detection (FR49-53) — passive, zero friction -->
+    <script src="/scripts/fraud-guard.js" defer></script>
+    <!-- Scroll Reveal Animations — lightweight IntersectionObserver -->
+    <script src="/scripts/scroll-reveal.js" defer></script>
+  </body>
+</html>

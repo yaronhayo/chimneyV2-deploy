@@ -1,0 +1,337 @@
+---
+const checkItems = [
+  {
+    icon: 'local_fire_department',
+    text: "It's been over a year since your last chimney sweep or inspection",
+  },
+  {
+    icon: 'air',
+    text: 'You smell smoke, musty odors, or notice poor airflow from your fireplace',
+  },
+  {
+    icon: 'timer',
+    text: 'Your dryer takes more than one cycle — your vent may be clogged',
+  },
+  {
+    icon: 'water_drop',
+    text: 'You see water stains or white residue on your chimney bricks',
+  },
+  {
+    icon: 'nest_eco_leaf',
+    text: 'You hear scratching or chirping — animals may be nesting inside',
+  },
+  {
+    icon: 'gas_meter',
+    text: "Your gas fireplace pilot light keeps going out or won't stay lit",
+  },
+];
+---
+
+<section class="risk-check section" id="risk-check">
+  <div class="risk-check__bg">
+    <img
+      src="/images/backgrounds/danger-chimney.png"
+      alt=""
+      class="risk-check__bg-img"
+      loading="lazy"
+    />
+    <div class="risk-check__bg-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="risk-check__inner" data-reveal>
+      <span class="section-label">Quick Home Check-Up</span>
+      <h2 class="section-heading">Does Any of This Sound Familiar?</h2>
+      <hr class="section-divider" />
+
+      <!-- Progress bar -->
+      <div class="risk-check__progress" id="rc-progress" aria-hidden="true">
+        <div class="risk-check__progress-bar">
+          <div class="risk-check__progress-fill" id="rc-progress-fill"></div>
+        </div>
+        <span class="risk-check__progress-text" id="rc-progress-text">0 of 6 checked</span>
+      </div>
+
+      <div class="risk-check__grid" data-reveal-group="80">
+        {
+          checkItems.map((item, i) => (
+            <label class="risk-check__item" data-reveal>
+              <input type="checkbox" class="risk-check__checkbox" data-rc-check />
+              <div class="risk-check__card">
+                <span class="material-symbols-outlined risk-check__icon">{item.icon}</span>
+                <span class="risk-check__text">{item.text}</span>
+                <span class="material-symbols-outlined risk-check__check-icon">check_circle</span>
+              </div>
+            </label>
+          ))
+        }
+      </div>
+
+      <div class="risk-check__result" data-reveal id="rc-result">
+        <p class="risk-check__result-text" id="rc-result-text">
+          <span class="material-symbols-outlined">check_circle</span>
+          Check the ones that apply — see where you stand.
+        </p>
+        <a href="#contact" class="btn btn-primary risk-check__cta"> Get Your Free Assessment </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .risk-check {
+    background: var(--color-charcoal);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .risk-check__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .risk-check__bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.08;
+  }
+
+  .risk-check__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      var(--color-charcoal) 0%,
+      rgba(26, 26, 26, 0.7) 50%,
+      var(--color-charcoal) 100%
+    );
+  }
+
+  .risk-check > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Subtle radial glow for visual depth */
+  .risk-check::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .risk-check__inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .risk-check__progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .risk-check__progress.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .risk-check__progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .risk-check__progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-gold);
+    border-radius: var(--radius-full);
+    transition: width 0.4s var(--reveal-ease);
+  }
+
+  .risk-check__progress-text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    white-space: nowrap;
+    min-width: 80px;
+  }
+
+  .risk-check__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    text-align: left;
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (min-width: 640px) {
+    .risk-check__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .risk-check__item {
+    cursor: pointer;
+  }
+
+  .risk-check__checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .risk-check__card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--color-stone);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+  }
+
+  .risk-check__card:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+    background-color: rgba(212, 175, 55, 0.04);
+  }
+
+  .risk-check__checkbox:checked + .risk-check__card {
+    border-color: var(--color-primary);
+    background-color: rgba(212, 175, 55, 0.08);
+  }
+
+  .risk-check__icon {
+    font-size: 24px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .risk-check__text {
+    flex: 1;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    line-height: var(--line-height-normal);
+  }
+
+  .risk-check__check-icon {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    transition: all var(--transition-base);
+  }
+
+  .risk-check__checkbox:checked + .risk-check__card .risk-check__check-icon {
+    color: var(--color-primary);
+  }
+
+  /* Result */
+  .risk-check__result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .risk-check__result-text {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    transition: opacity 0.3s ease;
+  }
+
+  .risk-check__result-text .material-symbols-outlined {
+    font-size: 24px;
+  }
+
+  @media (max-width: 639px) {
+    .risk-check__result-text {
+      font-size: var(--font-size-base);
+      text-align: center;
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const checkboxes = document.querySelectorAll('[data-rc-check]');
+    const progressEl = document.getElementById('rc-progress');
+    const fillEl = document.getElementById('rc-progress-fill');
+    const textEl = document.getElementById('rc-progress-text');
+    const resultTextEl = document.getElementById('rc-result-text');
+    const total = checkboxes.length;
+
+    const messages = [
+      { icon: 'check_circle', text: 'Check the ones that apply — see where you stand.' },
+      {
+        icon: 'thumb_up',
+        text: 'Most homeowners check at least one — a quick assessment gives you peace of mind.',
+      },
+      {
+        icon: 'favorite',
+        text: "You're not alone — most families we help started right here. Let's get you taken care of.",
+      },
+    ];
+
+    function update() {
+      let count = 0;
+      checkboxes.forEach(function (cb) {
+        if ((cb as HTMLInputElement).checked) count++;
+      });
+
+      // Show progress bar after first check
+      if (count > 0 && progressEl) {
+        progressEl.classList.add('active');
+      }
+
+      // Update progress
+      if (fillEl) fillEl.style.width = (count / total) * 100 + '%';
+      if (textEl) textEl.textContent = count + ' of ' + total + ' checked';
+
+      // Update result message
+      if (resultTextEl) {
+        let msg;
+        if (count === 0) msg = messages[0];
+        else if (count <= 2) msg = messages[1];
+        else msg = messages[2];
+
+        resultTextEl.innerHTML =
+          '<span class="material-symbols-outlined">' + msg.icon + '</span> ' + msg.text;
+      }
+    }
+
+    checkboxes.forEach(function (cb) {
+      cb.addEventListener('change', update);
+    });
+  })();
+</script>

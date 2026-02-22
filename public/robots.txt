@@ -1,0 +1,6 @@
+# robots.txt — 1st Class Chimney & Air Duct
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://www.1stclasschimney.com/sitemap-index.xml

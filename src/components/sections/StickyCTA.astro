@@ -1,0 +1,57 @@
+---
+import businessInfo from '../../data/business-info.json';
+---
+
+<div class="sticky-cta" aria-label="Call to action">
+  <a href={`tel:${businessInfo.phoneRaw}`} class="sticky-cta__button">
+    <span class="material-symbols-outlined">call</span>
+    Call Now for Quote
+  </a>
+</div>
+
+<style>
+  .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-sticky);
+    background-color: var(--color-charcoal);
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    padding: var(--space-md);
+  }
+
+  .sticky-cta__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    width: 100%;
+    background-color: var(--color-primary);
+    color: var(--color-stone);
+    font-weight: var(--font-weight-bold);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-gold-glow);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-base);
+  }
+
+  .sticky-cta__button:hover {
+    background-color: var(--color-primary-hover);
+  }
+
+  .sticky-cta__button .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1;
+    font-size: 20px;
+  }
+
+  /* Hide on tablet+ */
+  @media (min-width: 768px) {
+    .sticky-cta {
+      display: none;
+    }
+  }
+</style>

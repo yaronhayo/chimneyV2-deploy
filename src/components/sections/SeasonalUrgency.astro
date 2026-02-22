@@ -1,0 +1,214 @@
+---
+/**
+ * SeasonalUrgency.astro — Seasonal Timing Authority Section
+ * CRO: Kills the doubt "Can I just do this later?"
+ * Creates genuine urgency tied to real seasonal patterns.
+ */
+
+// Auto-detect current season based on month
+const month = new Date().getMonth(); // 0-indexed
+let currentSeason: string;
+if (month >= 2 && month <= 4) currentSeason = 'spring';
+else if (month >= 5 && month <= 7) currentSeason = 'summer';
+else if (month >= 8 && month <= 10) currentSeason = 'fall';
+else currentSeason = 'winter';
+
+const seasons = [
+  {
+    id: 'spring',
+    icon: 'local_florist',
+    label: 'Spring',
+    tagline: 'Best maintenance window',
+    detail: 'Shortest wait times. Ideal for cleaning after winter use.',
+  },
+  {
+    id: 'summer',
+    icon: 'wb_sunny',
+    label: 'Summer',
+    tagline: 'Pre-season pricing',
+    detail: 'Best availability. Get ahead of the fall rush.',
+  },
+  {
+    id: 'fall',
+    icon: 'park',
+    label: 'Fall',
+    tagline: 'Peak season',
+    detail: 'Slots fill fast. Book 2-3 weeks out.',
+  },
+  {
+    id: 'winter',
+    icon: 'ac_unit',
+    label: 'Winter',
+    tagline: 'Emergency calls spike',
+    detail: 'Higher demand. Longer wait times.',
+  },
+];
+---
+
+<section class="seasonal section" id="seasonal-urgency">
+  <div class="container">
+    <div class="seasonal__header" data-reveal>
+      <span class="section-label">Timing Matters</span>
+      <h2 class="seasonal__heading">
+        The Best Time to Check Your Chimney Was Last Year.<br />
+        <span class="gradient-gold-text">The Next Best Time Is Today.</span>
+      </h2>
+    </div>
+
+    <div class="seasonal__timeline" data-reveal-group="100">
+      {
+        seasons.map((season) => (
+          <div
+            class:list={[
+              'seasonal__card',
+              { 'seasonal__card--active': season.id === currentSeason },
+            ]}
+            data-reveal
+          >
+            {season.id === currentSeason && <span class="seasonal__now-badge">YOU ARE HERE</span>}
+            <span class="seasonal__icon">
+              <span class="material-symbols-outlined">{season.icon}</span>
+            </span>
+            <h3 class="seasonal__card-label">{season.label}</h3>
+            <p class="seasonal__card-tagline">{season.tagline}</p>
+            <p class="seasonal__card-detail">{season.detail}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="seasonal__bottom" data-reveal>
+      <p class="seasonal__availability">
+        <span class="material-symbols-outlined">event_available</span>
+        We have availability this week.
+      </p>
+      <a href="#contact" class="btn btn-primary seasonal__cta"> Check My Availability </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .seasonal {
+    background-color: var(--color-charcoal);
+  }
+
+  .seasonal__header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .seasonal__heading {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
+    line-height: var(--line-height-snug);
+  }
+
+  .seasonal__timeline {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    max-width: 900px;
+    margin: 0 auto var(--space-2xl);
+  }
+
+  .seasonal__card {
+    position: relative;
+    padding: var(--space-xl);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    transition: all var(--transition-base);
+  }
+
+  .seasonal__card--active {
+    background: rgba(212, 175, 55, 0.06);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 30px -10px rgba(212, 175, 55, 0.2);
+  }
+
+  .seasonal__now-badge {
+    position: absolute;
+    top: calc(-1 * var(--space-sm));
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gradient-gold);
+    color: var(--color-stone);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--letter-spacing-wider);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+  }
+
+  .seasonal__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: rgba(212, 175, 55, 0.1);
+    margin-bottom: var(--space-sm);
+  }
+
+  .seasonal__icon .material-symbols-outlined {
+    font-size: 28px;
+    color: var(--color-primary);
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .seasonal__card-label {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-xs);
+  }
+
+  .seasonal__card-tagline {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    margin-bottom: var(--space-sm);
+  }
+
+  .seasonal__card-detail {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .seasonal__bottom {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .seasonal__availability {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-success);
+  }
+
+  .seasonal__availability .material-symbols-outlined {
+    font-size: 24px;
+    font-variation-settings: 'FILL' 1;
+  }
+
+  @media (min-width: 768px) {
+    .seasonal__timeline {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .seasonal__heading {
+      font-size: var(--font-size-4xl);
+    }
+  }
+</style>

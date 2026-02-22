@@ -1,0 +1,324 @@
+---
+import businessInfo from '../../data/business-info.json';
+
+const navLinks = [
+  { label: 'Services', href: '#services' },
+  { label: 'Reviews', href: '#reviews' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <!-- Logo -->
+    <a href="/" class="header__logo" aria-label={businessInfo.businessName}>
+      <img src="/images/brand/logo.png" alt={businessInfo.businessName} class="header__logo-img" />
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="header__nav" aria-label="Main navigation">
+      <ul class="header__nav-list">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href} class="header__nav-link">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Right Actions -->
+    <div class="header__actions">
+      <!-- Phone (desktop) -->
+      <a
+        href={`tel:${businessInfo.phoneRaw}`}
+        class="header__phone"
+        aria-label={`Call ${businessInfo.phone}`}
+      >
+        <span class="material-symbols-outlined">phone</span>
+        <span class="header__phone-text">{businessInfo.phone}</span>
+      </a>
+
+      <!-- CTA Button -->
+      <a href="#contact" class="btn btn-primary header__cta"> Get Inspection </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="header__menu-toggle"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="header__mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav aria-label="Mobile navigation">
+      <ul class="header__mobile-list">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href} class="header__mobile-link">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href={`tel:${businessInfo.phoneRaw}`} class="header__mobile-link header__mobile-phone">
+            <span class="material-symbols-outlined">phone</span>
+            {businessInfo.phone}
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="btn btn-primary header__mobile-cta"> Get Free Inspection </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    width: 100%;
+    background-color: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+  }
+
+  /* Logo */
+  .header__logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .header__logo-img {
+    height: 54px;
+    width: auto;
+    object-fit: contain;
+    transition: transform var(--transition-base);
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
+  }
+
+  .header__logo:hover .header__logo-img {
+    transform: scale(1.05);
+  }
+
+  /* Desktop Nav */
+  .header__nav {
+    display: none;
+  }
+
+  .header__nav-list {
+    display: flex;
+    gap: var(--space-xl);
+  }
+
+  .header__nav-link {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-text-muted);
+    transition: color var(--transition-base);
+    position: relative;
+  }
+
+  .header__nav-link:hover {
+    color: var(--color-primary);
+  }
+
+  .header__nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-gold);
+    transition: width var(--transition-base);
+  }
+
+  .header__nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Actions */
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .header__phone {
+    display: none;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-base);
+  }
+
+  .header__phone:hover {
+    color: var(--color-text-white);
+  }
+
+  .header__phone .material-symbols-outlined {
+    font-size: 18px;
+  }
+
+  .header__cta {
+    display: none;
+    font-size: var(--font-size-xs);
+    padding: var(--space-sm) var(--space-lg);
+  }
+
+  .header__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: var(--color-text-light);
+    transition: color var(--transition-base);
+  }
+
+  .header__menu-toggle:hover {
+    color: var(--color-primary);
+  }
+
+  /* Mobile Menu */
+  .header__mobile-menu {
+    display: none;
+    background-color: var(--color-charcoal);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: var(--space-lg);
+  }
+
+  .header__mobile-menu[aria-hidden='false'] {
+    display: block;
+  }
+
+  .header__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .header__mobile-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-light);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+  }
+
+  .header__mobile-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-primary);
+  }
+
+  .header__mobile-phone {
+    color: var(--color-primary);
+  }
+
+  .header__mobile-cta {
+    margin-top: var(--space-sm);
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Desktop breakpoint */
+  @media (min-width: 768px) {
+    .header__nav {
+      display: block;
+    }
+
+    .header__phone {
+      display: flex;
+    }
+
+    .header__cta {
+      display: inline-flex;
+    }
+
+    .header__menu-toggle {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.header__menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.getAttribute('aria-hidden') === 'false';
+      menu.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+      toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+
+      const icon = toggle.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.textContent = isOpen ? 'menu' : 'close';
+      }
+    });
+
+    // Close menu when clicking a link
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        menu.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        const icon = toggle.querySelector('.material-symbols-outlined');
+        if (icon) icon.textContent = 'menu';
+      });
+    });
+  }
+
+  // Debounced scroll handler for header shadow
+  let scrollTimeout: ReturnType<typeof setTimeout>;
+  const header = document.getElementById('header');
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (header) {
+          if (window.scrollY > 10) {
+            header.classList.add('header--scrolled');
+          } else {
+            header.classList.remove('header--scrolled');
+          }
+        }
+      }, 16);
+    },
+    { passive: true }
+  );
+</script>

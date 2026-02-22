@@ -1,0 +1,203 @@
+---
+/**
+ * LiveActivityFeed.astro — Bandwagon Effect Toast
+ * Shows rotating notifications of recent bookings to leverage social proof.
+ * Auto-cycles through entries, auto-dismisses, closeable.
+ */
+---
+
+<div
+  class="activity-feed"
+  id="activity-feed"
+  role="status"
+  aria-live="polite"
+  aria-label="Recent activity"
+>
+  <div class="activity-feed__toast" id="activity-toast">
+    <button
+      class="activity-feed__close"
+      id="activity-close"
+      aria-label="Close activity notifications"
+    >
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="activity-feed__content">
+      <div class="activity-feed__icon">
+        <span class="material-symbols-outlined">event_available</span>
+      </div>
+      <div class="activity-feed__text">
+        <span class="activity-feed__message" id="activity-message"></span>
+        <span class="activity-feed__time" id="activity-time"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .activity-feed {
+    position: fixed;
+    bottom: var(--space-lg);
+    left: var(--space-lg);
+    z-index: 90;
+    pointer-events: none;
+  }
+
+  .activity-feed__toast {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    background: var(--color-charcoal);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    max-width: 340px;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.4s var(--reveal-ease);
+    pointer-events: auto;
+  }
+
+  .activity-feed__toast.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .activity-feed__close {
+    position: absolute;
+    top: var(--space-xs);
+    right: var(--space-xs);
+    padding: 4px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity var(--transition-fast);
+  }
+
+  .activity-feed__close:hover {
+    opacity: 1;
+  }
+
+  .activity-feed__close .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  .activity-feed__content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .activity-feed__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: rgba(212, 175, 55, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .activity-feed__icon .material-symbols-outlined {
+    font-size: 20px;
+    color: var(--color-primary);
+  }
+
+  .activity-feed__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .activity-feed__message {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-light);
+    line-height: var(--line-height-tight);
+  }
+
+  .activity-feed__time {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .activity-feed.dismissed {
+    display: none;
+  }
+
+  @media (max-width: 639px) {
+    .activity-feed {
+      left: var(--space-sm);
+      right: var(--space-sm);
+      bottom: 80px; /* Above sticky CTA */
+    }
+
+    .activity-feed__toast {
+      max-width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .activity-feed__toast {
+      transition: opacity 0.2s ease;
+      transform: none;
+    }
+
+    .activity-feed__toast.visible {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var entries = [
+      { name: 'Sarah', area: 'Lakewood', service: 'chimney assessment', time: '2 hours ago' },
+      { name: 'Mike', area: 'Toms River', service: 'air duct cleaning', time: '4 hours ago' },
+      { name: 'Jennifer', area: 'Brick', service: 'dryer vent cleaning', time: '5 hours ago' },
+      { name: 'David', area: 'Jackson', service: 'chimney inspection', time: 'yesterday' },
+      { name: 'Lisa', area: 'Howell', service: 'full home assessment', time: 'yesterday' },
+    ];
+
+    var feed = document.getElementById('activity-feed');
+    var toast = document.getElementById('activity-toast');
+    var messageEl = document.getElementById('activity-message');
+    var timeEl = document.getElementById('activity-time');
+    var closeBtn = document.getElementById('activity-close');
+
+    if (!feed || !toast || !messageEl || !timeEl || !closeBtn) return;
+
+    var currentIndex = 0;
+    var cycleTimer;
+    var dismissed = false;
+
+    function showToast(entry) {
+      if (dismissed) return;
+      messageEl.textContent = entry.name + ' from ' + entry.area + ' booked a ' + entry.service;
+      timeEl.textContent = entry.time;
+      toast.classList.add('visible');
+
+      setTimeout(function () {
+        toast.classList.remove('visible');
+      }, 4000);
+    }
+
+    function cycle() {
+      if (dismissed) return;
+      showToast(entries[currentIndex]);
+      currentIndex = (currentIndex + 1) % entries.length;
+      cycleTimer = setTimeout(cycle, 8000);
+    }
+
+    closeBtn.addEventListener('click', function () {
+      dismissed = true;
+      toast.classList.remove('visible');
+      feed.classList.add('dismissed');
+      if (cycleTimer) clearTimeout(cycleTimer);
+    });
+
+    // Start after 5 seconds
+    setTimeout(cycle, 5000);
+  })();
+</script>

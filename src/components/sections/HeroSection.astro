@@ -1,0 +1,673 @@
+---
+import businessInfo from '../../data/business-info.json';
+---
+
+<section class="hero" aria-label="Hero">
+  <div class="hero__bg-texture"></div>
+  <div class="hero__bg-gradient"></div>
+  <div class="hero__bg-image">
+    <img
+      src="/images/hero/hero-bg.png"
+      alt="Beautiful suburban home with brick chimney at golden hour"
+      class="hero__bg-photo"
+      loading="eager"
+      width="1024"
+      height="1024"
+    />
+  </div>
+
+  <div class="container hero__container">
+    <div class="hero__grid">
+      <!-- Text Content -->
+      <div class="hero__content">
+        <div class="hero__badge">
+          <span class="material-symbols-outlined">verified</span>
+          CSIA Certified · Protecting Homes Since 2010
+        </div>
+
+        <h1 class="hero__title">
+          Your Home Deserves <br />
+          <span class="gradient-gold-text">First-Class Care</span>
+        </h1>
+
+        <p class="hero__subtitle">
+          Chimney sweeps, inspections, repairs, fireplace service, and more — done right by
+          certified pros you can trust.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#contact" class="btn btn-primary hero__cta-primary animate-pulse-glow">
+            Get Your Free Assessment
+          </a>
+          <a href={`tel:${businessInfo.phoneRaw}`} class="btn btn-ghost hero__cta-secondary">
+            <span class="material-symbols-outlined">call</span>
+            {businessInfo.phone}
+          </a>
+        </div>
+
+        <div class="hero__trust-indicators">
+          <div class="hero__trust-item">
+            <span class="material-symbols-outlined">check_circle</span>
+            Certified & Insured
+          </div>
+          <div class="hero__trust-divider"></div>
+          <div class="hero__trust-item">
+            <span class="material-symbols-outlined">check_circle</span>
+            {businessInfo.rating.score}★ · {businessInfo.rating.count}+ Reviews
+          </div>
+          <div class="hero__trust-divider"></div>
+          <div class="hero__trust-item">
+            <span class="material-symbols-outlined">check_circle</span>
+            Same-Day Available
+          </div>
+        </div>
+      </div>
+
+      <!-- Lead Capture Form -->
+      <div class="hero__form-wrap">
+        <div class="hero__form-card">
+          <div class="hero__form-header">
+            <h2 class="hero__form-title">Get Your Free Assessment</h2>
+            <p class="hero__form-subtitle">
+              <span class="hero__form-dot"></span>
+              Technicians available today
+            </p>
+          </div>
+
+          <form class="hero__form" id="hero-form" novalidate>
+            <!-- Honeypot -->
+            <div style="position:absolute;left:-9999px" aria-hidden="true">
+              <input
+                type="text"
+                name="website"
+                id="hero-website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="hero__form-group">
+              <label for="hero-name" class="hero__form-label">Your Name</label>
+              <input
+                type="text"
+                id="hero-name"
+                name="name"
+                class="hero__form-input"
+                placeholder="John Smith"
+                required
+                autocomplete="name"
+              />
+            </div>
+
+            <div class="hero__form-group">
+              <label for="hero-phone" class="hero__form-label">Phone Number</label>
+              <input
+                type="tel"
+                id="hero-phone"
+                name="phone"
+                class="hero__form-input"
+                placeholder="(888) 696-9296"
+                required
+                autocomplete="tel"
+              />
+            </div>
+
+            <div class="hero__form-group">
+              <label for="hero-service" class="hero__form-label">Service Needed</label>
+              <select
+                id="hero-service"
+                name="service"
+                class="hero__form-input hero__form-select"
+                required
+              >
+                <option value="" disabled selected>Select a service…</option>
+                <option value="chimney-sweep">Chimney Sweep & Cleaning</option>
+                <option value="chimney-inspection">Chimney Inspection</option>
+                <option value="chimney-repair">Chimney Repair</option>
+                <option value="caps-liners">Caps, Liners & Flues</option>
+                <option value="fireplace-services">Fireplace Services</option>
+                <option value="dryer-vent">Dryer Vent Cleaning</option>
+                <option value="other">Other / Not Sure</option>
+              </select>
+            </div>
+
+            <button type="submit" class="hero__form-submit">
+              <span class="material-symbols-outlined">calendar_month</span>
+              Schedule Free Assessment
+            </button>
+
+            <p class="hero__form-disclaimer">
+              <span class="material-symbols-outlined">lock</span>
+              No spam, ever. We'll call to confirm your appointment.
+            </p>
+          </form>
+
+          <div class="hero__form-confirmation" id="heroFormConfirmation" style="display:none;">
+            <div class="hero__form-confirmation-icon">
+              <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <h3 class="hero__form-confirmation-title">Request Received!</h3>
+            <p class="hero__form-confirmation-text">
+              We'll call you within 2 hours to confirm your appointment.
+            </p>
+            <a href={`tel:${businessInfo.phoneRaw}`} class="hero__form-submit">
+              <span class="material-symbols-outlined">call</span>
+              Can't Wait? Call Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background-color: var(--color-stone);
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .hero__bg-texture {
+    position: absolute;
+    inset: 0;
+    opacity: 0.3;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23121212'/%3E%3Crect width='1' height='1' fill='%23181818'/%3E%3C/svg%3E");
+  }
+
+  .hero__bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--color-stone), rgba(18, 18, 18, 0.95), transparent);
+    z-index: 10;
+  }
+
+  .hero__bg-image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__bg-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center right;
+    opacity: 0.35;
+    filter: grayscale(0.4);
+  }
+
+  .hero__container {
+    position: relative;
+    z-index: 20;
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-3xl);
+  }
+
+  .hero__grid {
+    display: grid;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .hero__content {
+    max-width: 660px;
+  }
+
+  /* Badge */
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background-color: rgba(212, 175, 55, 0.1);
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__badge .material-symbols-outlined {
+    font-size: 14px;
+  }
+
+  /* Title */
+  .hero__title {
+    font-size: var(--font-size-hero);
+    font-weight: var(--font-weight-black);
+    color: var(--color-text-white);
+    margin-bottom: var(--space-lg);
+    line-height: var(--line-height-tight);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Subtitle */
+  .hero__subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+    max-width: 540px;
+    line-height: var(--line-height-relaxed);
+    border-left: 3px solid var(--color-primary);
+    padding-left: var(--space-lg);
+  }
+
+  .hero__subtitle strong {
+    color: var(--color-text-white);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* Stat Row */
+  .hero__stat-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(212, 175, 55, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: var(--radius-md);
+    justify-content: space-between;
+  }
+
+  .hero__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hero__stat-number {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-black);
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .hero__stat-label {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .hero__stat-divider {
+    width: 1px;
+    height: 56px;
+    background: rgba(212, 175, 55, 0.3);
+  }
+
+  /* Actions */
+  .hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .hero__cta-primary {
+    font-size: var(--font-size-lg);
+    padding: var(--space-md) var(--space-xl);
+  }
+
+  .hero__cta-secondary {
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Trust Indicators */
+  .hero__trust-indicators {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .hero__trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .hero__trust-item .material-symbols-outlined {
+    color: var(--color-primary);
+    font-size: 18px;
+  }
+
+  .hero__trust-divider {
+    width: 1px;
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: none;
+  }
+
+  /* Hero Form Card */
+  .hero__form-wrap {
+    display: none;
+    position: relative;
+  }
+
+  .hero__form-card {
+    position: relative;
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+    box-shadow:
+      0 30px 60px -12px rgba(0, 0, 0, 0.7),
+      0 0 40px rgba(212, 175, 55, 0.05);
+    max-width: 440px;
+    margin-left: auto;
+  }
+
+  .hero__form-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero__form-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-black);
+    color: var(--color-text-white);
+    margin-bottom: var(--space-xs);
+    line-height: 1.2;
+  }
+
+  .hero__form-subtitle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-success);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .hero__form-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-success);
+    box-shadow: 0 0 10px var(--color-success);
+    animation: hero-pulse 2s infinite;
+  }
+
+  @keyframes hero-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.15);
+    }
+  }
+
+  .hero__form-group {
+    margin-bottom: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .hero__form-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+  }
+
+  .hero__form-input {
+    width: 100%;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--color-text-white);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    transition: all 0.2s ease;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  .hero__form-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .hero__form-input:focus {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+  }
+
+  .hero__form-input--error {
+    border-color: #ff4d4d !important;
+    background: rgba(255, 77, 77, 0.05) !important;
+  }
+
+  .hero__form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 48px;
+    cursor: pointer;
+  }
+
+  .hero__form-select option {
+    background: #1a1a1a;
+    color: white;
+  }
+
+  .hero__form-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-md);
+    background: linear-gradient(135deg, #d4af37 0%, #f4d35e 50%, #d4af37 100%);
+    color: #121212;
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    margin-top: var(--space-sm);
+  }
+
+  .hero__form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+    filter: brightness(1.1);
+  }
+
+  .hero__form-submit:active {
+    transform: translateY(0);
+  }
+
+  .hero__form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .hero__form-disclaimer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: var(--space-xl);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .hero__form-disclaimer .material-symbols-outlined {
+    font-size: 14px;
+    color: var(--color-success);
+  }
+
+  .hero__field-error {
+    font-size: 11px;
+    color: #ff4d4d;
+    font-weight: var(--font-weight-bold);
+    margin-top: 4px;
+  }
+
+  @media (min-width: 640px) {
+    .hero__actions {
+      flex-direction: row;
+    }
+
+    .hero__trust-divider {
+      display: block;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero__grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--space-xl);
+    }
+
+    .hero__form-wrap {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    'use strict';
+    const form = document.getElementById('hero-form') as HTMLFormElement | null;
+    if (!form) return;
+
+    const loadTime = Date.now();
+
+    function showError(field: HTMLInputElement | HTMLSelectElement, msg: string) {
+      clearError(field);
+      const el = document.createElement('div');
+      el.className = 'hero__field-error';
+      el.textContent = msg;
+      el.setAttribute('role', 'alert');
+      field.parentElement?.appendChild(el);
+      field.classList.add('hero__form-input--error');
+    }
+
+    function clearError(field: HTMLInputElement | HTMLSelectElement) {
+      const err = field.parentElement?.querySelector('.hero__field-error');
+      if (err) err.remove();
+      field.classList.remove('hero__form-input--error');
+    }
+
+    function validate() {
+      let ok = true;
+      const name = form?.querySelector('#hero-name') as HTMLInputElement | null;
+      const phone = form?.querySelector('#hero-phone') as HTMLInputElement | null;
+      const service = form?.querySelector('#hero-service') as HTMLSelectElement | null;
+
+      if (!name || !phone || !service) return false;
+
+      [name, phone, service].forEach((f) => clearError(f));
+
+      if (!name.value.trim()) {
+        showError(name, 'Name is required');
+        ok = false;
+      }
+      if (!phone.value.trim()) {
+        showError(phone, 'Phone number is required');
+        ok = false;
+      } else if (phone.value.replace(/\D/g, '').length < 10) {
+        showError(phone, 'Enter a valid 10-digit phone number');
+        ok = false;
+      }
+      if (!service.value) {
+        showError(service, 'Please select a service');
+        ok = false;
+      }
+
+      return ok;
+    }
+
+    const btn = form.querySelector('.hero__form-submit') as HTMLButtonElement | null;
+    const btnText = btn ? btn.innerHTML : '';
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!validate()) return;
+
+      const nameEl = form.querySelector('#hero-name') as HTMLInputElement;
+      const phoneEl = form.querySelector('#hero-phone') as HTMLInputElement;
+      const serviceEl = form.querySelector('#hero-service') as HTMLSelectElement;
+      const honeypot = form.querySelector('#hero-website') as HTMLInputElement | null;
+
+      const payload = {
+        firstName: nameEl.value.trim().split(' ')[0],
+        lastName: nameEl.value.trim().split(' ').slice(1).join(' ') || '',
+        phone: phoneEl.value.trim(),
+        service: serviceEl.value,
+        honeypot: honeypot ? honeypot.value : '',
+        timeToSubmit: Date.now() - loadTime,
+        source: 'hero-form',
+        pageUrl: window.location.href,
+      };
+
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span> Sending…';
+      }
+
+      try {
+        const res = await fetch('/api/submit.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          form.style.display = 'none';
+          const conf = document.getElementById('heroFormConfirmation');
+          if (conf) conf.style.display = 'block';
+        } else {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = btnText;
+          }
+          alert(data.error || 'Something went wrong. Please try again.');
+        }
+      } catch {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = btnText;
+        }
+        alert('Something went wrong. Please call us directly.');
+      }
+    });
+  })();
+</script>

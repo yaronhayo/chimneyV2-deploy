@@ -1,0 +1,744 @@
+---
+/**
+ * ServicesGrid.astro — Top 6 Most-Searched Services (2×3 Grid)
+ * Cards with image, icon, title, short description
+ * Click opens a detail modal with expanded info + contact options
+ */
+import businessInfo from '../../data/business-info.json';
+
+const services = [
+  {
+    id: 'chimney-sweep',
+    icon: 'cleaning_services',
+    title: 'Chimney Sweep & Cleaning',
+    image: '/images/services/chimney-sweep.png',
+    description:
+      'Creosote removal, smoke chamber cleaning, and deep PCR cleaning — with HEPA filtration so nothing recirculates.',
+    badge: 'Most Popular',
+    details:
+      'Our CSIA-certified technicians perform a thorough top-to-bottom cleaning of your entire chimney system. We use professional-grade rotary tools and HEPA-filtered vacuum systems to remove dangerous creosote buildup, soot, and debris — without letting anything escape into your home.',
+    benefits: [
+      'Reduces chimney fire risk by up to 90%',
+      'HEPA filtration keeps your home clean',
+      'Includes basic safety inspection',
+      'Takes 60–90 minutes on average',
+    ],
+  },
+  {
+    id: 'chimney-inspection',
+    icon: 'search',
+    title: 'Chimney Inspection',
+    image: '/images/services/chimney-inspection.png',
+    description:
+      'Level I, II, and III inspections with HD camera footage. Catch cracks, blockages, and liner damage early.',
+    badge: null,
+    details:
+      'We offer all three NFPA-standard inspection levels. Our HD camera inspections reveal hidden cracks, deterioration, blockages, and liner damage that visual-only inspections miss. You receive a detailed report with photos and recommended next steps.',
+    benefits: [
+      'HD camera footage of your chimney interior',
+      'Detailed written report with photos',
+      'Identifies hidden safety hazards',
+      'Required before home sales (Level II)',
+    ],
+  },
+  {
+    id: 'chimney-repair',
+    icon: 'construction',
+    title: 'Chimney Repair',
+    image: '/images/services/chimney-repair.png',
+    description:
+      'Tuckpointing, crown repair, masonry restoration, flashing, and full rebuilds. We fix what others overlook.',
+    badge: null,
+    details:
+      'From minor mortar repairs to full chimney rebuilds, our master masons restore your chimney to peak structural integrity. We use premium materials that match your existing masonry and provide lasting protection against water penetration and freeze-thaw damage.',
+    benefits: [
+      'Prevents costly water damage to your home',
+      'Matched masonry for seamless appearance',
+      'Crown sealing stops leaks at the top',
+      'Flashing repair prevents roof-line leaks',
+    ],
+  },
+  {
+    id: 'caps-liners',
+    icon: 'roofing',
+    title: 'Caps, Liners & Flues',
+    image: '/images/services/caps-liners.png',
+    description:
+      'Cap installation, liner replacement, flue repair, damper service, and chase covers — keeping your system sealed and safe.',
+    badge: null,
+    details:
+      'Chimney caps prevent rain, animals, and debris from entering your flue. Stainless steel liners protect against heat transfer and corrosion. We install, repair, and replace all chimney components to keep your system operating safely and efficiently.',
+    benefits: [
+      'Keeps animals and rain out of your chimney',
+      'Stainless steel liners last 15–20+ years',
+      'Improves draft and heating efficiency',
+      'Prevents dangerous carbon monoxide leaks',
+    ],
+  },
+  {
+    id: 'fireplace-services',
+    icon: 'fireplace',
+    title: 'Fireplace Services',
+    image: '/images/services/fireplace-services.png',
+    description:
+      'Gas fireplace repair, gas log installation, pilot light service, glass doors, and electric fireplace setup.',
+    badge: null,
+    details:
+      'Whether you have a traditional wood-burning fireplace, a gas insert, or want to convert to gas logs, we handle it all. Our technicians are NFI-certified for gas appliance work and can diagnose pilot light issues, replace thermocouples, install glass doors, and set up new units.',
+    benefits: [
+      'NFI-certified gas appliance technicians',
+      'Gas log installation and conversion',
+      'Pilot light and thermocouple repair',
+      'Glass door installation and replacement',
+    ],
+  },
+  {
+    id: 'dryer-vent',
+    icon: 'local_laundry_service',
+    title: 'Dryer Vent Cleaning',
+    image: '/images/services/dryer-vent.png',
+    description:
+      'Full vent line clearing from dryer to exterior wall. Prevents the #1 overlooked fire hazard in homes.',
+    badge: null,
+    details:
+      'Clogged dryer vents cause over 15,000 house fires annually. Our technicians clear the entire vent line from your dryer to the exterior wall using specialized rotary brush equipment, removing lint buildup that restricts airflow and creates a serious fire hazard.',
+    benefits: [
+      'Prevents dryer fires — the #1 overlooked hazard',
+      'Cuts drying time and energy bills',
+      'Extends the life of your dryer',
+      'Full line clearing from dryer to exterior',
+    ],
+  },
+];
+---
+
+<section class="services section" id="services" aria-label="Our Services">
+  <div class="services__bg-texture"></div>
+  <div class="container services__container">
+    <div class="services__header" data-reveal>
+      <span class="section-label">What We Do</span>
+      <h2 class="section-heading">Our Most Requested Services</h2>
+      <hr class="section-divider" />
+    </div>
+
+    <div class="services__grid" data-reveal-group="80">
+      {
+        services.map((service) => (
+          <button
+            class="services__card"
+            data-reveal
+            data-service-id={service.id}
+            type="button"
+            aria-label={`Learn more about ${service.title}`}
+          >
+            <div class="services__card-img-wrap">
+              <img
+                src={service.image}
+                alt={service.title}
+                class="services__card-img"
+                loading="lazy"
+                width="400"
+                height="240"
+              />
+              <div class="services__card-img-overlay" />
+              {service.badge && <span class="services__badge">{service.badge}</span>}
+              <div class="services__card-icon">
+                <span class="material-symbols-outlined">{service.icon}</span>
+              </div>
+            </div>
+            <div class="services__card-body">
+              <h3 class="services__card-title">{service.title}</h3>
+              <p class="services__card-desc">{service.description}</p>
+              <span class="services__card-link">
+                Learn More <span class="material-symbols-outlined">arrow_forward</span>
+              </span>
+            </div>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Service Detail Modal (outside section to avoid scoped style conflicts) -->
+<div class="service-modal" id="serviceModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="service-modal__backdrop" data-close-modal></div>
+  <div class="service-modal__panel">
+    <button class="service-modal__close" data-close-modal aria-label="Close modal" type="button">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+
+    <div class="service-modal__img-wrap">
+      <img src="" alt="" class="service-modal__img" id="modalImg" />
+      <div class="service-modal__img-overlay"></div>
+      <div class="service-modal__icon" id="modalIcon">
+        <span class="material-symbols-outlined"></span>
+      </div>
+    </div>
+
+    <div class="service-modal__content">
+      <h3 class="service-modal__title" id="modalTitle"></h3>
+      <p class="service-modal__desc" id="modalDesc"></p>
+
+      <div class="service-modal__benefits">
+        <h4 class="service-modal__benefits-label">
+          <span class="material-symbols-outlined">verified</span>
+          What You Get
+        </h4>
+        <ul class="service-modal__benefits-list" id="modalBenefits"></ul>
+      </div>
+
+      <div class="service-modal__contact">
+        <h4 class="service-modal__contact-label">Ready to Get Started?</h4>
+        <div class="service-modal__contact-actions">
+          <a
+            href={`tel:${businessInfo.phoneRaw}`}
+            class="service-modal__btn service-modal__btn--call"
+          >
+            <span class="material-symbols-outlined">call</span>
+            Call {businessInfo.phone}
+          </a>
+          <a href="#contact" class="service-modal__btn service-modal__btn--quote" data-close-modal>
+            <span class="material-symbols-outlined">edit_note</span>
+            Request Free Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .services {
+    position: relative;
+    background-color: var(--color-stone);
+  }
+
+  .services__bg-texture {
+    position: absolute;
+    inset: 0;
+    opacity: 0.2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23121212'/%3E%3Crect width='1' height='1' fill='%23181818'/%3E%3C/svg%3E");
+  }
+
+  .services__container {
+    position: relative;
+    z-index: 10;
+  }
+
+  .services__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto var(--space-2xl);
+  }
+
+  .services__header .section-divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 2×3 Grid */
+  .services__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 640px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Card */
+  .services__card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    text-align: left;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+  }
+
+  .services__card:hover {
+    transform: translateY(-4px);
+    background: rgba(212, 175, 55, 0.04);
+    border-color: rgba(212, 175, 55, 0.25);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Card Image */
+  .services__card-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+
+  .services__card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .services__card:hover .services__card-img {
+    transform: scale(1.05);
+  }
+
+  .services__card-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(18, 18, 18, 0.8) 100%);
+  }
+
+  .services__card-icon {
+    position: absolute;
+    bottom: var(--space-md);
+    left: var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-lg);
+    background: rgba(18, 18, 18, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    backdrop-filter: blur(8px);
+  }
+
+  .services__card-icon .material-symbols-outlined {
+    font-size: 22px;
+    color: var(--color-primary);
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .services__badge {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    background: var(--color-primary);
+    color: var(--color-stone);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    z-index: 2;
+  }
+
+  /* Card Body */
+  .services__card-body {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    flex: 1;
+  }
+
+  .services__card-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-white);
+    margin-bottom: var(--space-sm);
+    transition: color 0.3s ease;
+  }
+
+  .services__card:hover .services__card-title {
+    color: var(--color-primary);
+  }
+
+  .services__card-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-md);
+    flex: 1;
+  }
+
+  .services__card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    margin-top: auto;
+  }
+
+  .services__card-link .material-symbols-outlined {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .services__card:hover .services__card-link .material-symbols-outlined {
+    transform: translateX(4px);
+  }
+</style>
+
+<style is:global>
+  /* ─── Service Modal (global scope — rendered outside section) ─────────── */
+  .service-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .service-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .service-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+  }
+
+  .service-modal__panel {
+    position: relative;
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    max-width: 580px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .service-modal.is-open .service-modal__panel {
+    transform: translateY(0) scale(1);
+  }
+
+  .service-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    background: rgba(18, 18, 18, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+  }
+
+  .service-modal__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .service-modal__close .material-symbols-outlined {
+    font-size: 20px;
+    color: #e5e5e5;
+  }
+
+  .service-modal__img-wrap {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .service-modal__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .service-modal__img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 30%, #1a1a1a 100%);
+  }
+
+  .service-modal__icon {
+    position: absolute;
+    bottom: -26px;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 0.75rem;
+    background: #1a1a1a;
+    border: 2px solid #d4af37;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .service-modal__icon .material-symbols-outlined {
+    font-size: 26px;
+    color: #d4af37;
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .service-modal__content {
+    padding: 3rem 2rem 2rem;
+  }
+
+  .service-modal__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .service-modal__desc {
+    font-size: 0.875rem;
+    color: #a3a3a3;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .service-modal__benefits {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(212, 175, 55, 0.04);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: 0.75rem;
+  }
+
+  .service-modal__benefits-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .service-modal__benefits-label .material-symbols-outlined {
+    font-size: 18px;
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .service-modal__benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .service-modal__benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #e5e5e5;
+    line-height: 1.75;
+  }
+
+  .service-modal__benefits-list li::before {
+    content: '✓';
+    color: #22c55e;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .service-modal__contact {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 1.5rem;
+  }
+
+  .service-modal__contact-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .service-modal__contact-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .service-modal__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .service-modal__btn .material-symbols-outlined {
+    font-size: 18px;
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .service-modal__btn--call {
+    background: linear-gradient(135deg, #d4af37 0%, #f4d35e 50%, #d4af37 100%);
+    color: #121212;
+  }
+
+  .service-modal__btn--call:hover {
+    background: linear-gradient(135deg, #b5952f 0%, #d4af37 50%, #b5952f 100%);
+    box-shadow: 0 4px 20px -5px rgba(212, 175, 55, 0.3);
+  }
+
+  .service-modal__btn--quote {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+  }
+
+  .service-modal__btn--quote:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .service-modal__btn--email {
+    background: rgba(255, 255, 255, 0.03);
+    color: #a3a3a3;
+  }
+
+  .service-modal__btn--email:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #e5e5e5;
+  }
+
+  @media (min-width: 500px) {
+    .service-modal__contact-actions {
+      flex-direction: row;
+      gap: 0.75rem;
+    }
+
+    .service-modal__btn {
+      flex: 1;
+      padding: 1rem 0.5rem;
+    }
+  }
+
+  .service-modal__panel::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .service-modal__panel::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .service-modal__panel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+  }
+</style>
+
+<script define:vars={{ services }}>
+  // Service data passed from Astro to client-side JS
+  const serviceData = services;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('serviceModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalBenefits = document.getElementById('modalBenefits');
+
+    if (!modal) return;
+
+    // Open modal on card click
+    document.querySelectorAll('.services__card').forEach((card) => {
+      card.addEventListener('click', () => {
+        const serviceId = card.getAttribute('data-service-id');
+        const service = serviceData.find((s) => s.id === serviceId);
+        if (!service) return;
+
+        // Populate modal content
+        modalImg.src = service.image;
+        modalImg.alt = service.title;
+        modalIcon.querySelector('.material-symbols-outlined').textContent = service.icon;
+        modalTitle.textContent = service.title;
+        modalDesc.textContent = service.details;
+
+        // Populate benefits
+        modalBenefits.innerHTML = '';
+        service.benefits.forEach((benefit) => {
+          const li = document.createElement('li');
+          li.textContent = benefit;
+          modalBenefits.appendChild(li);
+        });
+
+        // Show modal
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Close modal handlers
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    modal.querySelectorAll('[data-close-modal]').forEach((el) => {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+  });
+</script>

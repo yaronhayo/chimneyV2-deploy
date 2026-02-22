@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Design Tokens — 1st Class Chimney & Air Duct
+   Single source of truth for brand aesthetics.
+   Extracted from Stitch design export.
+   ========================================================================== */
+
+:root {
+  /* ── Colors ─────────────────────────────────────────────────────────────── */
+  --color-primary: #d4af37;
+  --color-primary-hover: #b5952f;
+  --color-primary-rgb: 212, 175, 55;
+
+  --color-navy: #0b132b;
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-light: #2d2d2d;
+  --color-stone: #121212;
+
+  --color-text-light: #e5e5e5;
+  --color-text-muted: #a3a3a3;
+  --color-text-white: #ffffff;
+  --color-text-black: #000000;
+
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+
+  /* ── Gradients ──────────────────────────────────────────────────────────── */
+  --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4d35e 50%, #d4af37 100%);
+  --gradient-gold-hover: linear-gradient(135deg, #b5952f 0%, #d4af37 50%, #b5952f 100%);
+
+  /* ── Shadows ────────────────────────────────────────────────────────────── */
+  --shadow-gold-glow: 0 4px 20px -5px rgba(212, 175, 55, 0.3);
+  --shadow-gold-glow-strong: 0 4px 30px -5px rgba(212, 175, 55, 0.5);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+  /* ── Typography ─────────────────────────────────────────────────────────── */
+  --font-display: 'Montserrat', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-icon: 'Material Symbols Outlined';
+
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: clamp(1.875rem, 3vw, 2.25rem); /* 30-36px */
+  --font-size-4xl: clamp(2.25rem, 4vw, 3rem); /* 36-48px */
+  --font-size-hero: clamp(2.5rem, 5vw, 4rem); /* 40-64px */
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  --line-height-tight: 1.1;
+  --line-height-snug: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wider: 0.1em;
+
+  /* ── Spacing ────────────────────────────────────────────────────────────── */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+  --space-2xl: 3rem; /* 48px */
+  --space-3xl: 4rem; /* 64px */
+  --space-4xl: 6rem; /* 96px */
+
+  /* ── Layout ─────────────────────────────────────────────────────────────── */
+  --max-width: 1280px;
+  --container-padding: 1rem;
+  --header-height: 80px;
+  --section-padding-y: var(--space-4xl);
+
+  /* ── Border Radius ──────────────────────────────────────────────────────── */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
+  --radius-2xl: 1.5rem; /* 24px */
+  --radius-full: 9999px;
+
+  /* ── Transitions ────────────────────────────────────────────────────────── */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+  --transition-zoom: 700ms ease;
+
+  /* ── Reveal Animations ──────────────────────────────────────────────────── */
+  --reveal-distance: 30px;
+  --reveal-duration: 600ms;
+  --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1); /* ease-out-expo */
+  --reveal-stagger: 80ms;
+
+  /* ── Breakpoints (for reference — use @media in CSS) ────────────────────── */
+  /* --bp-sm: 375px;    Mobile primary */
+  /* --bp-md: 768px;    Tablet */
+  /* --bp-lg: 1024px;   Small desktop */
+  /* --bp-xl: 1280px;   Desktop primary */
+  /* --bp-2xl: 1440px;  Wide desktop */
+
+  /* ── Z-Index Scale ──────────────────────────────────────────────────────── */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-overlay: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+}

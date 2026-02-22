@@ -1,0 +1,690 @@
+---
+import businessInfo from '../../data/business-info.json';
+---
+
+<section class="contact section" id="contact" aria-label="Contact Us">
+  <div class="contact__bg">
+    <img
+      src="/images/backgrounds/contact-fireplace.png"
+      alt=""
+      class="contact__bg-img"
+      loading="lazy"
+    />
+    <div class="contact__bg-overlay"></div>
+  </div>
+  <div class="container contact__container">
+    <div class="contact__grid">
+      <!-- Info Column -->
+      <div class="contact__info" data-reveal>
+        <span class="section-label">Get Started</span>
+        <h2 class="contact__heading">Let's Get You Taken Care Of</h2>
+        <p class="contact__description">
+          A single call gets you a free assessment and clear options — no pressure, no surprises.
+        </p>
+
+        <div class="contact__what-happens">
+          <h4 class="contact__what-happens-title">
+            <span class="material-symbols-outlined">route</span>
+            After You Submit
+          </h4>
+          <div class="contact__timeline-mini">
+            <div class="contact__timeline-step-mini">
+              <span class="contact__timeline-num">1</span>
+              <span>A real person calls you back</span>
+            </div>
+            <div class="contact__timeline-step-mini">
+              <span class="contact__timeline-num">2</span>
+              <span>We pick a time that works for <strong>you</strong></span>
+            </div>
+            <div class="contact__timeline-step-mini">
+              <span class="contact__timeline-num">3</span>
+              <span>Tech arrives in uniform, on time</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact__details">
+          <div class="contact__detail-item">
+            <div class="contact__detail-icon">
+              <span class="material-symbols-outlined">call</span>
+            </div>
+            <div>
+              <h4 class="contact__detail-label">Prefer to Call?</h4>
+              <a
+                href={`tel:${businessInfo.phoneRaw}`}
+                class="contact__detail-value contact__detail-link"
+              >
+                {businessInfo.phone}
+              </a>
+            </div>
+          </div>
+
+          <div class="contact__detail-item">
+            <div class="contact__detail-icon">
+              <span class="material-symbols-outlined">mail</span>
+            </div>
+            <div>
+              <h4 class="contact__detail-label">Email Us</h4>
+              <a
+                href={`mailto:${businessInfo.email}`}
+                class="contact__detail-value contact__detail-link"
+              >
+                {businessInfo.email}
+              </a>
+              <p class="contact__detail-note">We reply within 2 hours</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Column -->
+      <div class="contact__form-card" data-reveal>
+        <div class="contact__form-gold-bar"></div>
+        <h3 class="contact__form-title">Get Your Free Assessment</h3>
+        <p class="contact__form-subtitle">
+          Free safety assessment · No obligation · Takes 60 seconds
+        </p>
+        <form
+          class="contact__form"
+          id="contact-form"
+          data-form-error
+          data-phone={businessInfo.phone}
+          data-phone-raw={businessInfo.phoneRaw}
+        >
+          <div class="contact__form-row">
+            <div class="contact__form-field">
+              <label for="first-name" class="contact__label">First Name</label>
+              <input
+                type="text"
+                id="first-name"
+                name="firstName"
+                placeholder="John"
+                class="contact__input"
+                required
+                autocomplete="given-name"
+              />
+            </div>
+            <div class="contact__form-field">
+              <label for="last-name" class="contact__label">Last Name</label>
+              <input
+                type="text"
+                id="last-name"
+                name="lastName"
+                placeholder="Doe"
+                class="contact__input"
+                required
+                autocomplete="family-name"
+              />
+            </div>
+          </div>
+
+          <div class="contact__form-field">
+            <label for="phone" class="contact__label">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="(888) 696-9296"
+              class="contact__input"
+              required
+              autocomplete="tel"
+            />
+          </div>
+
+          <div class="contact__form-field">
+            <label for="email" class="contact__label"
+              >Email <span class="contact__optional">(Optional)</span></label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="john@example.com"
+              class="contact__input"
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="contact__form-field">
+            <label for="service-select" class="contact__label">What Are You Concerned About?</label>
+            <select id="service-select" name="service" class="contact__select" required>
+              <option value="">Select your concern…</option>
+              <option value="chimney-sweep">Chimney hasn't been inspected in years</option>
+              <option value="air-duct">Poor air quality or allergies at home</option>
+              <option value="dryer-vent">Dryer takes too long / feels hot</option>
+              <option value="other">Not sure — I just want an expert opinion</option>
+            </select>
+          </div>
+
+          <!-- Honeypot (FR43) -->
+          <div class="contact__honeypot" aria-hidden="true">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <button type="submit" class="btn btn-primary contact__submit">
+            Get My Free Safety Assessment
+          </button>
+
+          <p class="contact__privacy">
+            <span class="material-symbols-outlined">lock</span>
+            Your information is secure. No spam, ever.
+          </p>
+
+          <!-- CRO: Micro-review near form CTA (Playbook §1) -->
+          <div class="contact__micro-review">
+            <span class="contact__micro-stars">★★★★★</span>
+            <span class="contact__micro-quote"
+              >"They called within 20 minutes, no pressure, just honest advice."</span
+            >
+            <span class="contact__micro-author">— Mark R.</span>
+          </div>
+
+          <!-- CRO: Objection-killing micro-copy (Playbook §6) -->
+          <div class="contact__objections">
+            <p>
+              <span class="material-symbols-outlined">schedule</span> Most visits take 60–120 min
+            </p>
+            <p>
+              <span class="material-symbols-outlined">price_check</span> Clear pricing options before
+              any work starts
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    background-color: var(--color-stone);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    overflow: hidden;
+  }
+
+  .contact__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .contact__bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.12;
+  }
+
+  .contact__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      var(--color-stone) 0%,
+      rgba(18, 18, 18, 0.65) 50%,
+      var(--color-stone) 100%
+    );
+  }
+
+  .contact__container {
+    position: relative;
+    z-index: 10;
+  }
+
+  .contact__grid {
+    display: grid;
+    gap: var(--space-3xl);
+  }
+
+  /* Info */
+  .contact__heading {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-lg);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .contact__description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2xl);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* What happens next */
+  .contact__what-happens {
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-lg);
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: var(--radius-md);
+  }
+
+  .contact__what-happens-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-base);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-md);
+  }
+
+  .contact__what-happens-title .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  .contact__timeline-mini {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .contact__timeline-step-mini {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  .contact__timeline-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-full);
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .contact__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .contact__detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+
+  .contact__detail-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+
+  .contact__detail-label {
+    color: var(--color-text-white);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact__detail-value {
+    color: var(--color-text-light);
+    font-size: var(--font-size-xl);
+  }
+
+  .contact__detail-link {
+    transition: color var(--transition-base);
+  }
+
+  .contact__detail-link:hover {
+    color: var(--color-primary);
+  }
+
+  .contact__detail-note {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-xs);
+  }
+
+  /* Form Card */
+  .contact__form-card {
+    background-color: var(--color-charcoal);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: var(--space-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact__form-gold-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-gold);
+  }
+
+  .contact__form-title {
+    font-size: var(--font-size-2xl);
+    color: var(--color-text-white);
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact__form-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .contact__form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .contact__label {
+    display: block;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact__input,
+  .contact__select {
+    width: 100%;
+    background-color: var(--color-stone);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    color: var(--color-text-white);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-base);
+    outline: none;
+  }
+
+  .contact__input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+  }
+
+  .contact__input:focus,
+  .contact__select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px var(--color-primary);
+  }
+
+  .contact__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23D4AF37' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: var(--space-2xl);
+  }
+
+  .contact__submit {
+    width: 100%;
+    margin-top: var(--space-sm);
+    font-weight: var(--font-weight-black);
+    font-size: var(--font-size-base);
+    padding: var(--space-md);
+  }
+
+  .contact__privacy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .contact__privacy .material-symbols-outlined {
+    font-size: 14px;
+  }
+
+  @media (min-width: 640px) {
+    .contact__form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .contact__form-card {
+      padding: var(--space-2xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .contact__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Honeypot */
+  .contact__honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+  }
+
+  /* Validation errors */
+  :global(.contact__field-error) {
+    color: var(--color-error);
+    font-size: var(--font-size-xs);
+    margin-top: var(--space-xs);
+  }
+
+  :global(.contact__input--error) {
+    border-color: var(--color-error) !important;
+  }
+
+  /* Form error banner */
+  :global(.contact__form-error) {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+  }
+
+  :global(.contact__form-error .material-symbols-outlined) {
+    color: var(--color-error);
+    flex-shrink: 0;
+  }
+
+  :global(.contact__form-error-phone) {
+    display: block;
+    color: var(--color-primary);
+    margin-top: var(--space-xs);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* Confirmation */
+  :global(.contact__confirmation) {
+    text-align: center;
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  :global(.contact__confirmation-icon) {
+    margin-bottom: var(--space-lg);
+  }
+
+  :global(.contact__confirmation-icon .material-symbols-outlined) {
+    font-size: 64px;
+    color: var(--color-success);
+    font-variation-settings: 'FILL' 1;
+  }
+
+  :global(.contact__confirmation-title) {
+    font-size: var(--font-size-2xl);
+    color: var(--color-text-white);
+    margin-bottom: var(--space-md);
+  }
+
+  :global(.contact__confirmation-text) {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  :global(.contact__confirmation-timeline) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-bottom: var(--space-xl);
+  }
+
+  :global(.contact__timeline-step) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    color: var(--color-text-white);
+    font-weight: var(--font-weight-medium);
+    width: 100%;
+    max-width: 280px;
+  }
+
+  :global(.contact__timeline-icon) {
+    font-size: var(--font-size-xl);
+  }
+
+  :global(.contact__timeline-connector) {
+    width: 2px;
+    height: 16px;
+    background: rgba(212, 175, 55, 0.3);
+  }
+
+  :global(.contact__confirmation-call) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  /* Optional label hint */
+  .contact__optional {
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-muted);
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: var(--font-size-xs);
+  }
+
+  /* CRO: Micro-review near form */
+  .contact__micro-review {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .contact__micro-stars {
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+  }
+
+  .contact__micro-quote {
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .contact__micro-author {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: var(--font-size-xs);
+  }
+
+  /* CRO: Objection micro-copy */
+  .contact__objections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+  }
+
+  .contact__objections p {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .contact__objections .material-symbols-outlined {
+    font-size: 14px;
+    color: var(--color-success);
+  }
+
+  /* What You'll Receive */
+  .contact__receive-list {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    background: rgba(212, 175, 55, 0.04);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: var(--radius-lg);
+  }
+
+  .contact__receive-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .contact__receive-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .contact__receive-items li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+  }
+
+  .contact__receive-items .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--color-success);
+    flex-shrink: 0;
+  }
+</style>
+
+<script src="/scripts/gtm-events.js" defer></script>
+<script src="/scripts/form-handler.js" defer></script>

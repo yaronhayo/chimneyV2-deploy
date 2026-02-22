@@ -1,0 +1,171 @@
+---
+/**
+ * BrandLogosCarousel.astro — Trust Authority Strip
+ * Auto-scrolling infinite logo carousel showing certifications and partners.
+ * Pure CSS animation (no JS). Pauses on hover for accessibility.
+ */
+const logos = [
+  { name: 'CSIA', label: 'CSIA Certified', icon: 'local_fire_department' },
+  { name: 'NFPA', label: 'NFPA Member', icon: 'fire_truck' },
+  { name: 'BBB', label: 'BBB Accredited', icon: 'workspace_premium' },
+  { name: 'HomeAdvisor', label: 'HomeAdvisor Approved', icon: 'home' },
+  { name: 'Angi', label: 'Angi Listed', icon: 'star' },
+  { name: 'Google', label: 'Google Verified', icon: 'verified' },
+  { name: 'EPA', label: 'EPA Certified', icon: 'eco' },
+  { name: 'NFI', label: 'NFI Certified', icon: 'whatshot' },
+];
+---
+
+<section class="brand-logos" aria-label="Certifications and Partners">
+  <div class="container">
+    <p class="brand-logos__label" data-reveal>
+      Trusted By Homeowners · Certified By Industry Leaders
+    </p>
+  </div>
+  <div class="brand-logos__track-wrapper">
+    <div class="brand-logos__fade brand-logos__fade--left"></div>
+    <div class="brand-logos__fade brand-logos__fade--right"></div>
+    <div class="brand-logos__track">
+      {/* Double the logos for seamless infinite scroll */}
+      {
+        [...logos, ...logos].map((logo) => (
+          <div class="brand-logos__item" aria-label={logo.label}>
+            <div class="brand-logos__icon-circle">
+              <span class="material-symbols-outlined">{logo.icon}</span>
+            </div>
+            <span class="brand-logos__name">{logo.name}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .brand-logos {
+    padding: var(--space-2xl) 0;
+    background-color: var(--color-stone);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+  }
+
+  .brand-logos__label {
+    text-align: center;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+  }
+
+  .brand-logos__track-wrapper {
+    position: relative;
+  }
+
+  .brand-logos__fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .brand-logos__fade--left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-stone), transparent);
+  }
+
+  .brand-logos__fade--right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-stone), transparent);
+  }
+
+  .brand-logos__track {
+    display: flex;
+    gap: var(--space-3xl);
+    animation: scroll-logos 30s linear infinite;
+    width: max-content;
+  }
+
+  .brand-logos__track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-logos {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .brand-logos__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+    opacity: 0.5;
+    transition: opacity var(--transition-base);
+  }
+
+  .brand-logos__item:hover {
+    opacity: 1;
+  }
+
+  .brand-logos__icon-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-full);
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+  }
+
+  .brand-logos__item:hover .brand-logos__icon-circle {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+  }
+
+  .brand-logos__icon-circle .material-symbols-outlined {
+    font-size: 28px;
+    color: var(--color-primary);
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .brand-logos__name {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    .brand-logos__fade {
+      width: 40px;
+    }
+
+    .brand-logos__track {
+      gap: var(--space-2xl);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand-logos__track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-xl);
+    }
+  }
+</style>

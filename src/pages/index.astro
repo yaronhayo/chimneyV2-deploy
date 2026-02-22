@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroSection from '../components/sections/HeroSection.astro';
+import SocialProofStrip from '../components/sections/SocialProofStrip.astro';
+import RiskChecklist from '../components/sections/RiskChecklist.astro';
+import ServicesGrid from '../components/sections/ServicesGrid.astro';
+import ProcessStrip from '../components/sections/ProcessStrip.astro';
+import WhyChooseUs from '../components/sections/WhyChooseUs.astro';
+import BeforeAfter from '../components/sections/BeforeAfter.astro';
+import MidPageCTA from '../components/sections/MidPageCTA.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+
+import TrustStrip from '../components/sections/TrustStrip.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import SeasonalUrgency from '../components/sections/SeasonalUrgency.astro';
+import ContactSection from '../components/sections/ContactSection.astro';
+import StickyCTA from '../components/sections/StickyCTA.astro';
+import LiveActivityFeed from '../components/sections/LiveActivityFeed.astro';
+
+const pageTitle = '1st Class Chimney & Air Duct | Chimney Sweep, Repair & Fireplace Services';
+const pageDescription =
+  'CSIA certified chimney sweep, inspection, repair, liner installation, and fireplace services. Fully insured, background-checked technicians. Free assessment.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header />
+
+  <main id="main-content">
+    <!-- 1. Connect — warm welcome, set context -->
+    <HeroSection />
+    <!-- 2. Instant credibility -->
+    <SocialProofStrip />
+    <!-- 3. Empathize — "does this sound like you?" -->
+    <RiskChecklist />
+    <!-- 4. Solutions — here's how we help -->
+    <ServicesGrid />
+    <!-- 5. How it works -->
+    <ProcessStrip />
+    <!-- 6. What sets us apart -->
+    <WhyChooseUs />
+    <!-- 7. Visual proof -->
+    <BeforeAfter />
+    <!-- 8. Conversion checkpoint -->
+    <MidPageCTA />
+    <!-- 9. Social proof — real stories -->
+    <Testimonials />
+
+    <!-- 12. Guarantees & risk reversals -->
+    <TrustStrip />
+    <!-- 13. Overcome objections -->
+    <FAQ />
+    <!-- 14. Gentle urgency -->
+    <SeasonalUrgency />
+    <!-- 15. Final conversion -->
+    <ContactSection />
+  </main>
+
+  <Footer />
+  <StickyCTA />
+  <LiveActivityFeed />
+</BaseLayout>

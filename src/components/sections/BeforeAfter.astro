@@ -1,0 +1,390 @@
+---
+const proofPoints = [
+  {
+    icon: 'info',
+    iconColor: 'var(--color-primary)',
+    title: "What You're Looking At",
+    description:
+      'The dark substance is <strong>creosote</strong> — a natural byproduct of burning wood. At just ⅛" thick, it needs professional attention.',
+  },
+  {
+    icon: 'eco',
+    iconColor: 'var(--color-success)',
+    title: 'The Result',
+    description:
+      "After a professional sweep, the flue is clean — improving airflow, efficiency, and your family's <strong>air quality</strong>.",
+  },
+];
+---
+
+<section class="before-after section" aria-label="Before and After Results">
+  <div class="container">
+    <div class="before-after__grid">
+      <!-- Slider -->
+      <div class="before-after__slider-wrapper" data-reveal>
+        <div class="before-after__slider" id="ba-slider">
+          <div class="before-after__before">
+            <img
+              src="/images/before-after/before.png"
+              alt="Dirty chimney flue with thick creosote buildup on brick walls"
+              class="before-after__image before-after__image-before"
+              loading="lazy"
+              width="800"
+              height="1000"
+            />
+            <div class="before-after__label before-after__label--before">Before</div>
+          </div>
+          <div class="before-after__after" id="ba-after">
+            <img
+              src="/images/before-after/after.png"
+              alt="Clean chimney flue with pristine brick walls after professional cleaning"
+              class="before-after__image before-after__image-after"
+              loading="lazy"
+              width="800"
+              height="1000"
+            />
+            <div class="before-after__label before-after__label--after">After</div>
+          </div>
+          <div class="before-after__divider" id="ba-divider">
+            <div class="before-after__handle">
+              <span class="material-symbols-outlined">compare_arrows</span>
+            </div>
+          </div>
+          <div class="before-after__hint">Drag to Compare</div>
+        </div>
+      </div>
+
+      <!-- Copy -->
+      <div class="before-after__content" data-reveal="slide-right">
+        <span class="section-label">See It With Your Own Eyes</span>
+        <h2 class="before-after__heading">
+          See the <br />
+          <span class="before-after__heading-sub">Transformation</span>
+        </h2>
+        <p class="before-after__description">
+          This is an actual chimney we serviced. <strong>One professional visit</strong> made all the
+          difference.
+        </p>
+
+        <div class="before-after__proof-points">
+          {
+            proofPoints.map((point) => (
+              <div class="before-after__proof-card">
+                <div class="before-after__proof-icon">
+                  <span class="material-symbols-outlined" style={`color: ${point.iconColor}`}>
+                    {point.icon}
+                  </span>
+                </div>
+                <div>
+                  <h4 class="before-after__proof-title">{point.title}</h4>
+                  <p class="before-after__proof-desc" set:html={point.description} />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <a href="#contact" class="before-after__cta">
+          <span class="material-symbols-outlined">arrow_forward</span>
+          Ready for your own transformation?
+        </a>
+      </div>
+    </div>
+
+    <style>
+      .before-after {
+        background-color: var(--color-charcoal);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+      }
+
+      .before-after__grid {
+        display: grid;
+        gap: var(--space-3xl);
+        align-items: center;
+      }
+
+      /* Slider */
+      .before-after__slider-wrapper {
+        order: 2;
+      }
+
+      .before-after__slider {
+        position: relative;
+        height: 500px;
+        width: 100%;
+        border-radius: var(--radius-md);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        cursor: ew-resize;
+        user-select: none;
+      }
+
+      .before-after__before,
+      .before-after__after {
+        position: absolute;
+        inset: 0;
+      }
+
+      .before-after__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .before-after__after {
+        clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+      }
+
+      .before-after__label {
+        position: absolute;
+        top: var(--space-lg);
+        z-index: 2;
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-wider);
+        padding: var(--space-sm) var(--space-md);
+        backdrop-filter: blur(12px);
+        color: var(--color-text-white);
+      }
+
+      .before-after__label--before {
+        left: var(--space-lg);
+        background: rgba(127, 29, 29, 0.9);
+        border: 1px solid rgba(239, 68, 68, 0.5);
+      }
+
+      .before-after__label--after {
+        right: var(--space-lg);
+        background: rgba(20, 83, 45, 0.9);
+        border: 1px solid rgba(34, 197, 94, 0.5);
+      }
+
+      /* Divider */
+      .before-after__divider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        background-color: var(--color-primary);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        cursor: ew-resize;
+        z-index: 20;
+        transform: translateX(-50%);
+      }
+
+      .before-after__handle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-full);
+        background-color: var(--color-charcoal);
+        border: 2px solid var(--color-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-lg);
+        color: var(--color-primary);
+      }
+
+      .before-after__handle .material-symbols-outlined {
+        font-size: 20px;
+      }
+
+      .before-after__hint {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        color: var(--color-text-white);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-wider);
+        z-index: 10;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--transition-base);
+      }
+
+      .before-after__slider:hover .before-after__hint {
+        opacity: 1;
+      }
+
+      .before-after__slider.dragging .before-after__hint {
+        opacity: 0;
+      }
+
+      /* Content */
+      .before-after__content {
+        order: 1;
+      }
+
+      .before-after__heading {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-black);
+        color: var(--color-text-white);
+        margin-top: var(--space-md);
+        margin-bottom: var(--space-lg);
+        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .before-after__heading-sub {
+        color: var(--color-text-muted);
+        font-weight: var(--font-weight-light);
+      }
+
+      .before-after__description {
+        font-size: var(--font-size-lg);
+        color: var(--color-text-muted);
+        line-height: var(--line-height-relaxed);
+        margin-bottom: var(--space-xl);
+      }
+
+      .before-after__proof-points {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+      }
+
+      .before-after__proof-card {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-md);
+        padding: var(--space-md);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius-md);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: border-color var(--transition-base);
+      }
+
+      .before-after__proof-card:hover {
+        border-color: rgba(212, 175, 55, 0.2);
+      }
+
+      .before-after__proof-icon {
+        margin-top: 2px;
+      }
+
+      .before-after__proof-title {
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-white);
+        font-size: var(--font-size-lg);
+      }
+
+      .before-after__proof-desc {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-muted);
+        margin-top: var(--space-xs);
+        line-height: var(--line-height-relaxed);
+      }
+
+      /* CTA bridge */
+      .before-after__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        margin-top: var(--space-xl);
+        color: var(--color-primary);
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-sm);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-wide);
+        transition: all var(--transition-base);
+      }
+
+      .before-after__cta:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .before-after__cta .material-symbols-outlined {
+        font-size: 16px;
+        transition: transform var(--transition-base);
+      }
+
+      .before-after__cta:hover .material-symbols-outlined {
+        transform: translateX(4px);
+      }
+
+      @media (min-width: 1024px) {
+        .before-after__grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .before-after__slider-wrapper {
+          order: 1;
+        }
+
+        .before-after__content {
+          order: 2;
+        }
+      }
+    </style>
+
+    <script>
+      const slider = document.getElementById('ba-slider');
+      const afterEl = document.getElementById('ba-after');
+      const divider = document.getElementById('ba-divider');
+
+      if (slider && afterEl && divider) {
+        let isDragging = false;
+
+        function updatePosition(x: number) {
+          const rect = slider!.getBoundingClientRect();
+          let pct = ((x - rect.left) / rect.width) * 100;
+          pct = Math.max(5, Math.min(95, pct));
+          afterEl!.style.clipPath = `polygon(${pct}% 0, 100% 0, 100% 100%, ${pct}% 100%)`;
+          divider!.style.left = `${pct}%`;
+        }
+
+        slider.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          slider.classList.add('dragging');
+          updatePosition(e.clientX);
+        });
+
+        slider.addEventListener(
+          'touchstart',
+          (e) => {
+            isDragging = true;
+            slider.classList.add('dragging');
+            updatePosition(e.touches[0].clientX);
+          },
+          { passive: true }
+        );
+
+        window.addEventListener('mousemove', (e) => {
+          if (isDragging) updatePosition(e.clientX);
+        });
+
+        window.addEventListener(
+          'touchmove',
+          (e) => {
+            if (isDragging) updatePosition(e.touches[0].clientX);
+          },
+          { passive: true }
+        );
+
+        window.addEventListener('mouseup', () => {
+          isDragging = false;
+          slider.classList.remove('dragging');
+        });
+
+        window.addEventListener('touchend', () => {
+          isDragging = false;
+          slider.classList.remove('dragging');
+        });
+      }
+    </script>
+  </div>
+</section>

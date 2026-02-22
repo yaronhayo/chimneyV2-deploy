@@ -1,0 +1,169 @@
+---
+import businessInfo from '../../data/business-info.json';
+---
+
+<section class="mid-cta" aria-label="Call to Action">
+  <div class="container">
+    <div class="mid-cta__card" data-reveal>
+      <div class="mid-cta__content">
+        <h3 class="mid-cta__heading">Not Sure Where to Start?</h3>
+        <p class="mid-cta__text">
+          Our free assessment covers chimneys, air ducts, and dryer vents — all in one visit.
+        </p>
+        <p class="mid-cta__anchor">
+          <span class="material-symbols-outlined">lightbulb</span>
+          A routine inspection costs less than your monthly coffee budget. A chimney fire? <strong
+            >$45,000+ in damage</strong
+          >.
+        </p>
+      </div>
+      <div class="mid-cta__actions">
+        <a href="#contact" class="btn btn-primary mid-cta__btn"> Get Your Free Assessment </a>
+        <a href={`tel:${businessInfo.phoneRaw}`} class="mid-cta__phone">
+          <span class="material-symbols-outlined">call</span>
+          Or call {businessInfo.phone}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mid-cta {
+    padding: var(--space-xl) 0;
+    background: linear-gradient(
+      135deg,
+      rgba(212, 175, 55, 0.1) 0%,
+      rgba(26, 26, 26, 0.6) 50%,
+      rgba(212, 175, 55, 0.04) 100%
+    );
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mid-cta::before {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .mid-cta__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: center;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .mid-cta__heading {
+    font-size: var(--font-size-2xl);
+    color: var(--color-text-white);
+    margin-bottom: var(--space-sm);
+  }
+
+  .mid-cta__text {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .mid-cta__text strong {
+    color: var(--color-text-white);
+  }
+
+  .mid-cta__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .mid-cta__btn {
+    font-size: var(--font-size-base);
+    padding: var(--space-md) var(--space-2xl);
+    white-space: nowrap;
+  }
+
+  .mid-cta__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-base);
+  }
+
+  .mid-cta__phone:hover {
+    color: var(--color-primary);
+  }
+
+  .mid-cta__phone .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .mid-cta__card {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+      max-width: 100%;
+    }
+
+    .mid-cta__actions {
+      flex-shrink: 0;
+    }
+  }
+
+  .mid-cta__trust {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-top: var(--space-md);
+  }
+
+  .mid-cta__trust .material-symbols-outlined {
+    font-size: 14px;
+    color: var(--color-success);
+  }
+
+  .mid-cta__trust-sep {
+    color: rgba(255, 255, 255, 0.15);
+    margin: 0 var(--space-xs);
+  }
+
+  .mid-cta__anchor {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(212, 175, 55, 0.06);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    line-height: var(--line-height-normal);
+  }
+
+  .mid-cta__anchor .material-symbols-outlined {
+    font-size: 20px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .mid-cta__anchor strong {
+    color: var(--color-text-white);
+  }
+</style>

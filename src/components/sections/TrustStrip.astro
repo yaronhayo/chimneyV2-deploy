@@ -1,0 +1,249 @@
+---
+import businessInfo from '../../data/business-info.json';
+---
+
+<section class="trust-strip" aria-label="Certifications and Guarantees">
+  <div class="container">
+    <div class="trust-strip__header" data-reveal>
+      <div class="trust-strip__seal">
+        <span class="material-symbols-outlined">verified</span>
+      </div>
+      <h3 class="trust-strip__heading">Our Triple Guarantee</h3>
+      <p class="trust-strip__subheading">
+        We don't just promise quality — we guarantee it in writing.
+      </p>
+    </div>
+    <div class="trust-strip__grid" data-reveal-group="80">
+      <div class="trust-strip__item" data-reveal>
+        <div class="trust-strip__icon-wrap">
+          <span class="material-symbols-outlined">cleaning_services</span>
+        </div>
+        <h4 class="trust-strip__title">Clean Home Guarantee</h4>
+        <p class="trust-strip__desc">If we leave a speck of dust, the cleanup is on us — free.</p>
+      </div>
+      <div class="trust-strip__item" data-reveal>
+        <div class="trust-strip__icon-wrap">
+          <span class="material-symbols-outlined">price_check</span>
+        </div>
+        <h4 class="trust-strip__title">No-Surprise Pricing</h4>
+        <p class="trust-strip__desc">Your quote is your price. No hidden fees, no add-ons. Ever.</p>
+      </div>
+      <div class="trust-strip__item" data-reveal>
+        <div class="trust-strip__icon-wrap">
+          <span class="material-symbols-outlined">thumb_up</span>
+        </div>
+        <h4 class="trust-strip__title">100% Satisfaction</h4>
+        <p class="trust-strip__desc">Not happy? We come back and make it right — no extra cost.</p>
+      </div>
+    </div>
+    <div class="trust-strip__risk-reversals" data-reveal>
+      <p class="trust-strip__reversal">
+        <span class="material-symbols-outlined">handshake</span>
+        We never start extra work without your photos, explanation, and approval first.
+      </p>
+    </div>
+    <div class="trust-strip__safety-callout" data-reveal>
+      <span class="material-symbols-outlined">shield_person</span>
+      <p>
+        Every technician is <strong>background-checked</strong>, <strong>drug-tested</strong>, and
+        completes 200+ hours of training before entering your home.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-strip {
+    background-color: var(--color-charcoal);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: var(--space-3xl) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle cross-hatch pattern */
+  .trust-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(212, 175, 55, 0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+  }
+
+  .trust-strip__header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .trust-strip__heading {
+    font-size: var(--font-size-2xl);
+    color: var(--color-text-white);
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .trust-strip__subheading {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-base);
+    margin-top: var(--space-sm);
+  }
+
+  .trust-strip__seal {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-md);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    animation: seal-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes seal-pulse {
+    0%,
+    100% {
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    }
+    50% {
+      box-shadow: 0 4px 30px rgba(212, 175, 55, 0.5);
+    }
+  }
+
+  .trust-strip__seal .material-symbols-outlined {
+    font-size: 32px;
+    color: var(--color-bg-deep);
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .trust-strip__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+
+  .trust-strip__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .trust-strip__item:hover {
+    transform: translateY(-4px);
+    background: rgba(212, 175, 55, 0.04);
+    border-color: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
+  }
+
+  .trust-strip__icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-full);
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .trust-strip__icon-wrap .material-symbols-outlined {
+    font-size: 28px;
+  }
+
+  .trust-strip__title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-white);
+  }
+
+  .trust-strip__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    max-width: 240px;
+  }
+
+  /* Risk Reversals */
+  .trust-strip__risk-reversals {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .trust-strip__reversal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .trust-strip__reversal .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  /* Safety callout */
+  .trust-strip__safety-callout {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-left: 4px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .trust-strip__safety-callout .material-symbols-outlined {
+    font-size: 28px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .trust-strip__safety-callout p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .trust-strip__safety-callout strong {
+    color: var(--color-text-white);
+  }
+
+  @media (min-width: 768px) {
+    .trust-strip__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .trust-strip__risk-reversals {
+      flex-direction: row;
+      justify-content: center;
+      gap: var(--space-2xl);
+    }
+  }
+</style>

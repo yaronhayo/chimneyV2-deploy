@@ -1,0 +1,221 @@
+---
+/**
+ * DangerEducation.astro — Cost of Inaction Section
+ * CRO: Kills the doubt "Do I actually need this?"
+ * PRD line 110: Safety/Education section — "NFPA recommendation + fire risk education"
+ */
+const dangers = [
+  {
+    icon: 'local_fire_department',
+    title: 'Creosote Buildup',
+    description:
+      "Just ¼ inch of creosote can ignite a chimney fire. Most homeowners can't see it without a camera inspection.",
+    stat: '25,000+',
+    statLabel: 'Chimney fires per year (NFPA)',
+    accentColor: 'var(--color-error)',
+  },
+  {
+    icon: 'air',
+    title: 'Carbon Monoxide',
+    description:
+      'CO is invisible and odorless. A cracked flue liner or blocked chimney can fill your home while you sleep.',
+    stat: '400+',
+    statLabel: 'CO deaths per year in the U.S.',
+    accentColor: 'var(--color-warning)',
+  },
+  {
+    icon: 'coronavirus',
+    title: 'Air Contamination',
+    description:
+      'Dirty ducts circulate mold, dust mites, and allergens through every room — every breath you take.',
+    stat: '2–5×',
+    statLabel: 'Indoor air is worse than outdoor (EPA)',
+    accentColor: '#60a5fa',
+  },
+];
+---
+
+<section class="danger-ed section" id="danger-education">
+  <div class="danger-ed__bg">
+    <img
+      src="/images/backgrounds/danger-chimney.png"
+      alt=""
+      class="danger-ed__bg-img"
+      loading="lazy"
+    />
+    <div class="danger-ed__bg-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="danger-ed__header" data-reveal>
+      <span class="section-label">What You Can't See CAN Hurt You</span>
+      <h2 class="section-heading">The Hidden Dangers Inside Your Chimney & Ducts</h2>
+      <hr class="section-divider" />
+    </div>
+
+    <div class="danger-ed__grid" data-reveal-group="100">
+      {
+        dangers.map((danger) => (
+          <div class="danger-ed__card" data-reveal style={`--card-accent: ${danger.accentColor}`}>
+            <div class="danger-ed__card-icon">
+              <span class="material-symbols-outlined">{danger.icon}</span>
+            </div>
+            <h3 class="danger-ed__card-title">{danger.title}</h3>
+            <p class="danger-ed__card-desc">{danger.description}</p>
+            <div class="danger-ed__card-stat">
+              <span class="danger-ed__card-stat-number">{danger.stat}</span>
+              <span class="danger-ed__card-stat-label">{danger.statLabel}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="danger-ed__bottom" data-reveal>
+      <p class="danger-ed__bottom-text">
+        <span class="material-symbols-outlined">videocam</span>
+        We use camera inspections to show you exactly what's inside — no guessing, no pressure.
+      </p>
+      <a href="#contact" class="btn btn-primary danger-ed__cta"> See What's In YOUR Chimney </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .danger-ed {
+    position: relative;
+    background-color: var(--color-stone);
+    overflow: hidden;
+  }
+
+  .danger-ed__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .danger-ed__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+  }
+
+  .danger-ed__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      var(--color-stone) 0%,
+      transparent 30%,
+      transparent 70%,
+      var(--color-stone) 100%
+    );
+  }
+
+  .danger-ed > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .danger-ed__header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .danger-ed__header .section-divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .danger-ed__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .danger-ed__card {
+    background: var(--color-charcoal);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 4px solid var(--card-accent, var(--color-primary));
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .danger-ed__card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--card-accent, var(--color-primary));
+  }
+
+  .danger-ed__card-icon .material-symbols-outlined {
+    font-size: 28px;
+  }
+
+  .danger-ed__card-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .danger-ed__card-desc {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .danger-ed__card-stat {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .danger-ed__card-stat-number {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-black);
+    color: var(--card-accent, var(--color-primary));
+  }
+
+  .danger-ed__card-stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .danger-ed__bottom {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .danger-ed__bottom-text {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-base);
+    color: var(--color-text-light);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .danger-ed__bottom-text .material-symbols-outlined {
+    font-size: 20px;
+    color: var(--color-primary);
+  }
+
+  @media (min-width: 768px) {
+    .danger-ed__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

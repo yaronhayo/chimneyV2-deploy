@@ -1,0 +1,35 @@
+{
+  "businessName": "1st Class Chimney & Air Duct",
+  "tagline": "Elite Level Protection for Your Home",
+  "phone": "(888) 696-9296",
+  "phoneRaw": "8886969296",
+  "email": "info@1stclasschimney.com",
+  "social": {
+    "google": "https://g.page/1stclasschimney",
+    "yelp": "https://www.yelp.com/biz/1st-class-chimney",
+    "facebook": "https://www.facebook.com/1stclasschimney"
+  },
+  "credentials": ["CSIA Certified", "NFI Certified", "Fully Insured", "Background Checked"],
+  "guarantees": [
+    {
+      "icon": "price_check",
+      "title": "No-Surprise Pricing",
+      "description": "Transparent quotes before work begins"
+    },
+    {
+      "icon": "cleaning_services",
+      "title": "Clean-Home Guarantee",
+      "description": "We leave your home spotless or it's free"
+    },
+    {
+      "icon": "event_available",
+      "title": "Same-Week Availability",
+      "description": "Fast scheduling when you need us most"
+    }
+  ],
+  "rating": {
+    "score": 4.9,
+    "count": 500,
+    "source": "Google & Yelp"
+  }
+}

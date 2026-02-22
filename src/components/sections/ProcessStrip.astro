@@ -1,0 +1,283 @@
+---
+const steps = [
+  {
+    icon: 'shield',
+    title: 'Protect',
+    time: '~10 min',
+    description: 'Protective coverings on every surface — your home stays spotless.',
+  },
+  {
+    icon: 'air_purifier_gen',
+    title: 'Clean',
+    time: '~45 min',
+    description: 'HEPA-filtered vacuums capture 99.97% of particles. Nothing recirculates.',
+  },
+  {
+    icon: 'verified',
+    title: 'Verify',
+    time: '~15 min',
+    description: 'HD video footage so you see exactly what we found and fixed.',
+  },
+];
+---
+
+<section class="process-strip" aria-label="Our Process">
+  <div class="process-strip__bg">
+    <img
+      src="/images/backgrounds/process-technician.png"
+      alt=""
+      class="process-strip__bg-img"
+      loading="lazy"
+    />
+    <div class="process-strip__bg-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="process-strip__intro" data-reveal>
+      <span class="process-strip__label">Three Steps, Zero Hassle</span>
+    </div>
+    <div class="process-strip__grid" data-reveal-group="100">
+      {
+        steps.map((step, i) => (
+          <div class="process-strip__step" data-reveal="scale">
+            <div class="process-strip__step-header">
+              <div class="process-strip__icon-wrap">
+                <span class="material-symbols-outlined">{step.icon}</span>
+              </div>
+              {i < steps.length - 1 && <div class="process-strip__connector" aria-hidden="true" />}
+            </div>
+            <div class="process-strip__content">
+              <h4 class="process-strip__title">
+                <span class="process-strip__number">{i + 1}.</span>
+                {step.title}
+              </h4>
+              <span class="process-strip__time">
+                <span class="material-symbols-outlined">schedule</span>
+                {step.time}
+              </span>
+              <p class="process-strip__desc">{step.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <p class="process-strip__control-note" data-reveal>
+      <span class="material-symbols-outlined">verified_user</span>
+      You're always in control — no work starts without your say-so.
+    </p>
+  </div>
+</section>
+
+<style>
+  .process-strip {
+    position: relative;
+    background-color: var(--color-charcoal);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: var(--space-2xl) 0;
+    overflow: hidden;
+  }
+
+  .process-strip__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .process-strip__bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.1;
+  }
+
+  .process-strip__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      var(--color-charcoal) 0%,
+      rgba(26, 26, 26, 0.6) 50%,
+      var(--color-charcoal) 100%
+    );
+  }
+
+  .process-strip > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .process-strip__intro {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .process-strip__label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .process-strip__lead {
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .process-strip__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .process-strip__step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition:
+      border-color var(--transition-base),
+      transform var(--transition-base);
+  }
+
+  .process-strip__step:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .process-strip__icon-wrap {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+
+  .process-strip__icon-wrap .material-symbols-outlined {
+    font-size: 22px;
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .process-strip__title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-white);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    margin-bottom: var(--space-xs);
+  }
+
+  .process-strip__number {
+    color: var(--color-primary);
+    margin-right: var(--space-xs);
+  }
+
+  .process-strip__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  @media (min-width: 768px) {
+    .process-strip__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .process-strip__step {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-lg);
+    }
+
+    .process-strip__icon-wrap {
+      width: 56px;
+      height: 56px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .process-strip__step-header {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      justify-content: center;
+      position: relative;
+    }
+
+    .process-strip__connector {
+      position: absolute;
+      left: calc(50% + 32px);
+      top: 50%;
+      width: calc(100% - 16px);
+      height: 2px;
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.4), rgba(212, 175, 55, 0.1));
+      transform: translateY(-50%);
+    }
+  }
+
+  .process-strip__step-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .process-strip__connector {
+    display: none;
+  }
+
+  .process-strip__time {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-size-xs);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-sm);
+  }
+
+  .process-strip__time .material-symbols-outlined {
+    font-size: 14px;
+  }
+
+  .process-strip__control-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    padding: var(--space-md);
+    background: rgba(212, 175, 55, 0.04);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: var(--radius-md);
+  }
+
+  .process-strip__control-note .material-symbols-outlined {
+    font-size: 20px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    .process-strip__connector {
+      display: block;
+    }
+  }
+</style>
