@@ -28,14 +28,14 @@ return [
         'sender'     => defined('SMTP2GO_SENDER') ? SMTP2GO_SENDER : 'noreply@1stclasschimneyandairduct.com',
     ],
     'recipients' => [
-        defined('NOTIFICATION_EMAIL_1') ? NOTIFICATION_EMAIL_1 : '',
+        defined('NOTIFICATION_EMAIL_1') ? NOTIFICATION_EMAIL_1 : '1stclasschimneyusa@gmail.com',
         defined('NOTIFICATION_EMAIL_2') ? NOTIFICATION_EMAIL_2 : '',
         defined('NOTIFICATION_EMAIL_3') ? NOTIFICATION_EMAIL_3 : '',
     ],
     'business' => [
         'name'  => '1st Class Chimney & Air Duct',
         'phone' => '(888) 696-9296',
-        'email' => 'info@1stclasschimneyandairduct.com',
+        'email' => '1stclasschimneyusa@gmail.com',
     ],
     'rate_limit' => [
         'max_per_hour' => 60,
