@@ -38,7 +38,7 @@ return [
         'email' => 'info@1stclasschimney.com',
     ],
     'rate_limit' => [
-        'max_per_hour' => 3,
+        'max_per_hour' => 60,
         'storage_dir'  => sys_get_temp_dir() . '/chimney_rate_limits/',
     ],
 ];
