@@ -26,11 +26,16 @@ define('NOTIFICATION_EMAIL_3', 'backup@example.com');
 
 ## 2. Trigger Git Deployment
 
+> [!IMPORTANT]
+> The repository uses **GitHub Actions** to automatically build your site. When you push to the `main` branch, GitHub will build the site and push the output to a special branch called `hostinger-deploy`. This is what Hostinger should pull!
+
 1.  Go to the **Hostinger Dashboard** -> **Website** -> **Git**.
 2.  Connect your repository: `https://github.com/yaronhayo/chimneyV2-deploy.git`.
-3.  Set the Branch to `main`.
-4.  Set the Install Directory to `public_html`.
-5.  Click **Deploy**.
+3.  Set the **Branch** to `hostinger-deploy`.
+4.  Set the **Install Directory** to `public_html`.
+5.  Check the **Auto Deployment** box to generate a Hostinger Webhook URL.
+6.  Copy that Webhook URL and paste it into GitHub > Repository Settings > Webhooks (Action: push).
+7.  Click **Deploy** in Hostinger to do the initial pull.
 
 ## 3. Verify Deployment
 

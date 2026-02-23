@@ -1,0 +1,53 @@
+name: Deploy to Hostinger via Branch
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Prepare Deployment Branch
+        run: |
+          # Configure Git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Create deploy directory and move build assets
+          mkdir deploy_target
+          cp -R dist/* deploy_target/
+          cp -R public/api deploy_target/api || true
+          cp .htaccess deploy_target/ || true
+
+          # Create a new repository inside deploy_target to push to the hostinger-deploy branch
+          cd deploy_target
+          git init
+          git checkout -b hostinger-deploy
+          git add .
+          git commit -m "Auto-deploy build via GitHub Actions [skip ci]"
+
+          # Force push to the origin repo on branch hostinger-deploy
+          # We use the GITHUB_TOKEN for authentication
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git push -f origin hostinger-deploy
