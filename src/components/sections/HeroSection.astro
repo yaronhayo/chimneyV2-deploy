@@ -7,7 +7,7 @@ import businessInfo from '../../data/business-info.json';
   <div class="hero__bg-gradient"></div>
   <div class="hero__bg-image">
     <img
-      src="/images/hero/hero-bg.png"
+      src="/images/hero/hero-bg.webp"
       alt="Beautiful suburban home with brick chimney at golden hour"
       class="hero__bg-photo"
       loading="eager"
@@ -26,13 +26,17 @@ import businessInfo from '../../data/business-info.json';
         </div>
 
         <h1 class="hero__title">
-          Your Home Deserves <br />
-          <span class="gradient-gold-text">First-Class Care</span>
+          <span data-dtr="location" data-dtr-suffix=" " data-dtr-default="Your">Your</span>Home
+          Deserves <br />
+          <span class="gradient-gold-text" data-dtr="service" data-dtr-default="First-Class Care"
+            >First-Class Care</span
+          >
         </h1>
 
         <p class="hero__subtitle">
-          Chimney sweeps, inspections, repairs, fireplace service, and more — done right by
-          certified pros you can trust.
+          <span data-dtr="service"
+            >Chimney sweeps, inspections, repairs, fireplace service, and more</span
+          > — done right in <span data-dtr="location">your area</span> by certified pros you can trust.
         </p>
 
         <div class="hero__actions">
@@ -107,7 +111,7 @@ import businessInfo from '../../data/business-info.json';
                 id="hero-phone"
                 name="phone"
                 class="hero__form-input"
-                placeholder="(888) 696-9296"
+                placeholder={businessInfo.phone}
                 required
                 autocomplete="tel"
               />
@@ -255,7 +259,7 @@ import businessInfo from '../../data/business-info.json';
   .hero__subtitle {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-normal);
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.85); /* Improved contrast from text-muted (was #a3a3a3) */
     margin-bottom: var(--space-xl);
     max-width: 540px;
     line-height: var(--line-height-relaxed);
@@ -431,7 +435,7 @@ import businessInfo from '../../data/business-info.json';
   .hero__form-label {
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-bold);
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.85); /* Improved contrast */
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wider);
   }
@@ -451,7 +455,7 @@ import businessInfo from '../../data/business-info.json';
   }
 
   .hero__form-input::placeholder {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.6); /* Increased contrast for placeholder */
   }
 
   .hero__form-input:focus {
@@ -486,8 +490,13 @@ import businessInfo from '../../data/business-info.json';
     gap: var(--space-sm);
     width: 100%;
     padding: var(--space-md);
-    background: linear-gradient(135deg, #d84315 0%, #e64a19 50%, #d84315 100%);
-    color: #121212;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-primary-hover) 50%,
+      var(--color-primary) 100%
+    );
+    color: var(--color-text-white);
     font-family: var(--font-display);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-black);
@@ -525,7 +534,7 @@ import businessInfo from '../../data/business-info.json';
     gap: 6px;
     margin-top: var(--space-xl);
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.75); /* Fixed contrast */
     font-weight: var(--font-weight-medium);
   }
 

@@ -73,14 +73,14 @@ if ($curlError) {
     echo "FAILED: Network/CURL error: " . $curlError . "\n";
 } else {
     echo "HTTP Status: $httpCode\n";
-    echo "API Response: $response\n\n";
+    echo "API Response: " . htmlspecialchars((string)$response, ENT_QUOTES, 'UTF-8') . "\n\n";
 
     $decoded = json_decode($response, true);
     if ($httpCode === 200 && isset($decoded['data']['succeeded']) && $decoded['data']['succeeded'] > 0) {
         echo "✅ SUCCESS! Test email sent successfully to " . count($recipients) . " addresses.\n";
     } else {
         echo "❌ FAILED: SMTP2GO accepted the request but did not send the email.\n";
-        echo "Reason: " . ($decoded['data']['failures'][0] ?? 'Unknown API error') . "\n";
+        echo "Reason: " . htmlspecialchars((string)($decoded['data']['failures'][0] ?? 'Unknown API error'), ENT_QUOTES, 'UTF-8') . "\n";
     }
 }
 ?>

@@ -8,7 +8,7 @@ const testimonials = [
     name: 'Jennifer & Mark W.',
     title: 'Homeowners · 3 years as customers',
     location: 'Dallas, TX',
-    image: '/images/avatars/jennifer.png',
+    image: '/images/avatars/jennifer.webp',
     problem: 'Smoke smell in home',
     outcome: 'Fixed in a single visit',
     isRecent: false,
@@ -19,7 +19,7 @@ const testimonials = [
     name: 'Sarah Mitchell',
     title: 'Mother of two · First-time customer',
     location: 'Miami, FL',
-    image: '/images/avatars/sarah.png',
+    image: '/images/avatars/sarah.webp',
     problem: "Child's worsening allergies",
     outcome: 'Symptoms improved within 1 week',
     isRecent: true,
@@ -30,20 +30,45 @@ const testimonials = [
     name: 'Robert Chen',
     title: 'Estate Owner · Referred by neighbor',
     location: 'Boston, MA',
-    image: '/images/avatars/david.png',
+    image: '/images/avatars/david.webp',
     problem: 'Hidden flue liner crack',
     outcome: 'Repaired same day',
     isRecent: false,
   },
 ];
+
+const testimonialSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: businessInfo.businessName,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: businessInfo.rating.score,
+    reviewCount: businessInfo.rating.count,
+  },
+  review: testimonials.map((t) => ({
+    '@type': 'Review',
+    author: {
+      '@type': 'Person',
+      name: t.name,
+    },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: '5',
+      bestRating: '5',
+    },
+    reviewBody: t.quote,
+  })),
+};
 ---
 
-<section class="testimonials section" id="reviews" aria-label="Client Testimonials">
+<section class="testimonials section theme-light" id="reviews" aria-label="Client Testimonials">
+  <script type="application/ld+json" set:html={JSON.stringify(testimonialSchema)} />
   <div class="container">
     <div class="testimonials__header" data-reveal>
       <div>
         <span class="section-label">Social Proof</span>
-        <h2 class="testimonials__heading">Real Stories From Homeowners Just Like You</h2>
+        <h2 class="section-heading">Real Stories From Homeowners Just Like You</h2>
         <p class="testimonials__subheading">
           Every job starts with a problem. Here's how we solved them.
         </p>
@@ -134,7 +159,7 @@ const testimonials = [
 
 <style>
   .testimonials {
-    background-color: var(--color-stone);
+    background-color: var(--color-light-bg) !important;
   }
 
   .testimonials__header {
@@ -142,12 +167,6 @@ const testimonials = [
     flex-direction: column;
     gap: var(--space-lg);
     margin-bottom: var(--space-3xl);
-  }
-
-  .testimonials__heading {
-    font-size: var(--font-size-3xl);
-    margin-bottom: var(--space-sm);
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
   }
 
   .testimonials__subheading {
@@ -164,7 +183,7 @@ const testimonials = [
   .testimonials__score {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
-    color: var(--color-text-white);
+    color: var(--color-text-dark);
   }
 
   .testimonials__stars {
@@ -179,7 +198,7 @@ const testimonials = [
 
   .testimonials__count {
     font-size: var(--font-size-base);
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
     font-weight: var(--font-weight-medium);
     margin-left: var(--space-sm);
   }
@@ -202,17 +221,20 @@ const testimonials = [
   .testimonials__card {
     flex: 0 0 100%;
     scroll-snap-align: center;
-    background-color: var(--color-charcoal);
+    background-color: var(--color-light-bg-alt);
     padding: var(--space-xl);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     position: relative;
     transition:
       border-color var(--transition-base),
-      transform var(--transition-base);
+      transform var(--transition-base),
+      box-shadow var(--transition-base);
   }
 
   .testimonials__card:hover {
-    border-color: rgba(216, 67, 21, 0.5);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
   }
 
@@ -223,7 +245,7 @@ const testimonials = [
     font-family: var(--font-serif);
     font-size: 64px;
     line-height: 1;
-    color: rgba(255, 255, 255, 0.05);
+    color: rgba(0, 0, 0, 0.05);
     pointer-events: none;
   }
 
@@ -257,7 +279,7 @@ const testimonials = [
   .testimonials__text {
     font-size: var(--font-size-lg);
     font-style: italic;
-    color: var(--color-text-light);
+    color: var(--color-text-dark-muted);
     line-height: var(--line-height-relaxed);
     margin-bottom: var(--space-xl);
     position: relative;
@@ -281,7 +303,7 @@ const testimonials = [
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-sm);
     color: var(--color-primary);
-    background: rgba(216, 67, 21, 0.1);
+    background: rgba(var(--color-primary-rgb), 0.1);
     overflow: hidden;
   }
 
@@ -293,7 +315,7 @@ const testimonials = [
 
   .testimonials__name {
     font-weight: var(--font-weight-bold);
-    color: var(--color-text-white);
+    color: var(--color-text-dark);
   }
 
   .testimonials__title {
@@ -314,11 +336,11 @@ const testimonials = [
     align-items: center;
     gap: var(--space-xs);
     font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
     padding: var(--space-xs) var(--space-sm);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.03);
   }
 
   .testimonials__source-badge svg {
@@ -372,9 +394,8 @@ const testimonials = [
     font-size: 12px;
   }
 
-  /* Recent badge */
   .testimonials__card--recent {
-    border-color: rgba(216, 67, 21, 0.3);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
   }
 
   .testimonials__recent-badge {

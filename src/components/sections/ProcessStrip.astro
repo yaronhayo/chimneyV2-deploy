@@ -21,10 +21,10 @@ const steps = [
 ];
 ---
 
-<section class="process-strip" aria-label="Our Process">
+<section class="process-strip theme-light" aria-label="Our Process">
   <div class="process-strip__bg">
     <img
-      src="/images/backgrounds/process-technician.png"
+      src="/images/backgrounds/process-technician.webp"
       alt=""
       class="process-strip__bg-img"
       loading="lazy"
@@ -70,9 +70,9 @@ const steps = [
 <style>
   .process-strip {
     position: relative;
-    background-color: var(--color-charcoal);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: var(--color-light-bg);
+    border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
+    border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.15);
     padding: var(--space-2xl) 0;
     overflow: hidden;
   }
@@ -89,7 +89,7 @@ const steps = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.1;
+    opacity: 0.05;
   }
 
   .process-strip__bg-overlay {
@@ -97,9 +97,9 @@ const steps = [
     inset: 0;
     background: linear-gradient(
       180deg,
-      var(--color-charcoal) 0%,
-      rgba(26, 26, 26, 0.6) 50%,
-      var(--color-charcoal) 100%
+      var(--color-light-bg) 0%,
+      rgba(248, 249, 250, 0.8) 50%,
+      var(--color-light-bg) 100%
     );
   }
 
@@ -142,16 +142,19 @@ const steps = [
     gap: var(--space-md);
     padding: var(--space-md);
     border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--color-light-bg-alt);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     transition:
       border-color var(--transition-base),
-      transform var(--transition-base);
+      transform var(--transition-base),
+      box-shadow var(--transition-base);
   }
 
   .process-strip__step:hover {
-    border-color: rgba(216, 67, 21, 0.3);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
     transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
   .process-strip__icon-wrap {
@@ -159,8 +162,8 @@ const steps = [
     width: 48px;
     height: 48px;
     border-radius: var(--radius-full);
-    background: rgba(216, 67, 21, 0.1);
-    border: 1px solid rgba(216, 67, 21, 0.2);
+    background: rgba(var(--color-primary-rgb), 0.1);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -175,7 +178,7 @@ const steps = [
   .process-strip__title {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-bold);
-    color: var(--color-text-white);
+    color: var(--color-text-dark);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
     margin-bottom: var(--space-xs);
@@ -188,7 +191,7 @@ const steps = [
 
   .process-strip__desc {
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
     line-height: var(--line-height-relaxed);
   }
 
@@ -225,7 +228,11 @@ const steps = [
       top: 50%;
       width: calc(100% - 16px);
       height: 2px;
-      background: linear-gradient(90deg, rgba(216, 67, 21, 0.4), rgba(216, 67, 21, 0.1));
+      background: linear-gradient(
+        90deg,
+        rgba(var(--color-primary-rgb), 0.4),
+        rgba(var(--color-primary-rgb), 0.1)
+      );
       transform: translateY(-50%);
     }
   }
@@ -262,10 +269,10 @@ const steps = [
     margin-top: var(--space-xl);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
     padding: var(--space-md);
-    background: rgba(216, 67, 21, 0.04);
-    border: 1px solid rgba(216, 67, 21, 0.1);
+    background: rgba(var(--color-primary-rgb), 0.04);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.1);
     border-radius: var(--radius-md);
   }
 

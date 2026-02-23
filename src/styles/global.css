@@ -5,6 +5,16 @@
 
 @import './design-tokens.css';
 
+/* DTR Anti-Flicker Pre-render State */
+[data-dtr] {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+[data-dtr].dtr-loaded {
+  opacity: 1;
+}
+
 /* ── CSS Reset ────────────────────────────────────────────────────────────── */
 *,
 *::before,
@@ -17,7 +27,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-height);
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -31,7 +41,7 @@ body {
   color: var(--color-text-light);
   background-color: var(--color-stone);
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img,
@@ -60,6 +70,25 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* ── Theme Overrides ──────────────────────────────────────────────────────── */
+.theme-light {
+  background-color: var(--color-light-bg);
+  color: var(--color-text-dark);
+}
+
+.theme-light h1,
+.theme-light h2,
+.theme-light h3,
+.theme-light h4,
+.theme-light h5,
+.theme-light h6 {
+  color: var(--color-text-dark);
+}
+
+.theme-light p {
+  color: var(--color-text-dark-muted);
 }
 
 ul,
@@ -245,7 +274,7 @@ p {
 
 .btn-primary {
   background: var(--gradient-gold);
-  color: var(--color-stone);
+  color: var(--color-text-white);
   box-shadow: var(--shadow-gold-glow);
 }
 
@@ -399,7 +428,7 @@ p {
   z-index: 100;
   padding: var(--space-sm) var(--space-md);
   background: var(--color-primary);
-  color: var(--color-stone);
+  color: var(--color-text-white);
   font-weight: var(--font-weight-bold);
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   transition: top var(--transition-fast);

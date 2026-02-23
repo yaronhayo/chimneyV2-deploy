@@ -25,7 +25,7 @@
     return utm;
   }
 
-  // ── Validation Helpers ─────────────────────────────────────────────────
+  // ── Validation Helpers & Formatters ────────────────────────────────────
   function showError(field, message) {
     clearError(field);
     const el = document.createElement('div');
@@ -52,8 +52,40 @@
     });
   }
 
+  function formatUSPhone(value) {
+    const cleaned = ('' + value).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+    if (!match) return value;
+    if (!match[2]) return match[1];
+    return `(${match[1]}) ${match[2]}${match[3] ? '-' + match[3] : ''}`;
+  }
+
+  function capitalizeName(val) {
+    return val.replace(/\b\w/g, (c) => c.toUpperCase());
+  }
+
+  // Common typo domains
+  const COMMON_DOMAINS = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com'];
+  function suggestEmailCorrection(emailStr) {
+    const parts = emailStr.split('@');
+    if (parts.length !== 2) return null;
+    const domain = parts[1].toLowerCase();
+
+    // Simple heuristic for 1-2 character typos
+    for (const common of COMMON_DOMAINS) {
+      if (domain === common) return null; // exact match
+      const isTypo =
+        domain.length > common.length - 3 &&
+        domain.length < common.length + 3 &&
+        (common.startsWith(domain.substring(0, 3)) || common.endsWith(domain.slice(-3)));
+      if (isTypo && domain !== common) {
+        return `${parts[0]}@${common}`;
+      }
+    }
+    return null;
+  }
+
   function validatePhone(phone) {
-    // Accept 10-digit US phone: (555) 123-4567, 555-123-4567, 5551234567
     const digits = phone.replace(/\D/g, '');
     return digits.length === 10;
   }
@@ -87,9 +119,19 @@
     }
 
     const emailVal = email.value.trim();
-    if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-      showError(email, 'Please enter a valid email address');
-      isValid = false;
+    if (emailVal) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        showError(email, 'Please enter a valid email address');
+        isValid = false;
+      } else {
+        const suggestion = suggestEmailCorrection(emailVal);
+        if (suggestion && email.dataset.corrected !== 'true') {
+          showError(email, `Did you mean ${suggestion}? Click submit again if correct.`);
+          email.value = suggestion;
+          email.dataset.corrected = 'true';
+          isValid = false;
+        }
+      }
     }
 
     if (!service.value) {
@@ -99,6 +141,40 @@
 
     return isValid;
   }
+
+  // Attach live formatters
+  const fNameInput = form.querySelector('#first-name');
+  if (fNameInput)
+    Object.assign(fNameInput, {
+      oninput: (e) => {
+        e.target.value = capitalizeName(e.target.value);
+      },
+    });
+
+  const lNameInput = form.querySelector('#last-name');
+  if (lNameInput)
+    Object.assign(lNameInput, {
+      oninput: (e) => {
+        e.target.value = capitalizeName(e.target.value);
+      },
+    });
+
+  const phoneInput = form.querySelector('#phone');
+  if (phoneInput)
+    Object.assign(phoneInput, {
+      oninput: (e) => {
+        e.target.value = formatUSPhone(e.target.value);
+      },
+    });
+
+  const emailInput = form.querySelector('#email');
+  if (emailInput)
+    Object.assign(emailInput, {
+      oninput: (e) => {
+        e.target.value = e.target.value.toLowerCase();
+        e.target.dataset.corrected = 'false';
+      },
+    });
 
   // ── Submit Handler ─────────────────────────────────────────────────────
   const submitBtn = form.querySelector('.contact__submit');
@@ -207,28 +283,46 @@
 
     setLoading(true);
 
-    try {
-      const response = await fetch('/api/submit.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+    const executeSubmit = async (token) => {
+      payload['g-recaptcha-response'] = token;
+      try {
+        const response = await fetch('/api/submit.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data.success) {
-        showConfirmation();
-        // Fire GTM conversion event (FR20, FR21)
-        if (typeof window.pushFormConversion === 'function') {
-          window.pushFormConversion(payload.service, payload.utm);
+        if (data.success) {
+          showConfirmation();
+          // Fire GTM conversion event (FR20, FR21)
+          if (typeof window.pushFormConversion === 'function') {
+            window.pushFormConversion(payload.service, payload.utm);
+          }
+        } else {
+          showFormError(data.error || 'Something went wrong. Please try again.');
+          setLoading(false);
         }
-      } else {
-        showFormError(data.error || 'Something went wrong. Please try again.');
+      } catch (err) {
+        showFormError('Something went wrong. Please call us directly.');
         setLoading(false);
       }
-    } catch (err) {
-      showFormError('Something went wrong. Please call us directly.');
-      setLoading(false);
+    };
+
+    if (window.grecaptcha) {
+      grecaptcha.ready(function () {
+        grecaptcha
+          .execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', { action: 'submit' })
+          .then(function (token) {
+            executeSubmit(token);
+          })
+          .catch(function () {
+            executeSubmit('');
+          });
+      });
+    } else {
+      executeSubmit('');
     }
   });
 })();

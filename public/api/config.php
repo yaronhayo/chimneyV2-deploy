@@ -23,6 +23,10 @@ foreach ($envPaths as $path) {
 
 // Configuration with defaults for development
 return [
+    'recaptcha' => [
+        'enabled'    => true,
+        'secret_key' => defined('RECAPTCHA_SECRET_KEY') ? RECAPTCHA_SECRET_KEY : '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe', // Google testing secret
+    ],
     'smtp2go' => [
         'api_key'    => defined('SMTP2GO_API_KEY') ? SMTP2GO_API_KEY : '',
         'sender'     => defined('SMTP2GO_SENDER') ? SMTP2GO_SENDER : 'noreply@1stclasschimneyandairduct.com',

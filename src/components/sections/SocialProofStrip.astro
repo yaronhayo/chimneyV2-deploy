@@ -11,7 +11,7 @@ const stats = [
 ];
 ---
 
-<section class="social-proof-strip" aria-label="Company Statistics">
+<section class="social-proof-strip theme-light" aria-label="Company Statistics">
   <div class="container">
     <div class="social-proof-strip__grid" data-reveal-group="80">
       {
@@ -33,9 +33,14 @@ const stats = [
 
 <style>
   .social-proof-strip {
-    background: linear-gradient(135deg, rgba(216, 67, 21, 0.08) 0%, rgba(216, 67, 21, 0.02) 100%);
-    border-top: 1px solid rgba(216, 67, 21, 0.15);
-    border-bottom: 1px solid rgba(216, 67, 21, 0.15);
+    background-color: var(--color-light-bg);
+    background-image: linear-gradient(
+      135deg,
+      rgba(var(--color-primary-rgb), 0.08) 0%,
+      rgba(var(--color-primary-rgb), 0.02) 100%
+    );
+    border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
+    border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.15);
     padding: var(--space-3xl) 0;
     position: relative;
     overflow: hidden;
@@ -46,7 +51,7 @@ const stats = [
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(216, 67, 21, 0.06) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(var(--color-primary-rgb), 0.06) 1px, transparent 1px);
     background-size: 24px 24px;
     pointer-events: none;
   }
@@ -66,24 +71,26 @@ const stats = [
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-xl) var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--color-light-bg-alt);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.1);
     border-radius: var(--radius-xl);
     transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   }
 
   .social-proof-strip__stat:hover {
-    background: rgba(216, 67, 21, 0.06);
-    border-color: rgba(216, 67, 21, 0.2);
+    background: var(--color-light-bg-alt);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
     transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
   .social-proof-strip__icon-ring {
     width: 56px;
     height: 56px;
     border-radius: var(--radius-full);
-    background: rgba(216, 67, 21, 0.08);
-    border: 1px solid rgba(216, 67, 21, 0.2);
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,9 +100,9 @@ const stats = [
 
   /* Subtle glow ring on hover */
   .social-proof-strip__stat:hover .social-proof-strip__icon-ring {
-    background: rgba(216, 67, 21, 0.15);
-    box-shadow: 0 0 24px rgba(216, 67, 21, 0.15);
-    border-color: rgba(216, 67, 21, 0.4);
+    background: rgba(var(--color-primary-rgb), 0.15);
+    box-shadow: 0 0 24px rgba(var(--color-primary-rgb), 0.15);
+    border-color: rgba(var(--color-primary-rgb), 0.4);
   }
 
   .social-proof-strip__icon {
@@ -107,12 +114,8 @@ const stats = [
   .social-proof-strip__number {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-black);
-    color: var(--color-text-white);
+    color: var(--color-text-dark);
     line-height: 1;
-    background: linear-gradient(135deg, #fff 30%, var(--color-primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   .social-proof-strip__label {

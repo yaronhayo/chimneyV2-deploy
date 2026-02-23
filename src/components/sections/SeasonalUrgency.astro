@@ -5,14 +5,6 @@
  * Creates genuine urgency tied to real seasonal patterns.
  */
 
-// Auto-detect current season based on month
-const month = new Date().getMonth(); // 0-indexed
-let currentSeason: string;
-if (month >= 2 && month <= 4) currentSeason = 'spring';
-else if (month >= 5 && month <= 7) currentSeason = 'summer';
-else if (month >= 8 && month <= 10) currentSeason = 'fall';
-else currentSeason = 'winter';
-
 const seasons = [
   {
     id: 'spring',
@@ -49,7 +41,7 @@ const seasons = [
   <div class="container">
     <div class="seasonal__header" data-reveal>
       <span class="section-label">Timing Matters</span>
-      <h2 class="seasonal__heading">
+      <h2 class="section-heading">
         The Best Time to Check Your Chimney Was Last Year.<br />
         <span class="gradient-gold-text">The Next Best Time Is Today.</span>
       </h2>
@@ -58,14 +50,10 @@ const seasons = [
     <div class="seasonal__timeline" data-reveal-group="100">
       {
         seasons.map((season) => (
-          <div
-            class:list={[
-              'seasonal__card',
-              { 'seasonal__card--active': season.id === currentSeason },
-            ]}
-            data-reveal
-          >
-            {season.id === currentSeason && <span class="seasonal__now-badge">YOU ARE HERE</span>}
+          <div class="seasonal__card" data-season-id={season.id} data-reveal>
+            <span class="seasonal__now-badge" style="display: none;">
+              YOU ARE HERE
+            </span>
             <span class="seasonal__icon">
               <span class="material-symbols-outlined">{season.icon}</span>
             </span>
@@ -99,13 +87,6 @@ const seasons = [
     text-align: center;
     margin-bottom: var(--space-2xl);
   }
-
-  .seasonal__heading {
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-extrabold);
-    line-height: var(--line-height-snug);
-  }
-
   .seasonal__timeline {
     display: grid;
     grid-template-columns: 1fr;
@@ -136,7 +117,7 @@ const seasons = [
     left: 50%;
     transform: translateX(-50%);
     background: var(--gradient-gold);
-    color: var(--color-stone);
+    color: var(--color-text-white);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-black);
     letter-spacing: var(--letter-spacing-wider);
@@ -209,9 +190,24 @@ const seasons = [
     .seasonal__timeline {
       grid-template-columns: repeat(4, 1fr);
     }
-
-    .seasonal__heading {
-      font-size: var(--font-size-4xl);
-    }
   }
 </style>
+
+<script>
+  (function () {
+    const month = new Date().getMonth(); // 0-indexed
+    let currentSeason = 'winter'; // Default
+    if (month >= 2 && month <= 4) currentSeason = 'spring';
+    else if (month >= 5 && month <= 7) currentSeason = 'summer';
+    else if (month >= 8 && month <= 10) currentSeason = 'fall';
+
+    const cards = document.querySelectorAll('.seasonal__card');
+    cards.forEach((card) => {
+      if (card.getAttribute('data-season-id') === currentSeason) {
+        card.classList.add('seasonal__card--active');
+        const badge = card.querySelector('.seasonal__now-badge');
+        if (badge) (badge as HTMLElement).style.display = 'inline-block';
+      }
+    });
+  })();
+</script>

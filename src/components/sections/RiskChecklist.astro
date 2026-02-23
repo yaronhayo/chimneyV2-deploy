@@ -1,4 +1,6 @@
 ---
+import businessInfo from '../../data/business-info.json';
+
 const checkItems = [
   {
     icon: 'local_fire_department',
@@ -27,10 +29,10 @@ const checkItems = [
 ];
 ---
 
-<section class="risk-check section" id="risk-check">
+<section class="risk-check section theme-light" id="risk-check">
   <div class="risk-check__bg">
     <img
-      src="/images/backgrounds/danger-chimney.png"
+      src="/images/backgrounds/danger-chimney.webp"
       alt=""
       class="risk-check__bg-img"
       loading="lazy"
@@ -49,13 +51,14 @@ const checkItems = [
           <div class="risk-check__progress-fill" id="rc-progress-fill"></div>
         </div>
         <span class="risk-check__progress-text" id="rc-progress-text">0 of 6 checked</span>
+        <div id="rc-result-text" class="risk-check__result-text" aria-live="polite"></div>
       </div>
 
       <div class="risk-check__grid" data-reveal-group="80">
         {
-          checkItems.map((item, i) => (
-            <label class="risk-check__item" data-reveal>
-              <input type="checkbox" class="risk-check__checkbox" data-rc-check />
+          checkItems.map((item, index) => (
+            <label class="risk-check__item" data-index={index}>
+              <input type="checkbox" class="risk-check__checkbox sr-only" />
               <div class="risk-check__card">
                 <span class="material-symbols-outlined risk-check__icon">{item.icon}</span>
                 <span class="risk-check__text">{item.text}</span>
@@ -66,14 +69,18 @@ const checkItems = [
         }
       </div>
 
-      <div class="risk-check__result" data-reveal id="rc-result">
-        <p class="risk-check__result-text" id="rc-result-text">
+      <div class="risk-check__content" data-reveal style="margin-top: var(--space-2xl);">
+        <p
+          id="rc-result-text"
+          class="risk-check__description"
+          style="display: flex; align-items: center; justify-content: center; gap: var(--space-xs); margin-bottom: var(--space-md); color: var(--color-primary); font-weight: var(--font-weight-medium);"
+        >
           <span class="material-symbols-outlined">check_circle</span>
           Check the ones that apply — see where you stand.
         </p>
         <a href="#contact" class="btn btn-primary risk-check__cta">
           <span class="material-symbols-outlined">calendar_month</span>
-          Book Your $99 Inspection
+          Book Your {businessInfo.inspectionPrice} Inspection
         </a>
       </div>
     </div>
@@ -82,9 +89,9 @@ const checkItems = [
 
 <style>
   .risk-check {
-    background: var(--color-charcoal);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: var(--color-light-bg);
+    border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
+    border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.15);
     position: relative;
     overflow: hidden;
   }
@@ -101,7 +108,7 @@ const checkItems = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.08;
+    opacity: 0.05;
   }
 
   .risk-check__bg-overlay {
@@ -109,9 +116,9 @@ const checkItems = [
     inset: 0;
     background: linear-gradient(
       180deg,
-      var(--color-charcoal) 0%,
-      rgba(26, 26, 26, 0.7) 50%,
-      var(--color-charcoal) 100%
+      var(--color-light-bg) 0%,
+      rgba(248, 249, 250, 0.8) 50%,
+      var(--color-light-bg) 100%
     );
   }
 
@@ -129,7 +136,7 @@ const checkItems = [
     width: 600px;
     height: 600px;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(216, 67, 21, 0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.06) 0%, transparent 70%);
     pointer-events: none;
     z-index: 1;
   }
@@ -163,7 +170,7 @@ const checkItems = [
   .risk-check__progress-bar {
     flex: 1;
     height: 6px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(var(--color-primary-rgb), 0.15);
     border-radius: var(--radius-full);
     overflow: hidden;
   }
@@ -214,20 +221,24 @@ const checkItems = [
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
-    background-color: var(--color-stone);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: var(--color-light-bg-alt);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: var(--radius-lg);
     transition: all var(--transition-base);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
   }
 
   .risk-check__card:hover {
-    border-color: rgba(216, 67, 21, 0.3);
-    background-color: rgba(216, 67, 21, 0.04);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+    background-color: var(--color-light-bg-alt);
+    box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
   }
 
   .risk-check__checkbox:checked + .risk-check__card {
     border-color: var(--color-primary);
-    background-color: rgba(216, 67, 21, 0.08);
+    background-color: rgba(var(--color-primary-rgb), 0.05);
+    box-shadow: 0 4px 8px -2px rgba(var(--color-primary-rgb), 0.15);
   }
 
   .risk-check__icon {
@@ -239,13 +250,13 @@ const checkItems = [
   .risk-check__text {
     flex: 1;
     font-size: var(--font-size-sm);
-    color: var(--color-text-light);
+    color: var(--color-text-dark);
     line-height: var(--line-height-normal);
   }
 
   .risk-check__check-icon {
     font-size: 20px;
-    color: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
     transition: all var(--transition-base);
   }
@@ -287,7 +298,7 @@ const checkItems = [
 
 <script>
   (function () {
-    const checkboxes = document.querySelectorAll('[data-rc-check]');
+    const checkboxes = document.querySelectorAll('.risk-check__checkbox');
     const progressEl = document.getElementById('rc-progress');
     const fillEl = document.getElementById('rc-progress-fill');
     const textEl = document.getElementById('rc-progress-text');

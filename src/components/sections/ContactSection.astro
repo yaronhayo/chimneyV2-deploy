@@ -2,10 +2,10 @@
 import businessInfo from '../../data/business-info.json';
 ---
 
-<section class="contact section" id="contact" aria-label="Contact Us">
+<section class="contact section theme-light" id="contact" aria-label="Contact Us">
   <div class="contact__bg">
     <img
-      src="/images/backgrounds/contact-fireplace.png"
+      src="/images/backgrounds/contact-fireplace.webp"
       alt=""
       class="contact__bg-img"
       loading="lazy"
@@ -17,10 +17,10 @@ import businessInfo from '../../data/business-info.json';
       <!-- Info Column -->
       <div class="contact__info" data-reveal>
         <span class="section-label">Get Started</span>
-        <h2 class="contact__heading">Let's Get You Taken Care Of</h2>
+        <h2 class="section-heading">Let's Get You Taken Care Of</h2>
         <p class="contact__description">
-          A single call gets you a thorough $99 inspection and clear options — no pressure, no
-          surprises.
+          A single call gets you a thorough {businessInfo.inspectionPrice} inspection and clear options
+          — no pressure, no surprises.
         </p>
 
         <div class="contact__what-happens">
@@ -81,9 +81,9 @@ import businessInfo from '../../data/business-info.json';
       <!-- Form Column -->
       <div class="contact__form-card" data-reveal>
         <div class="contact__form-gold-bar"></div>
-        <h3 class="contact__form-title">Book Your $99 Inspection</h3>
+        <h3 class="contact__form-title">Book Your {businessInfo.inspectionPrice} Inspection</h3>
         <p class="contact__form-subtitle">
-          Professional $99 inspection · No obligation · Takes 60 seconds
+          Professional {businessInfo.inspectionPrice} inspection · No obligation · Takes 60 seconds
         </p>
         <form
           class="contact__form"
@@ -125,7 +125,7 @@ import businessInfo from '../../data/business-info.json';
               type="tel"
               id="phone"
               name="phone"
-              placeholder="(888) 696-9296"
+              placeholder={businessInfo.phone}
               class="contact__input"
               required
               autocomplete="tel"
@@ -165,7 +165,7 @@ import businessInfo from '../../data/business-info.json';
 
           <button type="submit" class="btn btn-primary contact__submit">
             <span class="material-symbols-outlined">calendar_month</span>
-            Book My $99 Inspection
+            Book My {businessInfo.inspectionPrice} Inspection
           </button>
 
           <p class="contact__privacy">
@@ -201,8 +201,8 @@ import businessInfo from '../../data/business-info.json';
 <style>
   .contact {
     position: relative;
-    background-color: var(--color-stone);
-    border-top: 1px solid rgba(216, 67, 21, 0.2);
+    background-color: var(--color-light-bg);
+    border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
     overflow: hidden;
   }
 
@@ -218,7 +218,7 @@ import businessInfo from '../../data/business-info.json';
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.12;
+    opacity: 0.05;
   }
 
   .contact__bg-overlay {
@@ -226,9 +226,9 @@ import businessInfo from '../../data/business-info.json';
     inset: 0;
     background: linear-gradient(
       180deg,
-      var(--color-stone) 0%,
-      rgba(18, 18, 18, 0.65) 50%,
-      var(--color-stone) 100%
+      var(--color-light-bg) 0%,
+      rgba(248, 249, 250, 0.8) 50%,
+      var(--color-light-bg) 100%
     );
   }
 
@@ -243,15 +243,10 @@ import businessInfo from '../../data/business-info.json';
   }
 
   /* Info */
-  .contact__heading {
-    font-size: var(--font-size-4xl);
-    margin-bottom: var(--space-lg);
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-  }
 
   .contact__description {
     font-size: var(--font-size-lg);
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
     margin-bottom: var(--space-2xl);
     line-height: var(--line-height-relaxed);
   }
@@ -290,7 +285,7 @@ import businessInfo from '../../data/business-info.json';
     align-items: center;
     gap: var(--space-md);
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
   }
 
   .contact__timeline-num {
@@ -334,14 +329,14 @@ import businessInfo from '../../data/business-info.json';
   }
 
   .contact__detail-label {
-    color: var(--color-text-white);
+    color: var(--color-text-dark);
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-lg);
     margin-bottom: var(--space-xs);
   }
 
   .contact__detail-value {
-    color: var(--color-text-light);
+    color: var(--color-text-dark);
     font-size: var(--font-size-xl);
   }
 
@@ -355,7 +350,7 @@ import businessInfo from '../../data/business-info.json';
 
   .contact__detail-note {
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
     margin-top: var(--space-xs);
   }
 
@@ -368,6 +363,7 @@ import businessInfo from '../../data/business-info.json';
     box-shadow: var(--shadow-lg);
     position: relative;
     overflow: hidden;
+    color: var(--color-text-white); /* Reset text color for dark card */
   }
 
   .contact__form-gold-bar {
@@ -389,6 +385,11 @@ import businessInfo from '../../data/business-info.json';
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
     margin-bottom: var(--space-lg);
+  }
+
+  /* OVERRIDES: Protect dark card text from global .theme-light p */
+  .theme-light .contact__form-card p {
+    color: var(--color-text-muted);
   }
 
   .contact__form {
@@ -427,7 +428,7 @@ import businessInfo from '../../data/business-info.json';
   }
 
   .contact__input::placeholder {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.6); /* Increased contrast */
   }
 
   .contact__input:focus,
@@ -458,7 +459,7 @@ import businessInfo from '../../data/business-info.json';
     justify-content: center;
     gap: var(--space-xs);
     font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.75); /* Improved contrast */
   }
 
   .contact__privacy .material-symbols-outlined {

@@ -8,7 +8,7 @@ import businessInfo from '../../data/business-info.json';
       <div class="trust-strip__seal">
         <span class="material-symbols-outlined">verified</span>
       </div>
-      <h3 class="trust-strip__heading">Our Triple Guarantee</h3>
+      <h2 class="section-heading">Our Triple Guarantee</h2>
       <p class="trust-strip__subheading">
         We don't just promise quality — we guarantee it in writing.
       </p>
@@ -26,7 +26,7 @@ import businessInfo from '../../data/business-info.json';
           <span class="material-symbols-outlined">price_check</span>
         </div>
         <h4 class="trust-strip__title">No-Surprise Pricing</h4>
-        <p class="trust-strip__desc">Your quote is your price. No hidden fees, no add-ons. Ever.</p>
+        <p class="trust-strip__desc">Your price is your price. No hidden fees, no add-ons. Ever.</p>
       </div>
       <div class="trust-strip__item" data-reveal>
         <div class="trust-strip__icon-wrap">
@@ -75,14 +75,6 @@ import businessInfo from '../../data/business-info.json';
   .trust-strip__header {
     text-align: center;
     margin-bottom: var(--space-2xl);
-  }
-
-  .trust-strip__heading {
-    font-size: var(--font-size-2xl);
-    color: var(--color-text-white);
-    max-width: 600px;
-    margin: 0 auto;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
   }
 
   .trust-strip__subheading {
@@ -192,7 +184,7 @@ import businessInfo from '../../data/business-info.json';
     justify-content: center;
     gap: var(--space-sm);
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.75); /* Improved contrast from muted */
     text-align: center;
   }
 
@@ -227,7 +219,7 @@ import businessInfo from '../../data/business-info.json';
 
   .trust-strip__safety-callout p {
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.85); /* Improved contrast */
     line-height: var(--line-height-relaxed);
   }
 

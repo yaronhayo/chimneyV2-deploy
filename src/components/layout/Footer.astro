@@ -8,146 +8,198 @@ const serviceLinks = [
   { label: 'Air Duct Cleaning', href: '#services' },
   { label: 'Dryer Vent Repair', href: '#services' },
   { label: 'Chimney Inspection', href: '#services' },
+  { label: 'Fireplace Service', href: '#services' },
 ];
 
 const companyLinks = [
   { label: 'Why Choose Us', href: '#services' },
   { label: 'Reviews', href: '#reviews' },
-  { label: 'Contact', href: '#contact' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Contact', href: '#contact' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
 ];
 ---
 
 <footer class="footer">
   <div class="container">
-    <div class="footer__main">
-      <!-- Zone 1: Brand & Trust -->
-      <div class="footer__brand-zone">
-        <div class="footer__logo">
+    <div class="footer__grid">
+      <!-- Column 1: Brand & Trust -->
+      <div class="footer__col footer__col--brand">
+        <a href="/" aria-label="Home" class="footer__logo-link">
           <img
-            src="/images/brand/logo.png"
+            src="/images/brand/logo.webp"
             alt={businessInfo.businessName}
-            class="footer__logo-img"
+            class="footer__logo"
+            loading="lazy"
           />
-        </div>
-        <p class="footer__tagline">Elite Level Chimney & Air Duct Protection</p>
-        <div class="footer__trust-badges">
+        </a>
+        <p class="footer__statement">Elite level Chimney & Air Duct protection for your home.</p>
+        <div class="footer__badges">
           <div class="footer__badge">
             <span class="material-symbols-outlined">verified</span>
-            <span>CSIA Certified</span>
+            CSIA Certified
           </div>
           <div class="footer__badge">
             <span class="material-symbols-outlined">gavel</span>
-            <span>Licensed & Insured</span>
+            Licensed & Insured
           </div>
         </div>
       </div>
 
-      <!-- Zone 2: High-Impact Contact -->
-      <div class="footer__contact-zone">
-        <div class="footer__cta">
-          <span class="footer__cta-text">Need Immediate Service?</span>
-          <div class="footer__cta-actions">
-            <a href={`tel:${businessInfo.phoneRaw}`} class="footer__phone">
-              <span class="material-symbols-outlined">call</span>
-              {businessInfo.phone}
-            </a>
-            <a href="#contact" class="btn btn-primary">
-              <span class="material-symbols-outlined">calendar_month</span>
-              Book Inspection
-            </a>
-          </div>
+      <!-- Column 2: Services -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Services</h4>
+        <ul class="footer__nav-list">
+          {
+            serviceLinks.map((link) => (
+              <li>
+                <a href={link.href} class="footer__nav-link">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Column 3: Company -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Company</h4>
+        <ul class="footer__nav-list">
+          {
+            companyLinks.map((link) => (
+              <li>
+                <a href={link.href} class="footer__nav-link">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Column 4: Contact -->
+      <div class="footer__col footer__col--contact">
+        <h4 class="footer__col-title">Contact</h4>
+        <div class="footer__contact-methods">
+          <a href={`tel:${businessInfo.phoneRaw}`} class="footer__phone-link">
+            <span class="material-symbols-outlined">call</span>
+            <div class="footer__phone-wrap">
+              <span class="footer__phone-label">Call Now</span>
+              <span class="footer__phone-number">{businessInfo.phone}</span>
+            </div>
+          </a>
+          <a href={`mailto:${businessInfo.email}`} class="footer__email-link">
+            <span class="material-symbols-outlined">mail</span>
+            {businessInfo.email}
+          </a>
+          <a href="#contact" class="btn btn-primary footer__cta">
+            <span class="material-symbols-outlined">calendar_month</span>
+            Book Inspection
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Secondary Floor: Legal & Nav -->
-    <div class="footer__secondary">
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
       <p class="footer__copyright">
         &copy; {currentYear}
         {businessInfo.businessName}. All rights reserved.
       </p>
-      <nav class="footer__nav">
-        <ul class="footer__nav-list">
-          <li><a href="#services">Services</a></li>
-          <li><a href="#reviews">Reviews</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <p class="footer__attribution">
+        Made with <span class="footer__heart">♥</span> by <a
+          href="https://www.gettmarketing.com"
+          target="_blank"
+          rel="noopener noreferrer">Gett Marketing</a
+        >
+      </p>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background-color: #f8f9fa;
+    background-color: var(--color-light-bg);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding: var(--space-3xl) 0 var(--space-xl);
+    padding: var(--space-4xl) 0 var(--space-xl);
     position: relative;
     overflow: hidden;
   }
 
-  .footer__main {
-    display: flex;
-    flex-direction: column;
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-3xl);
     padding-bottom: var(--space-3xl);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
 
-  @media (min-width: 992px) {
-    .footer__main {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
+  @media (min-width: 640px) {
+    .footer__grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  /* Zone 1: Brand & Trust */
-  .footer__brand-zone {
+  @media (min-width: 1024px) {
+    .footer__grid {
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: var(--space-2xl);
+    }
+  }
+
+  /* Col 1: Brand */
+  .footer__col {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    max-width: 500px;
-  }
-
-  .footer__logo-img {
-    height: 70px;
-    width: auto;
-    margin-bottom: var(--space-md);
-    filter: drop-shadow(0 0 10px rgba(216, 67, 21, 0.1));
-  }
-
-  .footer__tagline {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
-    margin-bottom: var(--space-lg);
-    letter-spacing: var(--letter-spacing-wide);
-  }
-
-  .footer__trust-badges {
-    display: flex;
-    flex-wrap: wrap;
     gap: var(--space-lg);
   }
 
-  .footer__badge {
+  .footer__logo-link {
+    display: inline-block;
+  }
+
+  .footer__logo {
+    height: 70px;
+    width: auto;
+    filter: drop-shadow(0 0 10px rgba(var(--color-primary-rgb), 0.1));
+  }
+
+  .footer__statement {
+    color: var(--color-text-dark-muted);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    max-width: 320px;
+  }
+
+  .footer__badges {
     display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
+  }
+
+  @media (min-width: 640px) {
+    .footer__badges {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  .footer__badge {
+    display: inline-flex;
     align-items: center;
     gap: var(--space-xs);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-widest);
-    color: var(--color-charcoal);
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--color-light-bg-alt);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-sm);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
   }
 
   .footer__badge .material-symbols-outlined {
@@ -155,132 +207,152 @@ const companyLinks = [
     color: var(--color-primary);
   }
 
-  /* Zone 2: Contact */
-  .footer__contact-zone {
+  /* Cols 2 & 3: Nav Lists */
+  .footer__col-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-dark);
+    margin-bottom: var(--space-xs);
+  }
+
+  .footer__nav-list {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-xl);
+    gap: var(--space-sm);
   }
 
-  @media (min-width: 992px) {
-    .footer__contact-zone {
-      align-items: flex-end;
-      text-align: right;
-    }
-  }
-
-  .footer__cta {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-
-  .footer__cta-text {
-    font-size: var(--font-size-sm);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-widest);
-    color: var(--color-charcoal-light);
-  }
-
-  .footer__cta-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-md);
-    margin-top: var(--space-xs);
-  }
-
-  .footer__phone {
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-black);
-    color: var(--color-charcoal);
+  .footer__nav-link {
+    color: var(--color-text-dark-muted);
+    font-size: var(--font-size-base);
     text-decoration: none;
-    transition: color var(--transition-base);
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
+    transition:
+      color var(--transition-base),
+      padding-left var(--transition-base);
+    display: inline-flex;
   }
 
-  .footer__phone .material-symbols-outlined {
+  .footer__nav-link:hover,
+  .footer__nav-link:focus-visible {
     color: var(--color-primary);
-    font-size: 28px;
+    padding-left: var(--space-xs);
   }
 
-  @media (min-width: 768px) {
-    .footer__phone {
-      font-size: var(--font-size-3xl);
-    }
-  }
-
-  .footer__phone:hover {
-    color: var(--color-primary);
-  }
-
-  .footer__info {
+  /* Col 4: Contact */
+  .footer__contact-methods {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-lg);
   }
 
-  .footer__info-item {
+  .footer__phone-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    text-decoration: none;
+    background: var(--color-light-bg-alt);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.15);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  }
+
+  .footer__phone-link:hover {
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+    box-shadow: 0 4px 6px -1px rgba(var(--color-primary-rgb), 0.05);
+    transform: translateY(-2px);
+  }
+
+  .footer__phone-link .material-symbols-outlined {
+    font-size: 32px;
+    color: var(--color-primary);
+  }
+
+  .footer__phone-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__phone-label {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    color: var(--color-text-dark-muted);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .footer__phone-number {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-black);
+    color: var(--color-text-dark);
+  }
+
+  .footer__email-link {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
+    color: var(--color-text-dark-muted);
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-base);
   }
 
-  @media (min-width: 992px) {
-    .footer__info-item {
-      justify-content: flex-end;
-    }
-  }
-
-  .footer__info-item .material-symbols-outlined {
+  .footer__email-link .material-symbols-outlined {
     font-size: 18px;
     color: var(--color-primary);
   }
 
-  /* Secondary Floor */
-  .footer__secondary {
-    padding-top: var(--space-xl);
+  .footer__email-link:hover {
+    color: var(--color-primary);
+  }
+
+  .footer__cta {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: var(--space-xs);
+  }
+
+  /* Bottom Bar */
+  .footer__bottom {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
-    align-items: center;
+    gap: var(--space-md);
+    padding-top: var(--space-xl);
+    text-align: center;
   }
 
   @media (min-width: 768px) {
-    .footer__secondary {
+    .footer__bottom {
       flex-direction: row;
       justify-content: space-between;
+      text-align: left;
     }
   }
 
   .footer__copyright {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
+    font-size: var(--font-size-sm);
   }
 
-  .footer__nav-list {
-    display: flex;
-    gap: var(--space-xl);
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .footer__attribution {
+    color: var(--color-text-dark-muted);
+    font-size: var(--font-size-sm);
   }
 
-  .footer__nav-list a {
-    font-size: var(--font-size-xs);
+  .footer__heart {
+    color: var(--color-primary);
+  }
+
+  .footer__attribution a {
+    color: var(--color-text-dark);
     font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-widest);
-    color: var(--color-charcoal-light);
     text-decoration: none;
     transition: color var(--transition-base);
   }
 
-  .footer__nav-list a:hover {
+  .footer__attribution a:hover {
     color: var(--color-primary);
   }
 </style>

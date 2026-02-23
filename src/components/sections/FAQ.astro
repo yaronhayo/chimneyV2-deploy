@@ -1,4 +1,5 @@
 ---
+import businessInfo from '../../data/business-info.json';
 const faqs = [
   {
     question: 'How long does a chimney sweep take?',
@@ -22,13 +23,12 @@ const faqs = [
   },
   {
     question: 'How much does it cost?',
-    answer:
-      'Every home is different, so we provide a <strong>thorough $99 inspection</strong> with clear pricing before any work begins. No surprises, no hidden fees — ever.',
+    answer: `Every home is different, so we provide a <strong>thorough ${businessInfo.inspectionPrice} inspection</strong> with clear pricing before any work begins. No surprises, no hidden fees — ever.`,
   },
   {
     question: 'What happens if you find something wrong during the inspection?',
     answer:
-      'We show you <strong>HD photos and video</strong> of exactly what we found, explain your options in plain English, and give you a clear quote. No work starts without your approval.',
+      'We show you <strong>HD photos and video</strong> of exactly what we found, explain your options in plain English, and give you a clear price. No work starts without your approval.',
   },
   {
     question: 'Are your technicians certified and insured?',
@@ -41,18 +41,37 @@ const faqs = [
       'Yes — we safely remove <strong>birds, squirrels, raccoons, and nests</strong> from your chimney. We also install chimney caps and spark arrestors to prevent them from coming back.',
   },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
 ---
 
-<section class="faq section" id="faq" aria-label="Frequently Asked Questions">
+<section class="faq section theme-light" id="faq" aria-label="Frequently Asked Questions">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <div class="faq__bg">
-    <img src="/images/backgrounds/faq-consultation.png" alt="" class="faq__bg-img" loading="lazy" />
+    <img
+      src="/images/backgrounds/faq-consultation.webp"
+      alt=""
+      class="faq__bg-img"
+      loading="lazy"
+    />
     <div class="faq__bg-overlay"></div>
   </div>
   <div class="container">
     <div class="faq__layout">
       <div class="faq__header" data-reveal>
         <span class="section-label">Common Questions</span>
-        <h2 class="faq__heading">
+        <h2 class="section-heading">
           Everything You Need to Know <br /><span class="faq__heading-sub">Before You Book</span>
         </h2>
         <p class="faq__lead">
@@ -81,8 +100,8 @@ const faqs = [
 <style>
   .faq {
     position: relative;
-    background-color: var(--color-stone);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: var(--color-light-bg) !important;
+    border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
     overflow: hidden;
   }
 
@@ -98,7 +117,7 @@ const faqs = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.08;
+    opacity: 0.05;
   }
 
   .faq__bg-overlay {
@@ -106,9 +125,9 @@ const faqs = [
     inset: 0;
     background: linear-gradient(
       180deg,
-      var(--color-stone) 0%,
-      rgba(18, 18, 18, 0.7) 50%,
-      var(--color-stone) 100%
+      var(--color-light-bg) 0%,
+      rgba(248, 249, 250, 0.8) 50%,
+      var(--color-light-bg) 100%
     );
   }
 
@@ -123,12 +142,6 @@ const faqs = [
     gap: var(--space-2xl);
   }
 
-  .faq__heading {
-    font-size: var(--font-size-3xl);
-    margin-bottom: var(--space-md);
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-  }
-
   .faq__heading-sub {
     color: var(--color-primary);
     font-weight: var(--font-weight-medium);
@@ -136,7 +149,7 @@ const faqs = [
   }
 
   .faq__lead {
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
     line-height: var(--line-height-relaxed);
     max-width: 400px;
   }
@@ -155,19 +168,24 @@ const faqs = [
   }
 
   .faq__item {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--color-light-bg-alt);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: var(--radius-md);
     overflow: hidden;
-    transition: border-color var(--transition-base);
+    transition:
+      border-color var(--transition-base),
+      box-shadow var(--transition-base);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   }
 
   .faq__item:hover {
-    border-color: rgba(216, 67, 21, 0.2);
+    border-color: rgba(var(--color-primary-rgb), 0.2);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   }
 
   .faq__item[open] {
-    border-color: rgba(216, 67, 21, 0.3);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+    box-shadow: 0 4px 6px -1px rgba(var(--color-primary-rgb), 0.05);
   }
 
   .faq__question {
@@ -187,7 +205,7 @@ const faqs = [
   .faq__question-text {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);
-    color: var(--color-text-white);
+    color: var(--color-text-dark);
     line-height: var(--line-height-snug);
   }
 
@@ -208,13 +226,13 @@ const faqs = [
 
   .faq__answer p {
     font-size: var(--font-size-base);
-    color: var(--color-text-muted);
+    color: var(--color-text-dark-muted);
     line-height: var(--line-height-relaxed);
     max-width: 640px;
   }
 
   .faq__answer :global(strong) {
-    color: var(--color-text-light);
+    color: var(--color-text-dark);
     font-weight: var(--font-weight-bold);
   }
 

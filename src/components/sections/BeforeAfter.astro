@@ -17,7 +17,7 @@ const proofPoints = [
 ];
 ---
 
-<section class="before-after section" aria-label="Before and After Results">
+<section class="before-after section theme-light" aria-label="Before and After Results">
   <div class="container">
     <div class="before-after__grid">
       <!-- Slider -->
@@ -25,7 +25,7 @@ const proofPoints = [
         <div class="before-after__slider" id="ba-slider">
           <div class="before-after__before">
             <img
-              src="/images/before-after/before.png"
+              src={`/images/before-after/before.webp?v=${Date.now()}`}
               alt="Dirty chimney flue with thick creosote buildup on brick walls"
               class="before-after__image before-after__image-before"
               loading="lazy"
@@ -36,7 +36,7 @@ const proofPoints = [
           </div>
           <div class="before-after__after" id="ba-after">
             <img
-              src="/images/before-after/after.png"
+              src={`/images/before-after/after.webp?v=${Date.now()}`}
               alt="Clean chimney flue with pristine brick walls after professional cleaning"
               class="before-after__image before-after__image-after"
               loading="lazy"
@@ -45,7 +45,16 @@ const proofPoints = [
             />
             <div class="before-after__label before-after__label--after">After</div>
           </div>
-          <div class="before-after__divider" id="ba-divider">
+          <div
+            class="before-after__divider"
+            id="ba-divider"
+            role="slider"
+            aria-label="Before and after comparison slider"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="50"
+            tabindex="0"
+          >
             <div class="before-after__handle">
               <span class="material-symbols-outlined">compare_arrows</span>
             </div>
@@ -57,7 +66,7 @@ const proofPoints = [
       <!-- Copy -->
       <div class="before-after__content" data-reveal="slide-right">
         <span class="section-label">See It With Your Own Eyes</span>
-        <h2 class="before-after__heading">
+        <h2 class="section-heading">
           See the <br />
           <span class="before-after__heading-sub">Transformation</span>
         </h2>
@@ -93,9 +102,9 @@ const proofPoints = [
 
     <style>
       .before-after {
-        background-color: var(--color-charcoal);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background-color: var(--color-light-bg);
+        border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
+        border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.15);
         overflow: hidden;
       }
 
@@ -115,7 +124,7 @@ const proofPoints = [
         height: 500px;
         width: 100%;
         border-radius: var(--radius-md);
-        border: 2px solid rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(0, 0, 0, 0.1);
         box-shadow: var(--shadow-lg);
         overflow: hidden;
         cursor: ew-resize;
@@ -186,7 +195,7 @@ const proofPoints = [
         width: 48px;
         height: 48px;
         border-radius: var(--radius-full);
-        background-color: var(--color-charcoal);
+        background-color: var(--color-light-bg-alt);
         border: 2px solid var(--color-primary);
         display: flex;
         align-items: center;
@@ -229,23 +238,14 @@ const proofPoints = [
         order: 1;
       }
 
-      .before-after__heading {
-        font-size: var(--font-size-3xl);
-        font-weight: var(--font-weight-black);
-        color: var(--color-text-white);
-        margin-top: var(--space-md);
-        margin-bottom: var(--space-lg);
-        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-      }
-
       .before-after__heading-sub {
-        color: var(--color-text-muted);
-        font-weight: var(--font-weight-light);
+        color: var(--color-primary);
+        font-weight: var(--font-weight-black);
       }
 
       .before-after__description {
         font-size: var(--font-size-lg);
-        color: var(--color-text-muted);
+        color: var(--color-text-dark-muted);
         line-height: var(--line-height-relaxed);
         margin-bottom: var(--space-xl);
       }
@@ -261,14 +261,18 @@ const proofPoints = [
         align-items: flex-start;
         gap: var(--space-md);
         padding: var(--space-md);
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--color-light-bg-alt);
         border-radius: var(--radius-md);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        transition: border-color var(--transition-base);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+        transition:
+          border-color var(--transition-base),
+          box-shadow var(--transition-base);
       }
 
       .before-after__proof-card:hover {
-        border-color: rgba(216, 67, 21, 0.2);
+        border-color: rgba(var(--color-primary-rgb), 0.3);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
       }
 
       .before-after__proof-icon {
@@ -277,13 +281,13 @@ const proofPoints = [
 
       .before-after__proof-title {
         font-weight: var(--font-weight-bold);
-        color: var(--color-text-white);
+        color: var(--color-text-dark);
         font-size: var(--font-size-lg);
       }
 
       .before-after__proof-desc {
         font-size: var(--font-size-sm);
-        color: var(--color-text-muted);
+        color: var(--color-text-dark-muted);
         margin-top: var(--space-xs);
         line-height: var(--line-height-relaxed);
       }
@@ -345,7 +349,25 @@ const proofPoints = [
           pct = Math.max(5, Math.min(95, pct));
           afterEl!.style.clipPath = `polygon(${pct}% 0, 100% 0, 100% 100%, ${pct}% 100%)`;
           divider!.style.left = `${pct}%`;
+          divider!.setAttribute('aria-valuenow', Math.round(pct).toString());
         }
+
+        divider.addEventListener('keydown', (e) => {
+          let currentPct = parseFloat(divider.style.left) || 50;
+          let step = 5; // move 5% per press
+          if (e.key === 'ArrowLeft') {
+            currentPct = Math.max(5, currentPct - step);
+            e.preventDefault();
+          } else if (e.key === 'ArrowRight') {
+            currentPct = Math.min(95, currentPct + step);
+            e.preventDefault();
+          } else {
+            return;
+          }
+          afterEl!.style.clipPath = `polygon(${currentPct}% 0, 100% 0, 100% 100%, ${currentPct}% 100%)`;
+          divider!.style.left = `${currentPct}%`;
+          divider!.setAttribute('aria-valuenow', Math.round(currentPct).toString());
+        });
 
         slider.addEventListener('mousedown', (e) => {
           isDragging = true;

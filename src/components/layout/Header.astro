@@ -12,7 +12,7 @@ const navLinks = [
   <div class="container header__inner">
     <!-- Logo -->
     <a href="/" class="header__logo" aria-label={businessInfo.businessName}>
-      <img src="/images/brand/logo.png" alt={businessInfo.businessName} class="header__logo-img" />
+      <img src="/images/brand/logo.webp" alt={businessInfo.businessName} class="header__logo-img" />
     </a>
 
     <!-- Desktop Nav -->
@@ -82,7 +82,7 @@ const navLinks = [
         <li>
           <a href="#contact" class="btn btn-primary header__mobile-cta">
             <span class="material-symbols-outlined">calendar_month</span>
-            Book $99 Inspection
+            Book {businessInfo.inspectionPrice} Inspection
           </a>
         </li>
       </ul>
@@ -216,6 +216,13 @@ const navLinks = [
   /* Mobile Menu */
   .header__mobile-menu {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background-color: var(--color-text-white);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     padding: var(--space-lg);
@@ -287,7 +294,6 @@ const navLinks = [
       const isOpen = menu.getAttribute('aria-hidden') === 'false';
       menu.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
       toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-      document.body.style.overflow = isOpen ? '' : 'hidden';
 
       const icon = toggle.querySelector('.material-symbols-outlined');
       if (icon) {
@@ -300,30 +306,32 @@ const navLinks = [
       link.addEventListener('click', () => {
         menu.setAttribute('aria-hidden', 'true');
         toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
         const icon = toggle.querySelector('.material-symbols-outlined');
         if (icon) icon.textContent = 'menu';
       });
     });
   }
 
-  // Debounced scroll handler for header shadow
-  let scrollTimeout: ReturnType<typeof setTimeout>;
+  // Performant scroll handler using requestAnimationFrame
+  let isTicking = false;
   const header = document.getElementById('header');
 
   window.addEventListener(
     'scroll',
     () => {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        if (header) {
-          if (window.scrollY > 10) {
-            header.classList.add('header--scrolled');
-          } else {
-            header.classList.remove('header--scrolled');
+      if (!isTicking) {
+        window.requestAnimationFrame(() => {
+          if (header) {
+            if (window.scrollY > 10) {
+              header.classList.add('header--scrolled');
+            } else {
+              header.classList.remove('header--scrolled');
+            }
           }
-        }
-      }, 16);
+          isTicking = false;
+        });
+        isTicking = true;
+      }
     },
     { passive: true }
   );

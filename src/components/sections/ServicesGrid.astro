@@ -11,7 +11,7 @@ const services = [
     id: 'chimney-sweep',
     icon: 'cleaning_services',
     title: 'Chimney Sweep & Cleaning',
-    image: '/images/services/chimney-sweep.png',
+    image: '/images/services/chimney-sweep.webp',
     description:
       'Creosote removal, smoke chamber cleaning, and deep PCR cleaning — with HEPA filtration so nothing recirculates.',
     badge: 'Most Popular',
@@ -28,7 +28,7 @@ const services = [
     id: 'chimney-inspection',
     icon: 'search',
     title: 'Chimney Inspection',
-    image: '/images/services/chimney-inspection.png',
+    image: '/images/services/chimney-inspection.webp',
     description:
       'Level I, II, and III inspections with HD camera footage. Catch cracks, blockages, and liner damage early.',
     badge: null,
@@ -45,7 +45,7 @@ const services = [
     id: 'chimney-repair',
     icon: 'construction',
     title: 'Chimney Repair',
-    image: '/images/services/chimney-repair.png',
+    image: '/images/services/chimney-repair.webp',
     description:
       'Tuckpointing, crown repair, masonry restoration, flashing, and full rebuilds. We fix what others overlook.',
     badge: null,
@@ -62,7 +62,7 @@ const services = [
     id: 'caps-liners',
     icon: 'roofing',
     title: 'Caps, Liners & Flues',
-    image: '/images/services/caps-liners.png',
+    image: '/images/services/caps-liners.webp',
     description:
       'Cap installation, liner replacement, flue repair, damper service, and chase covers — keeping your system sealed and safe.',
     badge: null,
@@ -79,7 +79,7 @@ const services = [
     id: 'fireplace-services',
     icon: 'fireplace',
     title: 'Fireplace Services',
-    image: '/images/services/fireplace-services.png',
+    image: '/images/services/fireplace-services.webp',
     description:
       'Gas fireplace repair, gas log installation, pilot light service, glass doors, and electric fireplace setup.',
     badge: null,
@@ -96,7 +96,7 @@ const services = [
     id: 'dryer-vent',
     icon: 'local_laundry_service',
     title: 'Dryer Vent Cleaning',
-    image: '/images/services/dryer-vent.png',
+    image: '/images/services/dryer-vent.webp',
     description:
       'Full vent line clearing from dryer to exterior wall. Prevents the #1 overlooked fire hazard in homes.',
     badge: null,
@@ -133,7 +133,7 @@ const services = [
           >
             <div class="services__card-img-wrap">
               <img
-                src={service.image}
+                src={`${service.image}?v=${Date.now()}`}
                 alt={service.title}
                 class="services__card-img"
                 loading="lazy"
@@ -200,7 +200,7 @@ const services = [
           </a>
           <a href="#contact" class="service-modal__btn service-modal__btn--quote" data-close-modal>
             <span class="material-symbols-outlined">support_agent</span>
-            Get a Free Quote
+            Book {businessInfo.inspectionPrice} Inspection
           </a>
         </div>
       </div>
@@ -333,7 +333,7 @@ const services = [
     top: var(--space-md);
     right: var(--space-md);
     background: var(--color-primary);
-    color: var(--color-stone);
+    color: var(--color-text-white);
     font-size: 10px;
     font-weight: var(--font-weight-bold);
     padding: 3px 10px;
@@ -475,7 +475,7 @@ const services = [
   .service-modal__img-wrap {
     position: relative;
     width: 100%;
-    height: 220px;
+    height: 320px;
     overflow: hidden;
     border-radius: 1rem 1rem 0 0;
   }
@@ -483,7 +483,8 @@ const services = [
   .service-modal__img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: var(--space-md);
   }
 
   .service-modal__img-overlay {
@@ -503,13 +504,13 @@ const services = [
     height: 52px;
     border-radius: 0.75rem;
     background: #1a1a1a;
-    border: 2px solid #d84315;
+    border: 2px solid var(--color-primary);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   }
 
   .service-modal__icon .material-symbols-outlined {
     font-size: 26px;
-    color: #d84315;
+    color: var(--color-primary);
     font-variation-settings: 'FILL' 1;
   }
 
@@ -547,7 +548,7 @@ const services = [
     font-family: 'Montserrat', sans-serif;
     font-size: 0.875rem;
     font-weight: 700;
-    color: #d84315;
+    color: var(--color-primary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 1rem;
@@ -625,12 +626,22 @@ const services = [
   }
 
   .service-modal__btn--call {
-    background: linear-gradient(135deg, #d84315 0%, #e64a19 50%, #d84315 100%);
-    color: #121212;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-primary-hover) 50%,
+      var(--color-primary) 100%
+    );
+    color: #ffffff;
   }
 
   .service-modal__btn--call:hover {
-    background: linear-gradient(135deg, #bf360c 0%, #d84315 50%, #bf360c 100%);
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-hover) 0%,
+      var(--color-primary) 50%,
+      var(--color-primary-hover) 100%
+    );
     box-shadow: 0 4px 20px -5px rgba(216, 67, 21, 0.3);
   }
 
@@ -693,7 +704,33 @@ const services = [
     const modalDesc = document.getElementById('modalDesc');
     const modalBenefits = document.getElementById('modalBenefits');
 
+    let lastFocusedElement;
+
     if (!modal) return;
+
+    // Trap focus inside modal
+    modal.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !modal.classList.contains('is-open')) return;
+
+      const focusableEls = modal.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusableEls.length === 0) return;
+      const firstFocusable = focusableEls[0];
+      const lastFocusable = focusableEls[focusableEls.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstFocusable) {
+          lastFocusable.focus();
+          e.preventDefault();
+        }
+      } else {
+        if (document.activeElement === lastFocusable) {
+          firstFocusable.focus();
+          e.preventDefault();
+        }
+      }
+    });
 
     // Open modal on card click
     document.querySelectorAll('.services__card').forEach((card) => {
@@ -718,9 +755,15 @@ const services = [
         });
 
         // Show modal
+        lastFocusedElement = document.activeElement;
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+
+        setTimeout(() => {
+          const closeBtn = modal.querySelector('.service-modal__close');
+          if (closeBtn) closeBtn.focus();
+        }, 50);
       });
     });
 
@@ -729,6 +772,9 @@ const services = [
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+      }
     }
 
     modal.querySelectorAll('[data-close-modal]').forEach((el) => {
