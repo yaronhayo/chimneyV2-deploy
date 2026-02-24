@@ -34,7 +34,7 @@ return [
     ],
     'business' => [
         'name'  => '1st Class Chimney & Air Duct',
-        'phone' => '(555) 123-4567',
+        'phone' => '(888) 696-9296',
         'email' => '1stclasschimneyusa@gmail.com',
     ],
     'rate_limit' => [

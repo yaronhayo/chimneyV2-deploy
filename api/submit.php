@@ -116,6 +116,7 @@ function sanitizeInput(string $input): string {
 $firstName = sanitizeInput($data['firstName'] ?? '');
 $lastName  = sanitizeInput($data['lastName'] ?? '');
 $email     = filter_var(trim($data['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+$phone     = sanitizeInput($data['phone'] ?? '');
 $service   = sanitizeInput($data['service'] ?? '');
 $pageUrl   = sanitizeInput($data['pageUrl'] ?? '');
 
@@ -136,15 +137,18 @@ if (empty($firstName)) {
     $errors[] = 'First name is required';
 }
 
-if (empty($lastName)) {
-    $errors[] = 'Last name is required';
+// lastName is optional for Hero form (single name field)
+
+// Email is optional — Hero form doesn't collect it
+if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'Please enter a valid email address';
 }
 
-if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = 'Valid email address is required';
-}
-
-$validServices = ['chimney-sweep', 'air-duct', 'dryer-vent', 'other'];
+$validServices = [
+    'chimney-sweep', 'chimney-inspection', 'chimney-repair',
+    'caps-liners', 'fireplace-services', 'dryer-vent',
+    'air-duct', 'other',
+];
 if (empty($service) || !in_array($service, $validServices)) {
     $errors[] = 'Please select a valid service';
 }
@@ -191,8 +195,12 @@ $notificationHtml = <<<HTML
           <td style="padding:12px;color:#E5E5E5;font-size:16px;">{$firstName} {$lastName}</td>
         </tr>
         <tr style="border-bottom:1px solid #333;">
+          <td style="padding:12px;color:#D4AF37;font-weight:bold;font-size:12px;text-transform:uppercase;">Phone</td>
+          <td style="padding:12px;color:#E5E5E5;font-size:16px;"><a href="tel:{$phone}" style="color:#E5E5E5;">{$phone}</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #333;">
           <td style="padding:12px;color:#D4AF37;font-weight:bold;font-size:12px;text-transform:uppercase;">Email</td>
-          <td style="padding:12px;color:#E5E5E5;font-size:16px;"><a href="mailto:{$email}" style="color:#E5E5E5;">{$email}</a></td>
+          <td style="padding:12px;color:#E5E5E5;font-size:16px;">{$email}</td>
         </tr>
         <tr style="border-bottom:1px solid #333;">
           <td style="padding:12px;color:#D4AF37;font-weight:bold;font-size:12px;text-transform:uppercase;">Service</td>
@@ -242,7 +250,7 @@ $autoresponderHtml = <<<HTML
         </div>
       </div>
       <div style="text-align:center;margin:24px 0;">
-        <a href="tel:5551234567" style="display:inline-block;background:linear-gradient(135deg,#D4AF37,#F4D35E,#D4AF37);color:#121212;font-weight:bold;text-transform:uppercase;letter-spacing:1px;padding:14px 32px;text-decoration:none;border-radius:8px;font-size:14px;">
+        <a href="tel:{$businessPhone}" style="display:inline-block;background:linear-gradient(135deg,#D4AF37,#F4D35E,#D4AF37);color:#121212;font-weight:bold;text-transform:uppercase;letter-spacing:1px;padding:14px 32px;text-decoration:none;border-radius:8px;font-size:14px;">
           Can't Wait? Call Us Now
         </a>
       </div>
@@ -317,9 +325,11 @@ if (empty($apiKey) || empty($recipients)) {
 $notifSubject = "🔔 New Lead: {$firstName} {$lastName} — {$serviceLabel}";
 $notifResult = sendViaSMTP2GO($apiKey, $sender, $recipients, $notifSubject, $notificationHtml, $email);
 
-// ── Send Autoresponder ───────────────────────────────────────────────────
-$autoSubject = "Thank You, {$firstName} — Your {$serviceLabel} Request is Confirmed";
-sendViaSMTP2GO($apiKey, $sender, [$email], $autoSubject, $autoresponderHtml);
+// ── Send Autoresponder (only if email was provided) ─────────────────────
+if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $autoSubject = "Thank You, {$firstName} — Your {$serviceLabel} Request is Confirmed";
+    sendViaSMTP2GO($apiKey, $sender, [$email], $autoSubject, $autoresponderHtml);
+}
 
 // ── Response ─────────────────────────────────────────────────────────────
 if ($notifResult['success']) {

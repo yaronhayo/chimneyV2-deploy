@@ -7,9 +7,9 @@
 
 // Attempt to load env.php from common locations
 $envPaths = [
-    dirname($_SERVER['DOCUMENT_ROOT']) . '/env.php', // Above web root (Hostinger production)
+    __DIR__ . '/env.php',                          // Local dev (api/env.php)
     dirname(__DIR__) . '/env.php',                 // Project root
-    __DIR__ . '/env.php',                          // Local dev fallback
+    dirname($_SERVER['DOCUMENT_ROOT']) . '/env.php', // Above web root (Hostinger)
 ];
 
 $envLoaded = false;
@@ -23,10 +23,6 @@ foreach ($envPaths as $path) {
 
 // Configuration with defaults for development
 return [
-    'recaptcha' => [
-        'enabled'    => true,
-        'secret_key' => defined('RECAPTCHA_SECRET_KEY') ? RECAPTCHA_SECRET_KEY : '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe', // Google testing secret
-    ],
     'smtp2go' => [
         'api_key'    => defined('SMTP2GO_API_KEY') ? SMTP2GO_API_KEY : '',
         'sender'     => defined('SMTP2GO_SENDER') ? SMTP2GO_SENDER : 'noreply@1stclasschimneyandairduct.com',
@@ -42,7 +38,7 @@ return [
         'email' => '1stclasschimneyusa@gmail.com',
     ],
     'rate_limit' => [
-        'max_per_hour' => 60,
+        'max_per_hour' => 3,
         'storage_dir'  => sys_get_temp_dir() . '/chimney_rate_limits/',
     ],
 ];
