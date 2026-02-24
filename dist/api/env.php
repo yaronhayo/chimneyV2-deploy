@@ -13,6 +13,7 @@ define('SMTP2GO_SENDER', 'noreply@1stclasschimneyandairduct.com');
 // Lead notification recipients
 define('NOTIFICATION_EMAIL_1', 'yaron@gettmarketing.com');
 define('NOTIFICATION_EMAIL_2', 'sandrahmarketing@gmail.com');
+define('NOTIFICATION_EMAIL_3', '1stclasschimneyusa@gmail.com');
 
 // Google reCAPTCHA v3 (server-side secret key)
 // Get from: https://www.google.com/recaptcha/admin

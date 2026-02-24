@@ -30,6 +30,7 @@ return [
     'recipients' => [
         defined('NOTIFICATION_EMAIL_1') ? NOTIFICATION_EMAIL_1 : 'yaron@gettmarketing.com',
         defined('NOTIFICATION_EMAIL_2') ? NOTIFICATION_EMAIL_2 : 'sandrahmarketing@gmail.com',
+        defined('NOTIFICATION_EMAIL_3') ? NOTIFICATION_EMAIL_3 : '1stclasschimneyusa@gmail.com',
     ],
     'business' => [
         'name'  => '1st Class Chimney & Air Duct',
