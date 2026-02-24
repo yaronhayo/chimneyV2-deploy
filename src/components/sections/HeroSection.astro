@@ -7,7 +7,7 @@ import businessInfo from '../../data/business-info.json';
   <div class="hero__bg-gradient"></div>
   <div class="hero__bg-image">
     <img
-      src="/images/hero/hero-bg.webp"
+      src="/images/hero/hero-bg.png"
       alt="Beautiful suburban home with brick chimney at golden hour"
       class="hero__bg-photo"
       loading="eager"
@@ -188,7 +188,12 @@ import businessInfo from '../../data/business-info.json';
   .hero__bg-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, var(--color-stone), rgba(18, 18, 18, 0.95), transparent);
+    background: linear-gradient(
+      to right,
+      rgba(18, 18, 18, 0.82),
+      rgba(18, 18, 18, 0.6),
+      rgba(18, 18, 18, 0.25)
+    );
     z-index: 10;
   }
 
@@ -203,8 +208,8 @@ import businessInfo from '../../data/business-info.json';
     height: 100%;
     object-fit: cover;
     object-position: center right;
-    opacity: 0.35;
-    filter: grayscale(0.4);
+    opacity: 0.55;
+    filter: grayscale(0.2) brightness(1.05);
   }
 
   .hero__container {

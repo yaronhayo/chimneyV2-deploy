@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     question: 'How much does it cost?',
-    answer: `Every home is different, so we provide a <strong>thorough ${businessInfo.inspectionPrice} inspection</strong> with clear pricing before any work begins. No surprises, no hidden fees — ever.`,
+    answer: `Every home is different, so we provide a <strong>thorough inspection</strong> with clear pricing before any work begins. No surprises, no hidden fees — ever.`,
   },
   {
     question: 'What happens if you find something wrong during the inspection?',
@@ -59,12 +59,6 @@ const faqSchema = {
 <section class="faq section theme-light" id="faq" aria-label="Frequently Asked Questions">
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <div class="faq__bg">
-    <img
-      src="/images/backgrounds/faq-consultation.webp"
-      alt=""
-      class="faq__bg-img"
-      loading="lazy"
-    />
     <div class="faq__bg-overlay"></div>
   </div>
   <div class="container">
