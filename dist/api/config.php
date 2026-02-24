@@ -28,9 +28,8 @@ return [
         'sender'     => defined('SMTP2GO_SENDER') ? SMTP2GO_SENDER : 'noreply@1stclasschimneyandairduct.com',
     ],
     'recipients' => [
-        defined('NOTIFICATION_EMAIL_1') ? NOTIFICATION_EMAIL_1 : '1stclasschimneyusa@gmail.com',
-        defined('NOTIFICATION_EMAIL_2') ? NOTIFICATION_EMAIL_2 : '',
-        defined('NOTIFICATION_EMAIL_3') ? NOTIFICATION_EMAIL_3 : '',
+        defined('NOTIFICATION_EMAIL_1') ? NOTIFICATION_EMAIL_1 : 'yaron@gettmarketing.com',
+        defined('NOTIFICATION_EMAIL_2') ? NOTIFICATION_EMAIL_2 : 'sandrahmarketing@gmail.com',
     ],
     'business' => [
         'name'  => '1st Class Chimney & Air Duct',
@@ -40,5 +39,10 @@ return [
     'rate_limit' => [
         'max_per_hour' => 3,
         'storage_dir'  => sys_get_temp_dir() . '/chimney_rate_limits/',
+    ],
+    'recaptcha' => [
+        'secret_key'     => defined('RECAPTCHA_SECRET_KEY') ? RECAPTCHA_SECRET_KEY : '',
+        'min_score'      => 0.5,
+        'fail_open'      => true,  // Allow submissions if reCAPTCHA is unavailable
     ],
 ];

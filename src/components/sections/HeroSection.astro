@@ -642,7 +642,7 @@ import businessInfo from '../../data/business-info.json';
       const serviceEl = form.querySelector('#hero-service') as HTMLSelectElement;
       const honeypot = form.querySelector('#hero-website') as HTMLInputElement | null;
 
-      const payload = {
+      const payload: Record<string, unknown> = {
         firstName: nameEl.value.trim().split(' ')[0],
         lastName: nameEl.value.trim().split(' ').slice(1).join(' ') || '',
         phone: phoneEl.value.trim(),
@@ -652,6 +652,21 @@ import businessInfo from '../../data/business-info.json';
         source: 'hero-form',
         pageUrl: window.location.href,
       };
+
+      // Get reCAPTCHA v3 token (fail-open if unavailable)
+      try {
+        if ((window as any).grecaptcha) {
+          const token = await (window as any).grecaptcha.execute(
+            document
+              .querySelector('[data-recaptcha-site-key]')
+              ?.getAttribute('data-recaptcha-site-key') || '',
+            { action: 'hero_form' }
+          );
+          payload.recaptchaToken = token;
+        }
+      } catch {
+        /* fail-open */
+      }
 
       if (btn) {
         btn.disabled = true;

@@ -252,6 +252,20 @@
       pageUrl: window.location.href,
     };
 
+    // Get reCAPTCHA v3 token (fail-open if unavailable)
+    try {
+      if (window.grecaptcha) {
+        var siteKeyEl = document.querySelector('[data-recaptcha-site-key]');
+        var siteKey = siteKeyEl ? siteKeyEl.getAttribute('data-recaptcha-site-key') : '';
+        if (siteKey) {
+          var token = await window.grecaptcha.execute(siteKey, { action: 'contact_form' });
+          payload.recaptchaToken = token;
+        }
+      }
+    } catch (e) {
+      /* fail-open */
+    }
+
     setLoading(true);
 
     try {

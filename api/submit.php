@@ -104,6 +104,54 @@ if ($rateLimited) {
     exit;
 }
 
+// ── Anti-Spam: reCAPTCHA v3 Verification ─────────────────────────────────
+$recaptchaSecret = $config['recaptcha']['secret_key'];
+$recaptchaToken  = $data['recaptchaToken'] ?? '';
+$minScore        = $config['recaptcha']['min_score'];
+$failOpen        = $config['recaptcha']['fail_open'];
+
+if (!empty($recaptchaSecret)) {
+    if (empty($recaptchaToken)) {
+        if (!$failOpen) {
+            http_response_code(422);
+            echo json_encode(['success' => false, 'error' => 'Security verification failed. Please refresh and try again.']);
+            exit;
+        }
+        // fail-open: proceed without verification
+    } else {
+        $verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
+        $ch = curl_init($verifyUrl);
+        curl_setopt_array($ch, [
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => http_build_query([
+                'secret'   => $recaptchaSecret,
+                'response' => $recaptchaToken,
+                'remoteip' => $clientIP,
+            ]),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 5,
+            CURLOPT_CONNECTTIMEOUT => 3,
+        ]);
+        $verifyResponse = curl_exec($ch);
+        curl_close($ch);
+        $verifyResult   = json_decode($verifyResponse, true);
+
+        if ($verifyResult && $verifyResult['success'] === true) {
+            $score = $verifyResult['score'] ?? 0;
+            if ($score < $minScore) {
+                // Low score = likely bot
+                echo json_encode(['success' => true, 'message' => 'Request received']);
+                exit;
+            }
+        } elseif (!$failOpen) {
+            http_response_code(422);
+            echo json_encode(['success' => false, 'error' => 'Security verification failed. Please refresh and try again.']);
+            exit;
+        }
+        // fail-open: proceed if verification service is down
+    }
+}
+
 // ── Input Sanitization (FR46, NFR9) ──────────────────────────────────────
 function sanitizeInput(string $input): string {
     $input = trim($input);
