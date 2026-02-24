@@ -16,4 +16,4 @@ define('NOTIFICATION_EMAIL_2', 'sandrahmarketing@gmail.com');
 
 // Google reCAPTCHA v3 (server-side secret key)
 // Get from: https://www.google.com/recaptcha/admin
-define('RECAPTCHA_SECRET_KEY', '');
+define('RECAPTCHA_SECRET_KEY', '6Le4j3YsAAAAAGZh4zVCqvmKt_W7B2lJD7qMT6YG');
